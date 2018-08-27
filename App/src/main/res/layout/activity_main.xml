@@ -1,18 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qianbai.newexg.MainActivity">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/line_large">
 
-    <com.joanzapata.iconify.widget.IconTextView
-        android:id="@+id/icon_test"
-        android:layout_width="wrap_content"
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpg_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        ></android.support.v4.view.ViewPager>
+
+
+    <RadioGroup
+        android:id="@+id/rgp_main"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="{fa-coffee}"
-        tools:ignore="HardcodedText">
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:layout_marginTop="@dimen/small_text"
 
-    </com.joanzapata.iconify.widget.IconTextView>
+        >
+        <RadioButton
+            android:id="@+id/rb_one_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_one"
+            android:layout_weight="1"
+            android:text="新闻资讯"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            android:checked="true"
+            android:textColor="@color/main"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_two_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_two"
+            android:layout_weight="1"
+            android:text="线索上报"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_three_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_three"
+            android:layout_weight="1"
+            android:text="信息采集"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            />
+
+
+
+        <RadioButton
+            android:id="@+id/rb_four_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_four"
+            android:layout_weight="1"
+            android:text="个人信息"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            />
+
+    </RadioGroup>
 
 </LinearLayout>

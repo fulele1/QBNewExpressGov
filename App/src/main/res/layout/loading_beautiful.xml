@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/alert_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_gravity="left"
+        android:gravity="left"
+        android:background="@drawable/bg_beautiful"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="《新寄递用协议》"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="友情提示各种统一附覅撒谎发is海飞丝阿大黄蜂is电话费赛杜护发素电话费四大海飞丝的返回的是返回数电话费黄金时代哈覅合肥市飞洒对方护发素大黄蜂水陆大会福利卡和覅水电费福建省地哦啊富奥涸鲋得水接口返回费的数据发件方接口的撒娇发刻录机费肯定会发开飞机地方都是发放假的说法酵素粉is大家发iOS大家发ISO安迪见覅时间飞逝地发掘撒欧覅爱迪生见覅速度佛圣诞节覅搜大浦覅三大步减肥ID苏菲iOS打飞机的搜房卡撒泼咖啡店佛寺大派送卡佛嗲飞洒豆腐皮机哦啊商品房接口对接爱上破费及法搜覅大【风纪扣撒旦法煎熬匹敌金佛萨迪发哦【石佛寺的爬房发山东if哦破第三方框架欧弟就设计费解放军飞快的设计费开始带饭就开始地方就当丰厚的恢复接电话覅司法鉴定是服看上大嫁风尚看积分的设计费时代峻峰设计费hi房产局欧式的看法if觉得就就觉得副科级三分"
+            android:textSize="15sp"
+            android:textColor="@color/text_c"
+            />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_dia_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@mipmap/exit_dialog"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        />
+
+</LinearLayout>
