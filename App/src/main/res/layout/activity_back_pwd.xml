@@ -18,7 +18,7 @@
         android:drawablePadding="@dimen/activity_horizontal_margin"
         android:drawableTop="@mipmap/icon_login"
         android:gravity="center"
-        android:text="新寄递·快递员版"
+        android:text="新寄递·警员版"
         android:textColor="#fcfcff"
         android:textSize="@dimen/pro" />
 
@@ -133,31 +133,7 @@
     </LinearLayout>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/activity_horizontal_margin">
-
-        <TextView
-            android:id="@+id/txt_back_pwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:drawableLeft="@mipmap/back"
-            android:gravity="center"
-            android:text="返回"
-            android:textColor="@color/wirte" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="找回密码"
-            android:textColor="@color/wirte" />
-
-
-    </RelativeLayout>
+    <include layout="@layout/title_bar"/>
 
     <Button
         android:id="@+id/bt_login_login"

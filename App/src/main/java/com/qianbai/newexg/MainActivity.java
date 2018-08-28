@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity {
     private MainActivity instance;
     private ViewPager mVpg;
     private RadioGroup mRgp;
-    private RadioButton mRbOne, mRbTwo, mRbThree, mRbFour;
+    private RadioButton mRbOne, mRbTwo, mRbThree;
     private List<Fragment> mFrags;
     private FragmentManager mFragmentManager;
 
@@ -36,7 +37,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         instance = this;
-        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+        StatuBarUtil.setBanner(instance);
         initView();
         initDate();
         addEvent();
@@ -63,7 +64,6 @@ public class MainActivity extends BaseActivity {
         mRbOne = findViewById(R.id.rb_one_main);
         mRbTwo = findViewById(R.id.rb_two_main);
         mRbThree = findViewById(R.id.rb_three_main);
-        mRbFour = findViewById(R.id.rb_four_main);
     }
 
 
@@ -72,20 +72,24 @@ public class MainActivity extends BaseActivity {
      */
     class CheckedChange implements RadioGroup.OnCheckedChangeListener {
 
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             switch (checkedId) {
                 case R.id.rb_one_main:
                     mVpg.setCurrentItem(0);
+                    StatuBarUtil.setBanner(instance);
+
                     break;
                 case R.id.rb_two_main:
                     mVpg.setCurrentItem(1);
+                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+
                     break;
                 case R.id.rb_three_main:
                     mVpg.setCurrentItem(2);
-                    break;
-                case R.id.rb_four_main:
-                    mVpg.setCurrentItem(3);
+                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+
                     break;
             }
         }
@@ -102,6 +106,7 @@ public class MainActivity extends BaseActivity {
 
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onPageSelected(int position) {
             switch (position) {
@@ -110,28 +115,23 @@ public class MainActivity extends BaseActivity {
                     mRbOne.setTextColor(instance.getResources().getColor(R.color.main));
                     mRbTwo.setTextColor(Color.BLACK);
                     mRbThree.setTextColor(Color.BLACK);
-                    mRbFour.setTextColor(Color.BLACK);
+                    StatuBarUtil.setBanner(instance);
                     break;
                 case 1:
                     mRbTwo.setChecked(true);
                     mRbTwo.setTextColor(instance.getResources().getColor(R.color.main));
                     mRbOne.setTextColor(Color.BLACK);
                     mRbThree.setTextColor(Color.BLACK);
-                    mRbFour.setTextColor(Color.BLACK);
+                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+
                     break;
                 case 2:
                     mRbThree.setChecked(true);
                     mRbThree.setTextColor(instance.getResources().getColor(R.color.main));
                     mRbOne.setTextColor(Color.BLACK);
                     mRbTwo.setTextColor(Color.BLACK);
-                    mRbFour.setTextColor(Color.BLACK);
-                    break;
-                case 3:
-                    mRbFour.setChecked(true);
-                    mRbFour.setTextColor(instance.getResources().getColor(R.color.main));
-                    mRbOne.setTextColor(Color.BLACK);
-                    mRbTwo.setTextColor(Color.BLACK);
-                    mRbThree.setTextColor(Color.BLACK);
+                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+
                     break;
             }
         }

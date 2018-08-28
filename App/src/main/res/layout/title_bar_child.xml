@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_title_child_bar"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:background="@color/wirte"
+    >
+    <TextView
+        android:id="@+id/tv_back_child_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回"
+        android:textColor="@color/main"
+        android:drawableLeft="@mipmap/back_child"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:onClick="onBack"
+        android:textSize="@dimen/edit_text"
+        android:layout_marginLeft="@dimen/layout_padding_small"
+        />
+
+    <TextView
+        android:id="@+id/tv_title_child_tilte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_size" />
+
+    <TextView
+        android:id="@+id/tv_right_child_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:textColor="@color/main"
+        android:text="编辑的"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        />
+</LinearLayout>

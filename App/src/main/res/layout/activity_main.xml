@@ -33,7 +33,7 @@
             android:button="@null"
             android:drawableTop="@drawable/button_one"
             android:layout_weight="1"
-            android:text="新闻资讯"
+            android:text="首页"
             android:gravity="center"
             android:textSize="@dimen/edit_text"
             android:drawablePadding="@dimen/line_large"
@@ -48,7 +48,7 @@
             android:button="@null"
             android:drawableTop="@drawable/button_two"
             android:layout_weight="1"
-            android:text="线索上报"
+            android:text="检查日志"
             android:gravity="center"
             android:textSize="@dimen/edit_text"
             android:drawablePadding="@dimen/line_large"
@@ -61,7 +61,7 @@
             android:button="@null"
             android:drawableTop="@drawable/button_three"
             android:layout_weight="1"
-            android:text="信息采集"
+            android:text="数据分析"
             android:gravity="center"
             android:textSize="@dimen/edit_text"
             android:drawablePadding="@dimen/line_large"
@@ -69,18 +69,6 @@
 
 
 
-        <RadioButton
-            android:id="@+id/rb_four_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@null"
-            android:drawableTop="@drawable/button_four"
-            android:layout_weight="1"
-            android:text="个人信息"
-            android:gravity="center"
-            android:textSize="@dimen/edit_text"
-            android:drawablePadding="@dimen/line_large"
-            />
 
     </RadioGroup>
 

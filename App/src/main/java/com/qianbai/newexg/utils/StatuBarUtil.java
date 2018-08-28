@@ -34,7 +34,7 @@ public class StatuBarUtil {
      * @param statusColor
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarColor(Activity activity, int statusColor){
+    private static void setStatusBarColor(Activity activity, int statusColor){
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {//5.0
             Window window = activity.getWindow();
             //取消状态栏透明
@@ -57,7 +57,7 @@ public class StatuBarUtil {
 
 
     /**
-     * 设置状态栏透明
+     * 设置状态栏透明(全背景)
      * @param activity
      * @param hideStatusBarBackGround
      */
@@ -135,10 +135,31 @@ public class StatuBarUtil {
                 }
             }else if (Build.VERSION.SDK_INT<Build.VERSION_CODES.M){//如果是6.0以下的版本不修改颜色
 //                activity.getWindow().setStatusBarColor(color);
-
+                //view不根据系统窗口来调整自己的布局
+                ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+                View mChildView = mContentView.getChildAt(0);
+                if (mChildView != null){
+                    ViewCompat.setFitsSystemWindows(mChildView,true);//true在界面上会留出状态栏的位置 false在界面上不会留出状态栏的位置
+                    ViewCompat.requestApplyInsets(mChildView);
+                }
             }
         }
     }
+
+    /**
+     * 轮播图设置沉浸式
+     * @param activity
+     */
+    public static void setBanner(Activity activity){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                        // 透明状态栏
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                        // 透明导航栏
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+                    }
+
+    }
+
 
     //获取是否存在NavigationBar
     public static boolean checkDeviceHasNavigationBar(Context context) {

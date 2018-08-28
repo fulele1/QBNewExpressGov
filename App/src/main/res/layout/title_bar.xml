@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_title_bar"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:orientation="horizontal"
+    android:background="@color/main"
+    >
+    <TextView
+        android:id="@+id/tv_back_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回"
+        android:textColor="@color/wirte"
+        android:drawableLeft="@mipmap/back"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:onClick="onChildBack"
+        android:textSize="@dimen/edit_text"
+        android:layout_marginLeft="@dimen/layout_padding_small"
+        />
+
+    <TextView
+        android:id="@+id/tv_title_tilte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/wirte"
+        android:textSize="@dimen/title_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="咚咚"
+        android:drawableLeft="@mipmap/back"
+        android:visibility="invisible"
+        />
+</LinearLayout>

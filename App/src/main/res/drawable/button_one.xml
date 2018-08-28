@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_checked="true" android:drawable="@mipmap/news_not_on"/>
-    <item android:state_checked="false" android:drawable="@mipmap/news_gray"/>
+    <item android:state_checked="true" android:drawable="@mipmap/index_icon_home_pre"/>
+    <item android:state_checked="false" android:drawable="@mipmap/index_home_g"/>
 
 </selector>

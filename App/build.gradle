@@ -25,9 +25,23 @@ android {
     }
 }
 
+//解决LRecycleView列表冲突问题
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '27.0.0'
+            }
+        }
+    }
+}
+
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':QB-ec')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor project(':QB-complier')
     //路由
     compile 'com.alibaba:arouter-api:1.4.0'
@@ -35,4 +49,13 @@ dependencies {
     //butterknife
     compile 'com.jakewharton:butterknife:8.1.0'
     annotationProcessor 'com.jakewharton:butterknife:8.1.0'
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.github.jdsjlzx:LRecyclerView:1.4.3'
+
+    //网络请求依赖
+    compile 'com.squareup.okio:okio:1.13.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }
