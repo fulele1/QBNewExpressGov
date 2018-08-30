@@ -31,7 +31,20 @@
         <activity android:name=".ComListActivity" />
         <activity android:name=".ComDelActivity" />
         <activity android:name=".PerListActivity" />
-        <activity android:name=".PerDelActivity"></activity>
+        <activity android:name=".PerDelActivity" />
+        <activity android:name=".ClueDelActivity" />
+        <activity android:name=".DataDelActivity" />
+        <activity android:name=".Main2Activity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+
+        </activity>
     </application>
 
 </manifest>

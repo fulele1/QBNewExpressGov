@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/wirte">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"/>
+
+    <RadioGroup
+        android:id="@+id/rgp_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:layout_marginTop="@dimen/small_text"
+
+        >
+        <RadioButton
+            android:id="@+id/rb_one_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_one"
+            android:layout_weight="1"
+            android:text="首页"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            android:checked="true"
+            android:textColor="@color/main"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_two_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_two"
+            android:layout_weight="1"
+            android:text="检查日志"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_three_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableTop="@drawable/button_three"
+            android:layout_weight="1"
+            android:text="数据分析"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            />
+
+    </RadioGroup>
+</LinearLayout>

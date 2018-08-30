@@ -114,19 +114,16 @@ public class BaseFragment extends Fragment {
     /**
      * 自定义对话框
      * @param context
-     * @param title
      * @param message
      * @param ok
      * @param no
      * @return
      */
-    public AlertDialog showAdialog(final Context context, String title, String message, String ok, String no){
+    public AlertDialog showAdialog(final Context context, String message, String ok, String no){
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.show();
         Window window = alertDialog.getWindow();
         window.setContentView(R.layout.loading_my_layout);
-        TextView tvTitle = (TextView) window.findViewById(R.id.tv_dialog_title);
-        tvTitle.setText(title);
         TextView tvMessage = (TextView) window.findViewById(R.id.tv_dialog_message);
         tvMessage.setText(message);
         Button btOk = (Button) window.findViewById(R.id.btn_dia_ok);

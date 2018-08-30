@@ -105,12 +105,72 @@ public class StatuBarUtil {
     }
 
     /**
-     * 修改状态栏字体颜色(一般在状态栏背景为白色时修改为黑色字体或者在状态栏透明的情况下背景图片的上面部分为渐变的颜色比较淡)
+     * 修改状态栏字体颜色(一般在状态栏背景为白色时修改为黑色字体或者在状态栏透明的情况下背景图片的上面部分为渐变的颜色比较淡)  fragment
      * @param activity
      * @param color
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static void setStatuBarLightMode(Activity activity, int color){
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT){
+
+//            if (MIUISetStatusBarLightMode(activity,true)||FlymeSetStatusBarLightMode(activity,true)){//判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色
+//                //设置状态栏为指定颜色
+//                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){//5.0
+//                    activity.getWindow().setStatusBarColor(color);
+//                }else if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){//4.4
+//                    //调用修改状态栏颜色的方法
+//                    setStatusBarColor(activity,color);
+//                }
+//            }else
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){//如果是一般手机6.0 以上将状态栏文字改为黑色，并设置状态栏颜色
+
+//                activity.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//                activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//                activity.getWindow().setStatusBarColor(color);
+//                //view不根据系统窗口来调整自己的布局
+//                ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+//                View mChildView = mContentView.getChildAt(0);
+//                if (mChildView != null){
+//                    ViewCompat.setFitsSystemWindows(mChildView,true);//true在界面上会留出状态栏的位置 false在界面上不会留出状态栏的位置
+//                    ViewCompat.requestApplyInsets(mChildView);
+//                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    View decorView = activity.getWindow().getDecorView();
+                    if (decorView != null) {
+                        int vis = decorView.getSystemUiVisibility();
+                        if (true) {
+                            vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                        } else {
+                            vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                        }
+                        decorView.setSystemUiVisibility(vis);
+                    }
+
+                }
+
+            }else if (Build.VERSION.SDK_INT<Build.VERSION_CODES.M){//如果是6.0以下的版本不修改颜色
+//                activity.getWindow().setStatusBarColor(color);
+                //view不根据系统窗口来调整自己的布局
+                ViewGroup mContentView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
+                View mChildView = mContentView.getChildAt(0);
+                if (mChildView != null){
+                    ViewCompat.setFitsSystemWindows(mChildView,true);//true在界面上会留出状态栏的位置 false在界面上不会留出状态栏的位置
+                    ViewCompat.requestApplyInsets(mChildView);
+                }
+            }
+        }
+    }
+
+
+
+    /**
+     * 修改状态栏字体颜色(一般在状态栏背景为白色时修改为黑色字体或者在状态栏透明的情况下背景图片的上面部分为渐变的颜色比较淡)
+     * @param activity
+     * @param color
+     */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatuBarLightModeClild(Activity activity, int color){
         if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT){
 
             if (MIUISetStatusBarLightMode(activity,true)||FlymeSetStatusBarLightMode(activity,true)){//判断是否为小米或魅族手机，如果是则将状态栏文字改为黑色
@@ -133,6 +193,23 @@ public class StatuBarUtil {
                     ViewCompat.setFitsSystemWindows(mChildView,true);//true在界面上会留出状态栏的位置 false在界面上不会留出状态栏的位置
                     ViewCompat.requestApplyInsets(mChildView);
                 }
+
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    View decorView = activity.getWindow().getDecorView();
+//                    if (decorView != null) {
+//                        int vis = decorView.getSystemUiVisibility();
+//                        if (true) {
+//                            vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+//                        } else {
+//                            vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+//                        }
+//                        decorView.setSystemUiVisibility(vis);
+//                    }
+
+                }
+
+
+
             }else if (Build.VERSION.SDK_INT<Build.VERSION_CODES.M){//如果是6.0以下的版本不修改颜色
 //                activity.getWindow().setStatusBarColor(color);
                 //view不根据系统窗口来调整自己的布局
@@ -144,7 +221,27 @@ public class StatuBarUtil {
                 }
             }
         }
+
+
+    public static void setStatusBarMode(Activity activity, boolean bDark) {
+        //6.0以上
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decorView = activity.getWindow().getDecorView();
+            if (decorView != null) {
+                int vis = decorView.getSystemUiVisibility();
+                if (bDark) {
+                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                } else {
+                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                }
+                decorView.setSystemUiVisibility(vis);
+            }
+
+        }
     }
+
+
+
 
     /**
      * 轮播图设置沉浸式

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_button"
+
+    >
+    <include layout="@layout/title_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main"
+        android:padding="@dimen/layout_padding">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/main_gray"
+            android:padding="@dimen/layout_padding">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@mipmap/count_icon_name"
+                android:layout_gravity="center"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_above="@+id/tv_name_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="辖区名称"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_name_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="长安西路"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/main_gray"
+            android:padding="@dimen/layout_padding"
+            android:layout_marginLeft="@dimen/layout_padding"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@mipmap/count_icon_number"
+                android:layout_gravity="center"
+                android:id="@+id/imageView" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_above="@+id/tv_brand_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总品牌数"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_brand_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="244"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
+        android:background="@color/main"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/main_gray"
+            android:padding="@dimen/layout_padding"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@mipmap/count_icon_enterprise"
+                android:layout_gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_above="@+id/tv_com_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总企业数"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_com_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="4234"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/main_gray"
+            android:padding="@dimen/layout_padding"
+            android:layout_marginLeft="@dimen/layout_padding"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@mipmap/count_icon_man"
+                android:layout_gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_above="@+id/tv_per_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="从业人员"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_per_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="222644"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
+        android:background="@color/main"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/main_gray"
+            android:padding="@dimen/layout_padding"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@mipmap/count_icon_deliver"
+                android:layout_gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_above="@+id/tv_post_count_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投递总数"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_post_count_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="234521"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@color/main_gray"
+            android:padding="@dimen/layout_padding"
+            android:layout_marginLeft="@dimen/layout_padding"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:src="@mipmap/count_icon_posting"
+                android:layout_gravity="center"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_above="@+id/tv_receive_count_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收寄总数"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center" />
+
+                <TextView
+                    android:id="@+id/tv_receive_count_org"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/top_bg_color"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="9879853"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart_org_de"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:padding="15dp"
+        android:background="@color/wirte"
+        />
+
+
+</LinearLayout>

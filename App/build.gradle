@@ -58,4 +58,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
+
+
 }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.qianbai.newexg.ComQueryActivity;
 import com.qianbai.newexg.PerQueryActivity;
 import com.qianbai.newexg.R;
 import com.qianbai.newexg.utils.ARouterUtil;
+import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
     private TextView txt_clue ;
     private TextView txt_psw ;
     private TextView txt_exit ;
+    private LinearLayout layout_button ;
 
 
 
@@ -66,6 +69,8 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
         txt_psw = (TextView) view.findViewById(R.id.txt_psw_one);
         txt_exit = (TextView) view.findViewById(R.id.txt_exit_one);
         iv_msg = (ImageView) view.findViewById(R.id.iv_msg_main);
+        layout_button =  view.findViewById(R.id.layout_button);
+
     }
 
     public void initData() {
@@ -114,7 +119,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
 
                 break;
             case R.id.txt_exit_one://退出系统
-                showAdialog(instance,"提示","是否要退出系统?","确定","取消");
+                showAdialog(instance,"确定要退出?","确定","取消");
                 break;
             case R.id.iv_msg_main://通知消息
                 ARouterUtil.intentNoPar("/qb/MsgListActivity",view);

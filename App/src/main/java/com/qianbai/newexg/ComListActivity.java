@@ -69,7 +69,7 @@ public class ComListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lrecycleview_layout);
         instance = this;
-        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+        StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         addEvent();
         setRecycleView();
@@ -201,21 +201,8 @@ public class ComListActivity extends BaseActivity {
                     public void onSuccess(String response) {
                         Toast.makeText(instance, response, Toast.LENGTH_SHORT).show();
 
-//
-//                        try{
-//                            mClue = new ArrayList<>();
-//                            Map<String, Object> map = GsonUtil.JsonToMap(s);
-//
-//                            LogUtils.e(map.toString());
-//                            if (map.get("state").toString().equals("1")) {
-//                                mHandler.sendEmptyMessage(-3);
-//                                Toast.makeText(instance,map.get("mess").toString(),Toast.LENGTH_SHORT).show();
-//                                return;
-//                            } else if (map.get("state").toString().equals("0")) {
-//                                if (!map.get("count").toString().equals("0")){
                                     mHandler.sendEmptyMessage(-1);
                                     list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
-//                                    List<Map<String, Object>> data = GsonUtil.GsonToListMaps(GsonUtil.GsonString(map.get("table")));//参数[{},{}]
                                     for (int j = 0; j < 25; j++) {
                                         Com com = new Com();
                                         com.setId(j+"");//ID
@@ -232,31 +219,6 @@ public class ComListActivity extends BaseActivity {
                                     TOTAL_COUNTER = Integer.valueOf(count).intValue();
                                     REQUEST_COUNT = Integer.valueOf(num).intValue();
                                     txt_size.setText("共查询到"+count+"条数据");
-//                                } else {
-//                                    mHandler.sendEmptyMessage(-3);
-//                                    txt_size.setVisibility(View.GONE);
-//                                }
-
-
-//                            } else if (map.get("state").toString().equals("19")) {
-//                                //响应失败
-//                                mHandler.sendEmptyMessage(-3);
-//                                txt_size.setVisibility(View.GONE);
-//                            }else if (map.get("state").toString().equals("10")) {
-//                                mHandler.sendEmptyMessage(-3);
-//                                //响应失败
-//                                Toast.makeText(instance, map.get("mess").toString(), Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(instance,LoginActivity.class));
-//                                finish();
-//                            }
-//                        }catch (Exception e){
-//                            mHandler.sendEmptyMessage(-3);
-//                            Toast.makeText(instance,e.toString(),Toast.LENGTH_SHORT).show();
-//                        }
-
-
-
-
                     }
                 })
                 .failure(new IFailure() {
@@ -270,92 +232,10 @@ public class ComListActivity extends BaseActivity {
                     @Override
                     public void onError(int code, String msg) {
                         mHandler.sendEmptyMessage(-3);
-//
                     }
                 })
                 .build()
                 .get();
-//
-//        LogUtils.e(HttpUrlUtils.getHttpUrl().clueList()+"?access_token="+ SPUtils.get(instance,"access_token",""));
-//        OkHttpUtils
-//                .get()
-//                .url(HttpUrlUtils.getHttpUrl().clueList()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
-//                .build()
-//                .execute(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int i) {
-//                        Toast.makeText(instance,e.toString(),Toast.LENGTH_SHORT).show();
-//                        mHandler.sendEmptyMessage(-3);
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String s, int i) {
-//
-//                        try{
-//                            mClue = new ArrayList<>();
-//                            Map<String, Object> map = GsonUtil.JsonToMap(s);
-//
-//                            LogUtils.e(map.toString());
-//                            if (map.get("state").toString().equals("1")) {
-//                                mHandler.sendEmptyMessage(-3);
-//                                Toast.makeText(instance,map.get("mess").toString(),Toast.LENGTH_SHORT).show();
-//                                return;
-//                            } else if (map.get("state").toString().equals("0")) {
-//                                if (!map.get("count").toString().equals("0")){
-//                                    mHandler.sendEmptyMessage(-1);
-//                                    list_r.setBackgroundColor(getResources().getColor(R.color.white));
-//                                    List<Map<String, Object>> data = GsonUtil.GsonToListMaps(GsonUtil.GsonString(map.get("table")));//参数[{},{}]
-//                                    for (int j = 0; j < data.size(); j++) {
-//                                        Clue clue = new Clue();
-//                                        clue.setId(NullUtil.getString(data.get(j).get("sc_id")));//ID
-//                                        String pk = NullUtil.getString(data.get(j).get("pk"));
-//                                        String sc_id = NullUtil.getString(data.get(j).get(pk));
-//                                        String img = NullUtil.getString(data.get(j).get("img"));
-//                                        LogUtils.e("头像"+HttpUrlUtils.getHttpUrl().picInclue()+sc_id+"/"+img
-//                                                +"?access_token="+ SPUtils.get(instance,"access_token",""));
-//
-//                                        clue.setPic(HttpUrlUtils.getHttpUrl().picInclue()+sc_id+"/"+img
-//                                                +"?access_token="+ SPUtils.get(instance,"access_token",""));
-//                                        clue.setName(NullUtil.getString(data.get(j).get("people")));//姓名
-//                                        clue.setDate(NullUtil.getString(data.get(j).get("createtime")));//
-//                                        clue.setTel(NullUtil.getString(data.get(j).get("mp")));
-//                                        clue.setAddress(NullUtil.getString(data.get(j).get("address")));//地址
-//                                        clue.setGood(NullUtil.getString(data.get(j).get("goods")));//地址
-//
-//                                        mClue.add(clue);
-//                                        mClues.add(clue);
-//                                    }
-//
-//                                    String count = map.get("count").toString();
-//                                    String  num = map.get("num").toString();
-//                                    TOTAL_COUNTER = Integer.valueOf(count).intValue();
-//                                    REQUEST_COUNT = Integer.valueOf(num).intValue();
-//                                    txt_size.setText("共查询到"+count+"条数据");
-//                                } else {
-//                                    mHandler.sendEmptyMessage(-3);
-//                                    txt_size.setVisibility(View.GONE);
-//                                }
-//
-//
-//                            } else if (map.get("state").toString().equals("19")) {
-//                                //响应失败
-//                                mHandler.sendEmptyMessage(-3);
-//                                txt_size.setVisibility(View.GONE);
-//                            }else if (map.get("state").toString().equals("10")) {
-//                                mHandler.sendEmptyMessage(-3);
-//                                //响应失败
-//                                Toast.makeText(instance, map.get("mess").toString(), Toast.LENGTH_SHORT).show();
-//                                startActivity(new Intent(instance,LoginActivity.class));
-//                                finish();
-//                            }
-//                        }catch (Exception e){
-//                            mHandler.sendEmptyMessage(-3);
-//                            Toast.makeText(instance,e.toString(),Toast.LENGTH_SHORT).show();
-//                        }
-//
-//
-//                    }
-//                });
     }
 
     private void notifyDataSetChanged() {

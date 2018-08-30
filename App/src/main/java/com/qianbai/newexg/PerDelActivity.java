@@ -20,7 +20,7 @@ public class PerDelActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_per_del);
         instance = this;
-        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+        StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
     }
 

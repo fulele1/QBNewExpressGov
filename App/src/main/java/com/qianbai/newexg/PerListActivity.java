@@ -68,7 +68,7 @@ public class PerListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lrecycleview_layout);
         instance = this;
-        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+        StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         addEvent();
         setRecycleView();

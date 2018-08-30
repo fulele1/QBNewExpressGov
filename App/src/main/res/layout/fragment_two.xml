@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/wirte"
         android:paddingTop="@dimen/activity_horizontal_margin"
         >
@@ -225,6 +225,19 @@
 
 
         </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/bt_query_three"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/bg_button_selector"
+            android:text="完成"
+            android:textColor="@color/wirte"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            />
 
 
 

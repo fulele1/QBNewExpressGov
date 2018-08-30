@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.bt_login_login:
                 ARouter.getInstance()
-                        .build("/qb/MainActivity")
+                        .build("/qb/MainActivity2")
                         .withOptionsCompat(ActivityOptionsCompat.
                                 makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0))//动画效果
                         .navigation();

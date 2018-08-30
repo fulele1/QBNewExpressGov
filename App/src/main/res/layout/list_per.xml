@@ -110,4 +110,7 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        style="@style/horizontal_list_line_bag" />
+
 </LinearLayout>

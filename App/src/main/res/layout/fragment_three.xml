@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/wirte"
         android:paddingTop="@dimen/activity_horizontal_margin"
         >
@@ -121,6 +121,13 @@
 
 
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
+
     <Button
         android:id="@+id/bt_query_three"
         android:layout_width="250dp"
@@ -131,6 +138,7 @@
         android:text="完成"
         android:textColor="@color/wirte"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
+
         />
 
 

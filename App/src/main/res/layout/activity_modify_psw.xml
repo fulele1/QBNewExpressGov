@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_modify_psw"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qianbai.newexg.ModifyPSWActivity">
+    android:orientation="vertical"
+    android:background="@color/wirte"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/title_bar_child"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/old_psw"
+            />
+        <EditText
+            android:id="@+id/et_old_modify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/edit_psw"
+            android:textSize="@dimen/edit_text"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal_black_line_small"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_psw"
+            android:layout_gravity="center"
+            />
+        <EditText
+            android:id="@+id/et_new_modify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/edit_psw"
+            android:textSize="@dimen/edit_text"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout style="@style/horizontal_black_line_small"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/con_psw"
+            android:layout_gravity="center"
+            />
+        <EditText
+            android:id="@+id/et_con_modify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/edit_psw"
+            android:textSize="@dimen/edit_text"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/horizontal_black_line_small"/>
+
+
+
+    <Button
+        android:id="@+id/bt_finished_modify"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/bg_button_selector"
+        android:text="完成"
+        android:textColor="@color/wirte"
+        android:layout_marginTop="@dimen/activity_horizontal_marginsx"
+        />
+
+</LinearLayout>
