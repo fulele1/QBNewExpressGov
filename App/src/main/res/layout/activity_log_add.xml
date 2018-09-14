@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_com_detial"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <include layout="@layout/title_bar_child"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/wirte"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/two"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/title_size"
+            />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:orientation="vertical"
         android:background="@color/wirte"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -24,28 +34,55 @@
             >
 
             <TextView
-                android:id="@+id/txt_com_pd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="广州顺丰速运有限公司"
-                />
-
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_com_pd"
-                android:layout_marginTop="@dimen/line_large"
-                />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/com"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/textView"
-                android:layout_alignParentLeft="true" />
+                android:layout_alignParentLeft="true"
 
+                />
+
+            <TextView
+                android:id="@+id/txt_com_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="陕西全峰速运有限公司"
+                android:layout_alignParentRight="true"
+
+                />
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt_com_two"
+                android:layout_marginTop="@dimen/line_large"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:layout_alignParentLeft="true"
+                />
+
+            <TextView
+                android:id="@+id/txt_address_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="陕西省西安市南大街13号"
+                android:layout_alignParentRight="true"
+
+                />
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt_address_two"
+                android:layout_marginTop="@dimen/line_large"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -57,24 +94,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name"
+                android:text="@string/device"
                 android:layout_alignParentLeft="true"
                 />
 
             <TextView
-                android:id="@+id/txt_name_pd"
+                android:id="@+id/txt_device_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="内任教"
-                />
 
+                />
             <LinearLayout
                 style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_name_pd"
+                android:layout_below="@+id/txt_device_two"
                 android:layout_marginTop="@dimen/line_large"
                 />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -85,25 +122,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/phone"
+                android:text="@string/is_check"
                 android:layout_alignParentLeft="true"
                 />
 
             <TextView
-                android:id="@+id/txt_tel_pd"
+                android:id="@+id/txt_check_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="175-5456-8787"
-                android:textColor="@color/main"
-                />
 
+                />
             <LinearLayout
                 style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_tel_pd"
+                android:layout_below="@+id/txt_check_two"
                 android:layout_marginTop="@dimen/line_large"
                 />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -114,24 +150,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/six"
+                android:text="@string/is_100"
                 android:layout_alignParentLeft="true"
                 />
 
             <TextView
-                android:id="@+id/txt_six_pd"
+                android:id="@+id/txt_100_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="男"
+                android:drawableRight="@mipmap/go"
+                android:text="是"
                 />
-
             <LinearLayout
                 style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_six_pd"
+                android:layout_below="@+id/txt_100_two"
                 android:layout_marginTop="@dimen/line_large"
                 />
+
+
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -142,24 +181,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ide_num"
+                android:text="@string/other"
                 android:layout_alignParentLeft="true"
                 />
 
             <TextView
-                android:id="@+id/txt_ide_pd"
+                android:id="@+id/txt_other_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="32356847846748"
-                />
 
+                />
             <LinearLayout
                 style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_ide_pd"
+                android:layout_below="@+id/txt_other_two"
                 android:layout_marginTop="@dimen/line_large"
                 />
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -169,63 +206,41 @@
             >
 
             <TextView
+                android:id="@+id/txt_add_pic_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/get_m_count"
+                android:text="@string/check_pic"
                 android:layout_alignParentLeft="true"
                 />
 
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_get_count_pd"
-                android:layout_marginTop="@dimen/line_large"
-                />
-
-            <TextView
-                android:id="@+id/txt_get_count_pd"
+            <ImageView
+                android:id="@+id/img_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="423"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+                android:src="@mipmap/add_pic"
+                android:layout_below="@+id/txt_add_pic_two"
+                android:layout_marginTop="@dimen/activity_horizontal_margins"
+                />
+
+
+
         </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/post_m_count"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_post_count_pd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="42134"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true" />
+        <Button
+            android:id="@+id/bt_query_three"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/bg_button_selector"
+            android:text="完成"
+            android:textColor="@color/wirte"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            />
 
 
-        </RelativeLayout>
 
     </LinearLayout>
-
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="15dp"
-        />
 
 </LinearLayout>

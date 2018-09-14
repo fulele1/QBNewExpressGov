@@ -11,6 +11,16 @@ public class Per {
     private String tel;
     private String ide;
 
+    public String getCom() {
+        return com;
+    }
+
+    public void setCom(String com) {
+        this.com = com;
+    }
+
+    private String com;
+
     public String getName() {
         return name;
     }

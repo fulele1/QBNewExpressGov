@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
@@ -32,6 +35,8 @@ import com.qianbai.newexg.net.callback.IFailure;
 import com.qianbai.newexg.net.callback.ISuccess;
 import com.qianbai.newexg.utils.ARouterUtil;
 import com.qianbai.newexg.utils.HttpUrlUtils;
+import com.qianbai.newexg.utils.NullUtil;
+import com.qianbai.newexg.utils.SPUtils;
 import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.lang.ref.WeakReference;
@@ -42,19 +47,25 @@ import java.util.Map;
 @Route(path = "/qb/ComListActivity")
 public class ComListActivity extends BaseActivity {
 
-   private ComListActivity instance;
+    private ComListActivity instance;
     private TextView tv_title_child;
     private TextView txt_size;
     private LRecyclerView list_r;
-    /**服务器端一共多少条数据*/
+    /**
+     * 服务器端一共多少条数据
+     */
     private int TOTAL_COUNTER;//如果服务器没有返回总数据或者总页数，这里设置为最大值比如10000，什么时候没有数据了根据接口返回判断
 
-    /**每一页展示多少条数据*/
+    /**
+     * 每一页展示多少条数据
+     */
     private int REQUEST_COUNT;
 
-    /**已经获取到多少条数据了*/
+    /**
+     * 已经获取到多少条数据了
+     */
     private static int mCurrentCounter = 0;
-    private  int mCurrentpage = 1;
+    private int mCurrentpage = 1;
 
 
     private ComAdapter mDataAdapter = null;
@@ -109,7 +120,7 @@ public class ComListActivity extends BaseActivity {
         list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
 
         //add a HeaderView
-        final View header = LayoutInflater.from(this).inflate(R.layout.sample_header,(ViewGroup)findViewById(android.R.id.content), false);
+        final View header = LayoutInflater.from(this).inflate(R.layout.sample_header, (ViewGroup) findViewById(android.R.id.content), false);
         mLRecyclerViewAdapter.addHeaderView(header);
 
         list_r.setOnRefreshListener(new OnRefreshListener() {
@@ -132,7 +143,7 @@ public class ComListActivity extends BaseActivity {
 
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     // loading more
-                    mCurrentpage =mCurrentpage+1;
+                    mCurrentpage = mCurrentpage + 1;
                     connecting(mCurrentpage);
                 } else {
                     //the end
@@ -163,11 +174,11 @@ public class ComListActivity extends BaseActivity {
         });
 
         //设置头部加载颜色
-        list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary ,android.R.color.white);
+        list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载颜色
-        list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary ,android.R.color.white);
+        list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载文字提示
-        list_r.setFooterViewHint("拼命加载中","已经全部为你呈现了","网络不给力啊，点击再试一次吧");
+        list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
 
         list_r.refresh();
 
@@ -177,7 +188,9 @@ public class ComListActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 if (mDataAdapter.getDataList().size() > position) {
-                    ARouterUtil.intentNoPar("/qb/ComDelActivity",view);
+                    Bundle mBundle = new Bundle();
+                    mBundle.putString("id", mClues.get(position).getId());
+                    ARouterUtil.intentPar("/qb/ComDelActivity", view, mBundle);
                 }
 
             }
@@ -185,40 +198,51 @@ public class ComListActivity extends BaseActivity {
         });
 
 
-
     }
 
 
-    List<Com> mClue = new ArrayList<>();;
+    List<Com> mClue = new ArrayList<>();
+    ;
     List<Com> mClues = new ArrayList<>();
+
     private void connecting(int p) {
 
         RestClient.builder()
-                .url("https://www.baidu.com/")
-//                .params("","")
+                .url(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Toast.makeText(instance, response, Toast.LENGTH_SHORT).show();
 
-                                    mHandler.sendEmptyMessage(-1);
-                                    list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
-                                    for (int j = 0; j < 25; j++) {
-                                        Com com = new Com();
-                                        com.setId(j+"");//ID
-                                        com.setName("测试name"+j);//姓名
-                                        com.setBelongs("测试belongs"+j);//
-                                        com.setAddress("测试address"+j);
+                        Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
+                        });
+                        Log.e("fule", response);
+                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                        });
+                        String num = mess.get("num").toString();
+                        String count = mess.get("count").toString();
+                        if (NullUtil.getString(map1.get("state")).equals("0")) {
+                            mHandler.sendEmptyMessage(-1);
+                            list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
+                            String table = map1.get("table").toString();
 
-                                        mClue.add(com);
-                                        mClues.add(com);
-                                    }
+                            List<Map> list1 = JSON.parseArray(table, Map.class);
+                            for (Map<String, Object> map : list1) {
 
-                                    String count = "25";
-                                    String  num = "10";
-                                    TOTAL_COUNTER = Integer.valueOf(count).intValue();
-                                    REQUEST_COUNT = Integer.valueOf(num).intValue();
-                                    txt_size.setText("共查询到"+count+"条数据");
+                                Com com = new Com();
+                                com.setId(NullUtil.getString(map.get("comcode")));//ID
+                                com.setName(NullUtil.getString(map.get("comname")));//姓名
+                                com.setBelongs(NullUtil.getString(map.get("bcname")));//
+                                com.setAddress(NullUtil.getString(map.get("comaddress")));
+
+                                mClue.add(com);
+                                mClues.add(com);
+
+                            }
+
+                        }
+                        TOTAL_COUNTER = Integer.valueOf(count).intValue();
+                        REQUEST_COUNT = Integer.valueOf(num).intValue();
+                        txt_size.setText("共查询到" + count + "条数据");
                     }
                 })
                 .failure(new IFailure() {

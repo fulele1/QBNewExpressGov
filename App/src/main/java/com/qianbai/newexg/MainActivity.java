@@ -5,65 +5,48 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.WindowManager;
+import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.qianbai.newexg.adapter.FragmentAdapter;
+import com.jaeger.library.StatusBarUtil;
 import com.qianbai.newexg.fragment.OneFragment;
 import com.qianbai.newexg.fragment.ThreeFragment;
 import com.qianbai.newexg.fragment.TwoFragment;
 import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
-@Route(path = "/qb/MainActivity")
+@Route(path = "/qb/MainActivity2")
 public class MainActivity extends BaseActivity {
 
     private MainActivity instance;
-    private ViewPager mVpg;
+    private ViewPager mVpHome;
+    //    private BottomNavigationBar mBottomNavigationBar;
+    private ArrayList<Fragment> mFragmentList = new ArrayList<>();
     private RadioGroup mRgp;
     private RadioButton mRbOne, mRbTwo, mRbThree;
-    private List<Fragment> mFrags;
-    private FragmentManager mFragmentManager;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        StatuBarUtil.setBanner(this);
+        setContentView(R.layout.activity_main2);
         instance = this;
+        StatusBarUtil.setTransparentForImageViewInFragment(this, null);
         initView();
-        initDate();
-        addEvent();
-    }
-
-    private void addEvent() {
-        mVpg.setAdapter(new FragmentAdapter(mFragmentManager, mFrags));
-        mRgp.setOnCheckedChangeListener(new CheckedChange());
-        mVpg.setOnPageChangeListener(new pageChange());
-    }
-
-    private void initDate() {
-        mFrags = new ArrayList<>();
-        mFrags.add(new OneFragment());
-        mFrags.add(new TwoFragment());
-        mFrags.add(new ThreeFragment());
-        mFrags.add(new ThreeFragment());
+        setViewPage();
     }
 
     private void initView() {
-        mFragmentManager = this.getSupportFragmentManager();
-        mVpg = findViewById(R.id.vpg_main);
+        mVpHome = (ViewPager) findViewById(R.id.vp_home);
         mRgp = findViewById(R.id.rgp_main);
         mRbOne = findViewById(R.id.rb_one_main);
         mRbTwo = findViewById(R.id.rb_two_main);
         mRbThree = findViewById(R.id.rb_three_main);
+        mRgp.setOnCheckedChangeListener(new CheckedChange());
     }
 
 
@@ -77,69 +60,101 @@ public class MainActivity extends BaseActivity {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             switch (checkedId) {
                 case R.id.rb_one_main:
-                    mVpg.setCurrentItem(0);
-                    StatuBarUtil.setBanner(instance);
-
+                    mVpHome.setCurrentItem(0);
                     break;
                 case R.id.rb_two_main:
-                    mVpg.setCurrentItem(1);
-                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
-
+                    mVpHome.setCurrentItem(1);
                     break;
                 case R.id.rb_three_main:
-                    mVpg.setCurrentItem(2);
-                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
-
+                    mVpHome.setCurrentItem(2);
                     break;
             }
         }
     }
 
 
-    /**
-     * 页面滑动后设置当前为点击
-     */
-    class pageChange implements ViewPager.OnPageChangeListener {
+    private void setViewPage() {
 
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//        mBottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+//        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.button_one, "首页"))
+//                .addItem(new BottomNavigationItem(R.drawable.button_two, "检查日志"))
+//                .addItem(new BottomNavigationItem(R.drawable.button_three, "数据分析"))
+//                .initialise();
+//
+//        mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(int position) {
+//                mVpHome.setCurrentItem(position);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(int position) {
+//
+//            }
+//        });
 
-        }
+        mFragmentList.add(new OneFragment());
+        mFragmentList.add(new TwoFragment());
+        mFragmentList.add(new ThreeFragment());
 
-        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-        @Override
-        public void onPageSelected(int position) {
-            switch (position) {
-                case 0:
-                    mRbOne.setChecked(true);
-                    mRbOne.setTextColor(instance.getResources().getColor(R.color.main));
-                    mRbTwo.setTextColor(Color.BLACK);
-                    mRbThree.setTextColor(Color.BLACK);
-                    StatuBarUtil.setBanner(instance);
-                    break;
-                case 1:
-                    mRbTwo.setChecked(true);
-                    mRbTwo.setTextColor(instance.getResources().getColor(R.color.main));
-                    mRbOne.setTextColor(Color.BLACK);
-                    mRbThree.setTextColor(Color.BLACK);
-                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+        mVpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                    break;
-                case 2:
-                    mRbThree.setChecked(true);
-                    mRbThree.setTextColor(instance.getResources().getColor(R.color.main));
-                    mRbOne.setTextColor(Color.BLACK);
-                    mRbTwo.setTextColor(Color.BLACK);
-                    StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
-
-                    break;
             }
-        }
 
-        @Override
-        public void onPageScrollStateChanged(int state) {
-        }
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onPageSelected(int position) {
+//                mBottomNavigationBar.selectTab(position);
+                Log.e("fule", position + "");
+                switch (position) {
+                    case 0:
+                        mRbOne.setChecked(true);
+                        mRbOne.setTextColor(instance.getResources().getColor(R.color.main));
+                        mRbTwo.setTextColor(Color.BLACK);
+                        mRbThree.setTextColor(Color.BLACK);
+                        StatusBarUtil.setTransparentForImageViewInFragment(instance, null);
+                        break;
+                    case 1:
+                        mRbTwo.setChecked(true);
+                        mRbTwo.setTextColor(instance.getResources().getColor(R.color.main));
+                        mRbOne.setTextColor(Color.BLACK);
+                        mRbThree.setTextColor(Color.BLACK);
+                        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+                        break;
+                    case 2:
+                        mRbThree.setChecked(true);
+                        mRbThree.setTextColor(instance.getResources().getColor(R.color.main));
+                        mRbOne.setTextColor(Color.BLACK);
+                        mRbTwo.setTextColor(Color.BLACK);
+                        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mVpHome.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return mFragmentList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return mFragmentList.size();
+            }
+        });
+
+
     }
-
-
 }

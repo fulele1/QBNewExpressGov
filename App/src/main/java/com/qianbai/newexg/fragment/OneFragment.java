@@ -1,8 +1,11 @@
 package com.qianbai.newexg.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -23,6 +26,7 @@ import com.qianbai.newexg.ComQueryActivity;
 import com.qianbai.newexg.PerQueryActivity;
 import com.qianbai.newexg.R;
 import com.qianbai.newexg.utils.ARouterUtil;
+import com.qianbai.newexg.utils.SPUtils;
 import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.util.ArrayList;
@@ -129,6 +133,14 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
 
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void okDialog() {
+        SPUtils.put(instance, "userPsw", "");
+        ARouterUtil.intentNoPar("/qb/loginActivity",view);
+        OneFragment.this.getActivity().finish();
+    }
 
     /**
      * 轮播图holder

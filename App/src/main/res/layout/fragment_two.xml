@@ -1,246 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/background"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_staff_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/wirte"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/two"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/title_size"
-            />
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/wirte"
         >
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
+            android:layout_height="60dp"
+            android:background="@color/wirte"
+            android:paddingTop="@dimen/activity_horizontal_margin"
             >
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/com"
-                android:layout_alignParentLeft="true"
-
-                />
-
-            <TextView
-                android:id="@+id/txt_com_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="陕西全峰速运有限公司"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_com_two"
-                android:layout_marginTop="@dimen/line_large"
+                android:text="@string/two"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/title_size"
                 />
         </RelativeLayout>
 
-
-        <RelativeLayout
+        <TextView
+            android:id="@+id/txt_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/address"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_address_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="陕西省西安市南大街13号"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_address_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/device"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_device_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_device_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/is_check"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_check_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_check_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/is_100"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_100_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:drawableRight="@mipmap/go"
-                android:text="是"
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_100_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/other"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_other_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_other_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:id="@+id/txt_add_pic_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/check_pic"
-                android:layout_alignParentLeft="true"
-                />
-
-            <ImageView
-                android:id="@+id/img_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/add_pic"
-                android:layout_below="@+id/txt_add_pic_two"
-                android:layout_marginTop="@dimen/activity_horizontal_margins"
-                />
-
-
-
-        </RelativeLayout>
-
-
-        <Button
-            android:id="@+id/bt_query_three"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/bg_button_selector"
-            android:text="完成"
-            android:textColor="@color/wirte"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:textColor="@color/text_c"
+            android:background="@color/background"
             />
+
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+            android:id="@+id/list_recycleview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@mipmap/nodata"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
 
     </LinearLayout>
 
-</LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/add"
+        app:borderWidth="0dp"
+        app:backgroundTint="@color/main"
+        app:rippleColor="#33728dff"
+        app:elevation="8dp"
+        app:pressedTranslationZ="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/activity_horizontal_margins"
+        />
+
+
+</RelativeLayout>

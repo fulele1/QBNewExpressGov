@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".TestActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".BackPWDActivity" />
         <activity android:name=".ComQueryActivity" />
         <activity android:name=".PerQueryActivity" />
@@ -34,17 +33,9 @@
         <activity android:name=".PerDelActivity" />
         <activity android:name=".ClueDelActivity" />
         <activity android:name=".DataDelActivity" />
-        <activity android:name=".Main2Activity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
-
-        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LogDelActivity" />
+        <activity android:name=".LogAddActivity"></activity>
     </application>
 
 </manifest>

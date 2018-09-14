@@ -23,8 +23,6 @@
         <item name="android:layout_height">@dimen/line_small</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/background</item>
-        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
     </style>
 
     <style name="vertical_black_line_small">

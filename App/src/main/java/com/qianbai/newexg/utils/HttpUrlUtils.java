@@ -10,19 +10,23 @@ public class HttpUrlUtils {
         return httpUrl;
     }
 
+//    private String getBaseUrl() {
+//        return "http://demo.0-w.cc";
+//    }
+
+
     private String getBaseUrl() {
-        return "http://xawl.qbchoice.cn/";
+        return "http://jdws.qbchoice.cn";
     }
 
     /**
      * 登录
-     *
+     * /v1/governor/login
      * @return
      */
     public String userLogin() {
-        return getBaseUrl() + "governor/index/login";
+        return getBaseUrl() + "/v1/governor/login";
     }
-
 
     /**
      * 品牌
@@ -52,34 +56,91 @@ public class HttpUrlUtils {
      * @return
      */
     public String query_com() {
-        return getBaseUrl() + "governor/company/search";
+        return getBaseUrl() + "/v1/governor/company";
     }
 
     /**
-     * www.newexpress.com/v1/governor/company/:id
+     * /v1/governor/company/：id
      *
      * @return
      */
     public String detail_com() {
-        return getBaseUrl() + "governor/company/";
+        return getBaseUrl() + "/v1/governor/company/";
+    }
+
+    /**
+     * /v1/governor/brandcode
+     *
+     * @return
+     */
+    public String brandcode() {
+        return getBaseUrl() + "/v1/governor/brandcode";
     }
 
     /**
      * www.newexpress.com/v1/governor/staff/search
      * 人员查询
-     *
+     * /v1/governor/employee
      * @return
      */
     public String query_per() {
-        return getBaseUrl() + "governor/staff/search";
+        return getBaseUrl() + "/v1/governor/employee";
     }
 
     /**
-     * www.newexpress.com/v1/governor/staff/:id
+     * /v1/governor/employee/:id
      *
      * @return
      */
     public String detail_per() {
-        return getBaseUrl() + "governor/staff/";
+        return getBaseUrl() + "/v1/governor/employee/";
     }
+
+
+
+
+
+    /**
+     * v1/governor/securityclue
+     *
+     * @return
+     */
+    public String clue_list() {
+        return getBaseUrl() + "/v1/governor/securityclue";
+    }
+
+    /**
+     * v1/governor/securityclue/:id
+     *
+     * @return
+     */
+    public String clue_del() {
+        return getBaseUrl() + "/v1/governor/securityclue/";
+    }
+
+
+
+    /**
+     * v1/governor/querylog
+     *
+     * @return
+     */
+    public String log_list() {
+        return getBaseUrl() + "/v1/governor/querylog";
+    }
+
+    /**
+     * v1/governor/securityclue/:id
+     *
+     * @return
+     */
+    public String log_del() {
+        return getBaseUrl() + "/v1/governor/querylog";
+    }
+
+
+
+
+
+
 }

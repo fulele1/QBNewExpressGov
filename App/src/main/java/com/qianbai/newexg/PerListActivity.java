@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.github.jdsjlzx.ItemDecoration.DividerDecoration;
 import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
@@ -32,11 +35,15 @@ import com.qianbai.newexg.net.callback.IError;
 import com.qianbai.newexg.net.callback.IFailure;
 import com.qianbai.newexg.net.callback.ISuccess;
 import com.qianbai.newexg.utils.ARouterUtil;
+import com.qianbai.newexg.utils.HttpUrlUtils;
+import com.qianbai.newexg.utils.NullUtil;
+import com.qianbai.newexg.utils.SPUtils;
 import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Route(path = "/qb/PerListActivity")
 public class PerListActivity extends BaseActivity {
@@ -176,9 +183,10 @@ public class PerListActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 if (mDataAdapter.getDataList().size() > position) {
-                    ARouterUtil.intentNoPar("/qb/PerDelActivity",view);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",mClues.get(position).getId());
+                    ARouterUtil.intentPar("/qb/PerDelActivity",view,bundle);
                 }
-
             }
 
         });
@@ -193,28 +201,37 @@ public class PerListActivity extends BaseActivity {
     private void connecting(int p) {
 
         RestClient.builder()
-                .url("https://www.baidu.com/")
-//                .params("","")
+                .url(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Toast.makeText(instance, response, Toast.LENGTH_SHORT).show();
+                        Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
+                        });
+                        Log.e("fule", response);
+                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                        });
+                        String num = mess.get("num").toString();
+                        String count = mess.get("count").toString();
+                        if (NullUtil.getString(map1.get("state")).equals("0")) {
+                            mHandler.sendEmptyMessage(-1);
+                            list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
+                            String table = map1.get("table").toString();
+                            List<Map> list1 = JSON.parseArray(table, Map.class);
+                            for (Map<String, Object> map : list1) {
+                                Per com = new Per();
+                                com.setId(NullUtil.getString(map.get("empcode")));//ID
+                                com.setName(NullUtil.getString(map.get("empname")));//姓名
+                                com.setTel(NullUtil.getString(map.get("empphone")));//电话
+                                com.setSix(NullUtil.getString(map.get("sexname")));//性别
+                                com.setIde(NullUtil.getString(map.get("empcertcode")));//身份证号码
+                                com.setCom(NullUtil.getString(map.get("comname")));//公司
 
-//
-                                    mHandler.sendEmptyMessage(-1);
-                                    list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
-                                    for (int j = 0; j < 25; j++) {
-                                        Per com = new Per();
-                                        com.setId(j+"");//ID
-                                        com.setName("测试name"+j);//姓名
-                                        com.setTel("测试tel"+j);//
+                                mClue.add(com);
+                                mClues.add(com);
+                            }
 
-                                        mClue.add(com);
-                                        mClues.add(com);
-                                    }
+                        }
 
-                                    String count = "25";
-                                    String  num = "10";
                                     TOTAL_COUNTER = Integer.valueOf(count).intValue();
                                     REQUEST_COUNT = Integer.valueOf(num).intValue();
                                     txt_size.setText("共查询到"+count+"条数据");
@@ -281,6 +298,9 @@ public class PerListActivity extends BaseActivity {
                         Per item = new Per();
                         item.setName(mClue.get(i).getName());
                         item.setTel(mClue.get(i).getTel());
+                        item.setCom(mClue.get(i).getCom());
+                        item.setIde(mClue.get(i).getIde());
+                        item.setSix(mClue.get(i).getSix());
                         newList.add(item);
                     }
 

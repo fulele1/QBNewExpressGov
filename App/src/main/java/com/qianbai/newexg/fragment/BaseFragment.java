@@ -131,8 +131,9 @@ public class BaseFragment extends Fragment {
         btOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                okDialog();
             }
+
         });
         Button btNo = (Button) window.findViewById(R.id.btn_dia_no);
         btNo.setText(no);
@@ -144,6 +145,8 @@ public class BaseFragment extends Fragment {
         });
         return alertDialog;
     }
+            public void okDialog() {
+            }
 
 
 }

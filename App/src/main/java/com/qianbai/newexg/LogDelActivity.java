@@ -2,9 +2,8 @@ package com.qianbai.newexg;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -25,12 +24,9 @@ import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.util.Map;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
-@Route(path = "/qb/ClueDelActivity")
-public class ClueDelActivity extends BaseActivity {
-    private ClueDelActivity instance;
+@Route(path = "/qb/LogDelActivity")
+public class LogDelActivity extends BaseActivity {
+    private LogDelActivity instance;
     private TextView tv_title_child, tv_right_child;
     private String id;
     private TextView txt_responsible_Per_cld,txt_responsible_tel_cld,txt_employee_count_cld,txt_get_count_cld,txt_post_count_cld;
@@ -41,7 +37,7 @@ public class ClueDelActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clue_del);
+        setContentView(R.layout.activity_log_del);
         instance = this;
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
@@ -51,9 +47,9 @@ public class ClueDelActivity extends BaseActivity {
 
     private void internet() {
 
-        Log.e("fule", HttpUrlUtils.getHttpUrl().clue_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
+        Log.e("fule", HttpUrlUtils.getHttpUrl().log_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().clue_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().log_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -98,7 +94,7 @@ public class ClueDelActivity extends BaseActivity {
     @SuppressLint("WrongViewCast")
     private void initView() {
         tv_title_child = findViewById(R.id.tv_title_child_tilte);
-        tv_title_child.setText("线索详情");
+        tv_title_child.setText("日志详情");
         tv_right_child = findViewById(R.id.tv_right_child_title);
         tv_right_child.setText("编辑");
         tv_right_child.setVisibility(View.VISIBLE);
@@ -108,10 +104,5 @@ public class ClueDelActivity extends BaseActivity {
         txt_get_count_cld = findViewById(R.id.txt_get_count_cld);
         txt_post_count_cld = findViewById(R.id.txt_post_count_cld);
     }
-
-
-
-
-
 
 }
