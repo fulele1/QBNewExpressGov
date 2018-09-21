@@ -68,5 +68,16 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:design:27.1.1'
 
+    //二维码扫描
+    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.2.5'
+
+    //图库选择
+    implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
+    implementation 'cn.bingoogolapple:bga-baseadapter:1.2.9@aar'
+    implementation 'cn.bingoogolapple:bga-flowlayout:1.0.0@aar'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+
+    //动态权限
+    implementation 'pub.devrel:easypermissions:1.0.1'
 
 }

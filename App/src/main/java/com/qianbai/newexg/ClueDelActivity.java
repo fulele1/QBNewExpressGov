@@ -75,7 +75,7 @@ public class ClueDelActivity extends BaseActivity {
                 })
                 .failure(new IFailure() {
                     @Override
-                    public void onFailure() {
+                    public void onFailure(String s) {
                         Toast.makeText(instance, "失败", Toast.LENGTH_SHORT).show();
 
                     }

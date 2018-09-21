@@ -1,5 +1,6 @@
 package com.qianbai.newexg.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,15 +33,18 @@ import com.qianbai.newexg.utils.StatuBarUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 /**
  * Created by fl on 2017/9/5.
  */
 
-public class OneFragment extends BaseFragment implements View.OnClickListener{
-
+public class OneFragment extends BaseFragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks{
+    private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
     private Context instance;
     private View view;
-    private ImageView iv_msg;
+    private ImageView iv_msg,img_scan_one;
     private ConvenientBanner mCb;
     private List<Integer> mImageList;
     private TextView txt_com ;
@@ -73,7 +77,10 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
         txt_psw = (TextView) view.findViewById(R.id.txt_psw_one);
         txt_exit = (TextView) view.findViewById(R.id.txt_exit_one);
         iv_msg = (ImageView) view.findViewById(R.id.iv_msg_main);
+        img_scan_one = (ImageView) view.findViewById(R.id.img_scan_one);
         layout_button =  view.findViewById(R.id.layout_button);
+        requestCodeQRCodePermissions();
+
 
     }
 
@@ -94,6 +101,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
         txt_psw.setOnClickListener(this);
         txt_exit.setOnClickListener(this);
         iv_msg.setOnClickListener(this);
+        img_scan_one.setOnClickListener(this);
     }
 
 
@@ -129,6 +137,11 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
                 ARouterUtil.intentNoPar("/qb/MsgListActivity",view);
 
                 break;
+
+                case R.id.img_scan_one://二维码扫描
+                ARouterUtil.intentNoPar("/qb/ScanActivity",view);
+
+                break;
         }
 
     }
@@ -140,6 +153,27 @@ public class OneFragment extends BaseFragment implements View.OnClickListener{
         SPUtils.put(instance, "userPsw", "");
         ARouterUtil.intentNoPar("/qb/loginActivity",view);
         OneFragment.this.getActivity().finish();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+    }
+
+    @AfterPermissionGranted(REQUEST_CODE_QRCODE_PERMISSIONS)
+    private void requestCodeQRCodePermissions() {
+        String[] perms = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (!EasyPermissions.hasPermissions(this.getActivity(), perms)) {
+            EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
+        }
     }
 
     /**

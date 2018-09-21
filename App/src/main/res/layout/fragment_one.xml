@@ -65,6 +65,7 @@
                         android:textSize="@dimen/edit_text" />
 
                     <ImageView
+                        android:id="@+id/img_scan_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -78,7 +79,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@mipmap/message32" />
+                    android:src="@mipmap/message32"
+                    android:visibility="invisible"
+                    />
             </LinearLayout>
 
 

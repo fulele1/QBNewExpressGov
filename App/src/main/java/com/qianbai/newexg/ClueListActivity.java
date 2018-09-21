@@ -76,12 +76,9 @@ public class ClueListActivity extends BaseActivity {
         instance = this;
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
-        addEvent();
         setRecycleView();
     }
 
-    private void addEvent() {
-    }
 
     private void initView() {
         tv_title_child = findViewById(R.id.tv_title_child_tilte);
@@ -240,7 +237,7 @@ public class ClueListActivity extends BaseActivity {
                 })
                 .failure(new IFailure() {
                     @Override
-                    public void onFailure() {
+                    public void onFailure(String s) {
                         mHandler.sendEmptyMessage(-3);
 
                     }

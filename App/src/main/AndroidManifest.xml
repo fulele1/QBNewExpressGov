@@ -3,6 +3,7 @@
     package="com.qianbai.newexg">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".QBApplication"
@@ -35,7 +36,14 @@
         <activity android:name=".DataDelActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LogDelActivity" />
-        <activity android:name=".LogAddActivity"></activity>
+        <activity android:name=".LogAddActivity" />
+        <activity android:name=".BrandActivity" />
+        <activity android:name=".OrgActivityOne" />
+        <activity android:name=".OrgActivityTwo" />
+        <activity android:name=".OrgActivityThree" />
+        <activity android:name=".OrgActivityFour" />
+        <activity android:name=".ScanActivity" />
+        <activity android:name=".ExpressActivity"></activity>
     </application>
 
 </manifest>

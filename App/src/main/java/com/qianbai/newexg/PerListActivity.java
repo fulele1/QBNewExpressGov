@@ -35,13 +35,16 @@ import com.qianbai.newexg.net.callback.IError;
 import com.qianbai.newexg.net.callback.IFailure;
 import com.qianbai.newexg.net.callback.ISuccess;
 import com.qianbai.newexg.utils.ARouterUtil;
+import com.qianbai.newexg.utils.ConditionUtil;
 import com.qianbai.newexg.utils.HttpUrlUtils;
+import com.qianbai.newexg.utils.LogUtils;
 import com.qianbai.newexg.utils.NullUtil;
 import com.qianbai.newexg.utils.SPUtils;
 import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +94,24 @@ public class PerListActivity extends BaseActivity {
         list_r = findViewById(R.id.list_recycleview);
 
         txt_size = findViewById(R.id.txt_size);
+    }
+
+    public String  getIntentData(){
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        String comname = bundle.getString("comname");
+        String empname = bundle.getString("empname");
+        String empcertcode = bundle.getString("empcertcode");
+        String empphone = bundle.getString("empphone");
+        String comsecurityorg = bundle.getString("comsecurityorg");
+
+        HashMap map = new HashMap();
+        map.put("\"comname\"", "\""+comname+"\"");
+        map.put("\"empname\"", "\""+empname+"\"");
+        map.put("\"empcertcode\"", "\""+empcertcode+"\"");
+        map.put("\"empphone\"", "\""+empphone+"\"");
+        map.put("\"comsecurityorg\"", "\""+comsecurityorg+"\"");
+
+        return "&condition="+ ConditionUtil.getConditionString(map);
     }
 
     private void setRecycleView() {
@@ -199,9 +220,10 @@ public class PerListActivity extends BaseActivity {
     List<Per> mClue = new ArrayList<>();;
     List<Per> mClues = new ArrayList<>();
     private void connecting(int p) {
+        LogUtils.e(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p);
 
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
+                .url(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -213,23 +235,27 @@ public class PerListActivity extends BaseActivity {
                         String num = mess.get("num").toString();
                         String count = mess.get("count").toString();
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
-                            mHandler.sendEmptyMessage(-1);
-                            list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
-                            String table = map1.get("table").toString();
-                            List<Map> list1 = JSON.parseArray(table, Map.class);
-                            for (Map<String, Object> map : list1) {
-                                Per com = new Per();
-                                com.setId(NullUtil.getString(map.get("empcode")));//ID
-                                com.setName(NullUtil.getString(map.get("empname")));//姓名
-                                com.setTel(NullUtil.getString(map.get("empphone")));//电话
-                                com.setSix(NullUtil.getString(map.get("sexname")));//性别
-                                com.setIde(NullUtil.getString(map.get("empcertcode")));//身份证号码
-                                com.setCom(NullUtil.getString(map.get("comname")));//公司
+                            if (!NullUtil.getString(mess.get("count")).equals("0")) {
+                                mHandler.sendEmptyMessage(-1);
+                                list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
+                                String table = map1.get("table").toString();
+                                List<Map> list1 = JSON.parseArray(table, Map.class);
+                                for (Map<String, Object> map : list1) {
+                                    Per com = new Per();
+                                    com.setId(NullUtil.getString(map.get("empcode")));//ID
+                                    com.setName(NullUtil.getString(map.get("empname")));//姓名
+                                    com.setTel(NullUtil.getString(map.get("empphone")));//电话
+                                    com.setSix(NullUtil.getString(map.get("sexname")));//性别
+                                    com.setIde(NullUtil.getString(map.get("empcertcode")));//身份证号码
+                                    com.setCom(NullUtil.getString(map.get("comname")));//公司
 
-                                mClue.add(com);
-                                mClues.add(com);
+                                    mClue.add(com);
+                                    mClues.add(com);
+                                }
+                            }else {
+                                mHandler.sendEmptyMessage(-3);
+                                txt_size.setVisibility(View.GONE);
                             }
-
                         }
 
                                     TOTAL_COUNTER = Integer.valueOf(count).intValue();
@@ -240,7 +266,7 @@ public class PerListActivity extends BaseActivity {
                 })
                 .failure(new IFailure() {
                     @Override
-                    public void onFailure() {
+                    public void onFailure(String s) {
                         mHandler.sendEmptyMessage(-3);
 
                     }

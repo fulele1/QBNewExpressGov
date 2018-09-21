@@ -5,20 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/wirte"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/two"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/title_size"
-            />
-    </RelativeLayout>
+    <include layout="@layout/title_bar_child" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -228,7 +215,7 @@
 
 
         <Button
-            android:id="@+id/bt_query_three"
+            android:id="@+id/bt_finish_addLog"
             android:layout_width="250dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -238,7 +225,6 @@
             android:textColor="@color/wirte"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             />
-
 
 
     </LinearLayout>

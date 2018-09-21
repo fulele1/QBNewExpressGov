@@ -107,4 +107,5 @@
     <string name="please_choose_org">请选择管辖机构</string>
     <string name="please_write_com_name">请输入企业名称...</string>
     <string name="six">性别</string>
+    <string name="title_activity_brand">BrandActivity</string>
 </resources>

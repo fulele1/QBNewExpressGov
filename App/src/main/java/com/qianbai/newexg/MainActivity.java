@@ -75,29 +75,6 @@ public class MainActivity extends BaseActivity {
 
     private void setViewPage() {
 
-//        mBottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-//        mBottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.button_one, "首页"))
-//                .addItem(new BottomNavigationItem(R.drawable.button_two, "检查日志"))
-//                .addItem(new BottomNavigationItem(R.drawable.button_three, "数据分析"))
-//                .initialise();
-//
-//        mBottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(int position) {
-//                mVpHome.setCurrentItem(position);
-//            }
-//
-//            @Override
-//            public void onTabUnselected(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(int position) {
-//
-//            }
-//        });
-
         mFragmentList.add(new OneFragment());
         mFragmentList.add(new TwoFragment());
         mFragmentList.add(new ThreeFragment());

@@ -62,7 +62,7 @@ public class LogDelActivity extends BaseActivity {
                             });
                             txt_responsible_Per_cld.setText(NullUtil.getString(map2.get("scbillcode")));//运单号
                             txt_responsible_tel_cld.setText(NullUtil.getString(map2.get("comname")));//企业名称
-                            txt_employee_count_cld.setText(DateUtil.getDate(NullUtil.getString(map2.get("sccreatetime"))));//时间
+                            txt_employee_count_cld.setText(NullUtil.getString(map2.get("sccreatetime")));//时间
                             txt_get_count_cld.setText(NullUtil.getString(map2.get("scaddress")));//地址
                             txt_post_count_cld.setText(NullUtil.getString(map2.get("scsketch")));//线索信息
 
@@ -71,7 +71,7 @@ public class LogDelActivity extends BaseActivity {
                 })
                 .failure(new IFailure() {
                     @Override
-                    public void onFailure() {
+                    public void onFailure(String s) {
                         Toast.makeText(instance, "失败", Toast.LENGTH_SHORT).show();
 
                     }

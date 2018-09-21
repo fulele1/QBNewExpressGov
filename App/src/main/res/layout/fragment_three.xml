@@ -44,9 +44,9 @@
                 />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_org_three"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="广州省顺丰控股（集团）股份有限公司"
                 android:textSize="@dimen/title_size"
                 android:layout_below="@+id/txt_name_three"
                 android:textColor="@color/black"

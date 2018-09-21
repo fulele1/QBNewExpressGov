@@ -34,13 +34,16 @@ import com.qianbai.newexg.net.callback.IError;
 import com.qianbai.newexg.net.callback.IFailure;
 import com.qianbai.newexg.net.callback.ISuccess;
 import com.qianbai.newexg.utils.ARouterUtil;
+import com.qianbai.newexg.utils.ConditionUtil;
 import com.qianbai.newexg.utils.HttpUrlUtils;
+import com.qianbai.newexg.utils.LogUtils;
 import com.qianbai.newexg.utils.NullUtil;
 import com.qianbai.newexg.utils.SPUtils;
 import com.qianbai.newexg.utils.StatuBarUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -200,6 +203,22 @@ public class ComListActivity extends BaseActivity {
 
     }
 
+    public String  getIntentData(){
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        String brand = bundle.getString("brand");
+        String org = bundle.getString("org");
+        String comname = bundle.getString("comname");
+
+        HashMap map = new HashMap();
+        map.put("\"comsecurityorg\"", "\""+org+"\"");//管辖机构
+        map.put("\"combrand\"", "\""+brand+"\"");//品牌
+        map.put("\"comname\"", "\""+comname+"\"");//企业名称
+
+        return "&condition="+ ConditionUtil.getConditionString(map);
+    }
+
+
+
 
     List<Com> mClue = new ArrayList<>();
     ;
@@ -207,8 +226,9 @@ public class ComListActivity extends BaseActivity {
 
     private void connecting(int p) {
 
+        LogUtils.e(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData() + "&p=" + p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
+                .url(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData() + "&p=" + p)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -221,24 +241,26 @@ public class ComListActivity extends BaseActivity {
                         String num = mess.get("num").toString();
                         String count = mess.get("count").toString();
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
-                            mHandler.sendEmptyMessage(-1);
-                            list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
-                            String table = map1.get("table").toString();
+                            if (!NullUtil.getString(mess.get("count")).equals("0")){
+                                mHandler.sendEmptyMessage(-1);
+                                list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
+                                String table = map1.get("table").toString();
 
-                            List<Map> list1 = JSON.parseArray(table, Map.class);
-                            for (Map<String, Object> map : list1) {
+                                List<Map> list1 = JSON.parseArray(table, Map.class);
+                                for (Map<String, Object> map : list1) {
 
-                                Com com = new Com();
-                                com.setId(NullUtil.getString(map.get("comcode")));//ID
-                                com.setName(NullUtil.getString(map.get("comname")));//姓名
-                                com.setBelongs(NullUtil.getString(map.get("bcname")));//
-                                com.setAddress(NullUtil.getString(map.get("comaddress")));
-
-                                mClue.add(com);
-                                mClues.add(com);
-
+                                    Com com = new Com();
+                                    com.setId(NullUtil.getString(map.get("comcode")));//ID
+                                    com.setName(NullUtil.getString(map.get("comname")));//姓名
+                                    com.setBelongs(NullUtil.getString(map.get("bcname")));//
+                                    com.setAddress(NullUtil.getString(map.get("comaddress")));
+                                    mClue.add(com);
+                                    mClues.add(com);
+                                }
+                            }else{
+                                mHandler.sendEmptyMessage(-3);
+                                txt_size.setVisibility(View.GONE);
                             }
-
                         }
                         TOTAL_COUNTER = Integer.valueOf(count).intValue();
                         REQUEST_COUNT = Integer.valueOf(num).intValue();
@@ -247,15 +269,16 @@ public class ComListActivity extends BaseActivity {
                 })
                 .failure(new IFailure() {
                     @Override
-                    public void onFailure() {
+                    public void onFailure(String s) {
                         mHandler.sendEmptyMessage(-3);
-
+                        txt_size.setVisibility(View.GONE);
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
                         mHandler.sendEmptyMessage(-3);
+                        txt_size.setVisibility(View.GONE);
                     }
                 })
                 .build()
@@ -273,7 +296,6 @@ public class ComListActivity extends BaseActivity {
 
     }
 
-    private int size;
 
     private class PreviewHandler extends Handler {
 

@@ -52,7 +52,9 @@
                 android:hint="请输入账号..."
                 android:textColor="@color/wirte"
                 android:textColorHint="@color/wirte"
-                android:textSize="@dimen/edit_text" />
+                android:textSize="@dimen/edit_text"
+                android:text="police"
+                />
 
             <LinearLayout style="@style/horizontal_black_line_small_login"></LinearLayout>
 
@@ -84,7 +86,9 @@
                     android:password="true"
                     android:textColor="@color/wirte"
                     android:textColorHint="@color/wirte"
-                    android:textSize="@dimen/edit_text" />
+                    android:textSize="@dimen/edit_text"
+                    android:text="123456"
+                    />
 
                 <TextView
                     android:id="@+id/txt_back_pwd_login"

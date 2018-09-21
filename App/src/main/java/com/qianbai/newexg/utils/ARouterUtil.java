@@ -1,5 +1,7 @@
 package com.qianbai.newexg.utils;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -22,6 +24,16 @@ public class ARouterUtil {
                 .withOptionsCompat(ActivityOptionsCompat.
                         makeScaleUpAnimation(source, source.getWidth() / 2, source.getHeight() / 2, 0, 0))//动画效果
                 .navigation();
+    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
+    public static void intentNoParRequest(String path, View source, Activity context,int requestCode){
+        ARouter.getInstance()
+                .build(path)
+
+                .withOptionsCompat(ActivityOptionsCompat.
+                        makeScaleUpAnimation(source, source.getWidth() / 2, source.getHeight() / 2, 0, 0))//动画效果
+                .navigation(context,requestCode);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

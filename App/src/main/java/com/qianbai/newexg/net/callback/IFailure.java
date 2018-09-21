@@ -5,5 +5,5 @@ package com.qianbai.newexg.net.callback;
  */
 
 public interface IFailure {
-    void onFailure();
+    void onFailure(String response);
 }

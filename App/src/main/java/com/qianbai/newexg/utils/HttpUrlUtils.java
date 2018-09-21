@@ -41,12 +41,12 @@ public class HttpUrlUtils {
 
     /**
      * 管辖机构
-     * www.newexpress.com/v1/common/data/securityorg
+     * /v1/governor/securityorganization/search
      *
      * @return
      */
     public String getOrg() {
-        return getBaseUrl() + "common/data/securityorg";
+        return getBaseUrl() + "/v1/governor/securityorganization/search";
     }
 
     /**
@@ -98,6 +98,26 @@ public class HttpUrlUtils {
 
 
 
+    /**
+     * /v1/governor/dashboard/statistical
+     *
+     * @return
+     */
+    public String detail_org_down() {
+        return getBaseUrl() + "/v1/governor/dashboard/statistical";
+    }
+
+    /**
+     * /v1/governor/dashboard/index
+     *
+     * @return
+     */
+    public String detail_org_up() {
+        return getBaseUrl() + "/v1/governor/dashboard/index";
+    }
+
+
+
 
 
     /**
@@ -135,7 +155,7 @@ public class HttpUrlUtils {
      * @return
      */
     public String log_del() {
-        return getBaseUrl() + "/v1/governor/querylog";
+        return getBaseUrl() + "/v1/governor/querylog/";
     }
 
 

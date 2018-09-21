@@ -57,9 +57,9 @@ public class ConditionUtil {
                 break;
         }
 
-//        LogUtils.e("String---"+condition);
-//        LogUtils.e("64---"+ Base64.encodeToString(condition.getBytes(), Base64.DEFAULT));
-//        LogUtils.e("encuded------"+getUrlEncoded(condition));
+        LogUtils.e("String---"+condition);
+        LogUtils.e("64---"+ Base64.encodeToString(condition.getBytes(), Base64.DEFAULT));
+        LogUtils.e("encuded------"+getUrlEncoded(condition));
         return getUrlEncoded(condition);
     }
 
