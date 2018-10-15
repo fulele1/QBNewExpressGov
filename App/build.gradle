@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.qianbai.newexg"
+        applicationId "com.xaqb.policescan"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -69,7 +69,7 @@ dependencies {
     compile 'com.android.support:design:27.1.1'
 
     //二维码扫描
-    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.2.5'
+    implementation 'cn.bingoogolapple:bga-qrcode-zbar:1.2.5'
 
     //图库选择
     implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
@@ -79,5 +79,14 @@ dependencies {
 
     //动态权限
     implementation 'pub.devrel:easypermissions:1.0.1'
+
+    //双时间选择
+    compile 'com.github.darrenfantasy:DoubleDatePicker:1.0'
+
+    compile 'com.amap.api:map2d:latest.integration'//2D地图
+    compile 'com.amap.api:location:latest.integration'
+    compile 'com.amap.api:search:latest.integration'//搜索
+    compile 'com.amap.api:navi-3dmap:latest.integration'//导航
+
 
 }

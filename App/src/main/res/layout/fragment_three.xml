@@ -43,7 +43,7 @@
 
                 />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_org_three"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,6 +51,9 @@
                 android:layout_below="@+id/txt_name_three"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/activity_horizontal_margins"
+                android:background="@null"
+                android:hint="请选择管辖机构"
+                android:focusable="false"
                 />
 
         </RelativeLayout>
@@ -79,43 +82,20 @@
                 />
 
             <TextView
-                android:id="@+id/txt_start_three"
+                android:id="@+id/txt_date_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawableRight="@mipmap/go"
-                android:text="@string/please_choose"
                 />
             <LinearLayout
                 style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_start_three"
+                android:layout_below="@+id/txt_date_three"
                 android:layout_marginTop="@dimen/line_large"
                 />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end_time"
-                android:layout_alignParentLeft="true"
-
-                />
-
-            <TextView
-                android:id="@+id/txt_end_three"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:drawableRight="@mipmap/go"
-                android:text="@string/please_choose"
-                />
-        </RelativeLayout>
 
     </LinearLayout>
 

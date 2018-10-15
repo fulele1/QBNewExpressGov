@@ -87,7 +87,7 @@
                     android:textColor="@color/wirte"
                     android:textColorHint="@color/wirte"
                     android:textSize="@dimen/edit_text"
-                    android:text="123456"
+                    android:text="111111"
                     />
 
                 <TextView

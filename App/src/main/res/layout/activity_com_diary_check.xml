@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_com_detial"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/title_bar_child" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/wirte"
+        android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@color/wirte"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="企业名称" />
+
+                <TextView
+                    android:id="@+id/txt_comname_cdc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="张客气" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_comname_cdc"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="管辖机构" />
+
+                <TextView
+                    android:id="@+id/txt_soname_cdc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="132-3948--4321"
+                    android:textColor="@color/main" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_soname_cdc"
+                    android:layout_marginTop="@dimen/line_large" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="检查人员" />
+
+                <TextView
+                    android:id="@+id/txt_dcorguser_cdc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2333" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_dcorguser_cdc"
+                    android:layout_marginTop="@dimen/line_large" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="检查内容" />
+
+                <TextView
+                    android:id="@+id/txt_dccontent_cdc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_dccontent_cdc"
+                    android:layout_marginTop="@dimen/line_large" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="处理结果" />
+
+                <TextView
+                    android:id="@+id/txt_dcresult_cdc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_dcresult_cdc"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="企业地址" />
+
+                <TextView
+                    android:id="@+id/txt_comaddress_cdc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:text="2343434"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="检查地址" />
+
+                <TextView
+                    android:id="@+id/txt_queryaddress_cdc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="2343434" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="备注" />
+
+                <TextView
+                    android:id="@+id/txt_dcmark_cdc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

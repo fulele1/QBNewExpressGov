@@ -1,9 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qianbai.newexg.MapNavgActivity">
+    android:orientation="vertical"
+    tools:context="com.xaqb.policescan.MapNavgActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <include layout="@layout/title_bar_child"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:alpha="0.5"
+            android:background="@color/edit"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/layout_padding_small"
+            android:paddingTop="@dimen/layout_padding_small"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding_small"
+                android:src="@mipmap/search_main"
+                android:layout_gravity="center"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:hint="搜索内容"
+                android:textColorHint="@color/black"
+                android:background="@null"
+                android:textColor="@color/black"
+                android:textSize="@dimen/edit_text" />
+
+            <TextView
+                android:id="@+id/txt_search_mapna"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="搜索"
+                android:textColor="@color/main"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:id="@+id/list_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/nodata"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</LinearLayout>

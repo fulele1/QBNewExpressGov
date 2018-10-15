@@ -1,11 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_com_detial"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qianbai.newexg.ExpressActivity">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <include layout="@layout/title_bar_child"/>
+
+    <include layout="@layout/title_bar_child" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@color/wirte"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@color/wirte"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="订单号" />
+
+                    <TextView
+                        android:id="@+id/txt_code_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        />
+
+                    <LinearLayout
+                        style="@style/horizontal_black_line_small"
+                        android:layout_below="@+id/txt_code_exp"
+                        android:layout_marginTop="@dimen/line_large" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="品牌名称" />
+
+                    <TextView
+                        android:id="@+id/txt_brandname_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+
+                        android:textColor="@color/main" />
+
+                    <LinearLayout
+                        style="@style/horizontal_black_line_small"
+                        android:layout_below="@+id/txt_brandname_exp"
+                        android:layout_marginTop="@dimen/line_large" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="企业名称" />
+
+                    <TextView
+                        android:id="@+id/txt_comname_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        />
+
+                    <LinearLayout
+                        style="@style/horizontal_black_line_small"
+                        android:layout_below="@+id/txt_comname_exp"
+                        android:layout_marginTop="@dimen/line_large" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/layout_padding">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="收递类型" />
+
+                    <TextView
+                        android:id="@+id/txt_codefrom_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        />
+
+                    <LinearLayout
+                        style="@style/horizontal_black_line_small"
+                        android:layout_below="@+id/txt_codefrom_exp"
+                        android:layout_marginTop="@dimen/line_large" />
+
+                </RelativeLayout> <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="姓名" />
+
+                <TextView
+                    android:id="@+id/txt_empname_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_empname_exp"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout><RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="证件类型" />
+
+                <TextView
+                    android:id="@+id/txt_ctname_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ctname_exp"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout><RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="证件号码" />
+
+                <TextView
+                    android:id="@+id/txt_mancertcodec_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_mancertcodec_exp"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout> <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="联系电话" />
+
+                <TextView
+                    android:id="@+id/txt_manphone_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_manphone_exp"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout> <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="寄件日期" />
+
+                <TextView
+                    android:id="@+id/txt_wdate_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_wdate_exp"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout> <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="收件电话" />
+
+                <TextView
+                    android:id="@+id/txt_destphone_exp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_destphone_exp"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/layout_padding"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="收件地址" />
+
+                    <TextView
+                        android:id="@+id/txt_manaddress_bdc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        />
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
 
 </LinearLayout>

@@ -49,7 +49,7 @@
         android:background="@android:color/white"
         >
 
-        <com.qianbai.newexg.Listview.PinnedSectionListView
+        <com.xaqb.policescan.Listview.PinnedSectionListView
             android:id="@+id/phone_listview_org"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true">
 
-            <com.qianbai.newexg.Listview.LetterIndexView
+            <com.xaqb.policescan.Listview.LetterIndexView
                 android:id="@+id/phone_LetterIndexView_org"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />

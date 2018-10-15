@@ -100,7 +100,7 @@
     <string name="check_pic">检查照片</string>
     <string name="org_name">辖区名称</string>
     <string name="com_name">企业名称</string>
-    <string name="start_time">辖区成立时间</string>
+    <string name="start_time">时间查询</string>
     <string name="end_time">辖区截止时间</string>
     <string name="please_choose">请选择</string>
     <string name="please_choose_brand">请选择品牌名称</string>
