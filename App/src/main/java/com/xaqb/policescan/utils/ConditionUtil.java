@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ConditionUtil {
 
-    public static String getConditionString(HashMap map){
+    public static String getConditionString(HashMap map) {
         HashMap<String, String> map2 = new HashMap();
         ArrayList<String> list = new ArrayList();
 
@@ -30,35 +30,35 @@ public class ConditionUtil {
         String condition = "";
         switch (list.size()) {
             case 1:
-                    condition = "{" + list.get(0) +":"+ map2.get(list.get(0)) + "}";
+                condition = "{" + list.get(0) + ":" + map2.get(list.get(0)) + "}";
                 break;
             case 2:
-                condition = "{" + list.get(0) +":"+ map2.get(list.get(0)) + ","
-                        + list.get(1) +":"+ map2.get(list.get(1)) + "}";
+                condition = "{" + list.get(0) + ":" + map2.get(list.get(0)) + ","
+                        + list.get(1) + ":" + map2.get(list.get(1)) + "}";
                 break;
             case 3:
-                condition = "{" + list.get(0) +":"+ map2.get(list.get(0)) + "," +
-                        list.get(1) +":"+ map2.get(list.get(1)) + "," +
-                        list.get(2) +":"+ map2.get(list.get(2)) + "}";
+                condition = "{" + list.get(0) + ":" + map2.get(list.get(0)) + "," +
+                        list.get(1) + ":" + map2.get(list.get(1)) + "," +
+                        list.get(2) + ":" + map2.get(list.get(2)) + "}";
                 break;
             case 4:
-                condition = "{" + list.get(0) +":"+ map2.get(list.get(0)) + "," +
-                        list.get(1) +":"+ map2.get(list.get(1)) + "," +
-                        list.get(2) +":"+ map2.get(list.get(2)) + "," +
-                        list.get(3) +":"+ map2.get(list.get(3)) + "}";
+                condition = "{" + list.get(0) + ":" + map2.get(list.get(0)) + "," +
+                        list.get(1) + ":" + map2.get(list.get(1)) + "," +
+                        list.get(2) + ":" + map2.get(list.get(2)) + "," +
+                        list.get(3) + ":" + map2.get(list.get(3)) + "}";
                 break;
             case 5:
-                condition = "{" + list.get(0) +":"+ map2.get(list.get(0)) + "," +
-                        list.get(1) +":"+ map2.get(list.get(1)) + "," +
-                        list.get(2) +":"+ map2.get(list.get(2)) + "," +
-                        list.get(3) +":"+ map2.get(list.get(3)) + "," +
-                        list.get(4) +":"+ map2.get(list.get(4)) + "}";
+                condition = "{" + list.get(0) + ":" + map2.get(list.get(0)) + "," +
+                        list.get(1) + ":" + map2.get(list.get(1)) + "," +
+                        list.get(2) + ":" + map2.get(list.get(2)) + "," +
+                        list.get(3) + ":" + map2.get(list.get(3)) + "," +
+                        list.get(4) + ":" + map2.get(list.get(4)) + "}";
                 break;
         }
 
-        LogUtils.e("String---"+condition);
-        LogUtils.e("64---"+ Base64.encodeToString(condition.getBytes(), Base64.DEFAULT));
-        LogUtils.e("encuded------"+getUrlEncoded(condition));
+        LogUtils.e("String---" + condition);
+        LogUtils.e("64---" + Base64.encodeToString(condition.getBytes(), Base64.DEFAULT));
+        LogUtils.e("encuded------" + getUrlEncoded(condition));
         return getUrlEncoded(condition);
     }
 
@@ -69,14 +69,11 @@ public class ConditionUtil {
             return "";
         }
 
-        try
-        {
+        try {
             String str = new String(list.getBytes(), "UTF-8");
             str = URLEncoder.encode(Base64.encodeToString(str.getBytes(), Base64.DEFAULT), "UTF-8");
             return str;
-        }
-        catch (Exception localException)
-        {
+        } catch (Exception localException) {
         }
 
         return "";

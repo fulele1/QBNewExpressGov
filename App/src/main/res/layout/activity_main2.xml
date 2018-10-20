@@ -57,6 +57,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
+            android:drawableTop="@drawable/button_two"
+            android:layout_weight="1"
+            android:text="联合检查"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:drawablePadding="@dimen/line_large"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_four_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@null"
             android:drawableTop="@drawable/button_three"
             android:layout_weight="1"
             android:text="数据分析"

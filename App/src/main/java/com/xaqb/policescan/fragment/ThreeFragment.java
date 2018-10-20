@@ -1,140 +1,612 @@
 package com.xaqb.policescan.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.xaqb.policescan.OrgActivityFour;
-import com.xaqb.policescan.OrgActivityOne;
-import com.xaqb.policescan.OrgActivityThree;
-import com.xaqb.policescan.OrgActivityTwo;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.github.jdsjlzx.interfaces.OnItemClickListener;
+import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
+import com.github.jdsjlzx.interfaces.OnNetWorkErrorListener;
+import com.github.jdsjlzx.interfaces.OnRefreshListener;
+import com.github.jdsjlzx.recyclerview.LRecyclerView;
+import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
+import com.github.jdsjlzx.recyclerview.ProgressStyle;
 import com.xaqb.policescan.R;
+import com.xaqb.policescan.RLview.Joint;
+import com.xaqb.policescan.RLview.JointAdapter;
+import com.xaqb.policescan.RLview.LogBill;
+import com.xaqb.policescan.RLview.LogBillAdapter;
+import com.xaqb.policescan.net.RestClient;
+import com.xaqb.policescan.net.callback.IError;
+import com.xaqb.policescan.net.callback.IFailure;
+import com.xaqb.policescan.net.callback.ISuccess;
 import com.xaqb.policescan.utils.ARouterUtil;
-import com.xaqb.policescan.utils.DoubleDateUtil;
-import com.xaqb.policescan.utils.LogUtils;
+import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
-import com.xaqb.policescan.utils.StatuBarUtil;
 
-import static android.app.Activity.RESULT_OK;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
  * Created by fl on 2017/5/18.
+ *
+ * 检查快递单
+ *
  */
 
-public class ThreeFragment extends BaseFragment implements View.OnClickListener{
+public class ThreeFragment extends BaseFragment {
 
     private Context instance;
     private View view;
-    private Button btn_query;
-    private TextView txt_org_three,txt_date_three;
+
+    private LRecyclerView list_r;
+    /**
+     * 服务器端一共多少条数据
+     */
+    private int TOTAL_COUNTER;//如果服务器没有返回总数据或者总页数，这里设置为最大值比如10000，什么时候没有数据了根据接口返回判断
+
+    /**
+     * 每一页展示多少条数据
+     */
+    private int REQUEST_COUNT;
+
+    /**
+     * 已经获取到多少条数据了
+     */
+    private static int mCurrentCounter = 0;
+    private int mCurrentpage = 1;
+
+
+    private JointAdapter mDataAdapter = null;
+
+    private ThreeFragment.PreviewHandler mHandler = new ThreeFragment.PreviewHandler(this);
+    private LRecyclerViewAdapter mLRecyclerViewAdapter = null;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_three, null);
         instance = ThreeFragment.this.getActivity();
-        view = inflater.inflate(R.layout.fragment_three,null);
-        StatuBarUtil.setStatuBarLightMode(this.getActivity(), getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
-
-        btn_query = view.findViewById(R.id.bt_query_three);
-        txt_org_three = view.findViewById(R.id.txt_org_three);
-        txt_date_three = view.findViewById(R.id.txt_date_three);
-        setEvent();
+        list_r = view.findViewById(R.id.list_recycleview);
+        setRecycleView();
         return view;
     }
 
-    private void setEvent() {
-        btn_query.setOnClickListener(this);
-        txt_org_three.setOnClickListener(this);
-        txt_date_three.setOnClickListener(this);
+    private void setRecycleView() {
+
+        mDataAdapter = new JointAdapter(instance);
+        mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
+        list_r.setAdapter(mLRecyclerViewAdapter);
+
+
+        //设置距离
+//        DividerDecoration divider = new DividerDecoration.Builder(this.getActivity())
+//                .setHeight(R.dimen.list_line)
+////                .setPadding(R.dimen.line)
+////                .setColorResource(R.color.wirte)
+//                .build();
+//
+//        //mRecyclerView.setHasFixedSize(true);
+//        list_r.addItemDecoration(divider);
+
+        list_r.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        list_r.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
+        list_r.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
+        list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+
+        //add a HeaderView
+        final View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.sample_header, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
+        mLRecyclerViewAdapter.addHeaderView(header);
+
+        list_r.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                mDataAdapter.clear();
+                mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
+                mCurrentCounter = 0;
+                connecting(1);
+            }
+        });
+
+        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
+        list_r.setLoadMoreEnabled(true);
+
+        list_r.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+                if (mCurrentCounter < TOTAL_COUNTER) {
+                    // loading more
+                    mCurrentpage = mCurrentpage + 1;
+                    connecting(mCurrentpage);
+                } else {
+                    //the end
+                    list_r.setNoMore(true);
+                }
+            }
+        });
+
+        list_r.setLScrollListener(new LRecyclerView.LScrollListener() {
+
+            @Override
+            public void onScrollUp() {
+            }
+
+            @Override
+            public void onScrollDown() {
+            }
+
+            @Override
+            public void onScrolled(int distanceX, int distanceY) {
+            }
+
+            @Override
+            public void onScrollStateChanged(int state) {
+
+            }
+
+        });
+
+        //设置头部加载颜色
+        list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
+        //设置底部加载颜色
+        list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
+        //设置底部加载文字提示
+        list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
+
+        list_r.refresh();
+
+        //子条目的点击事件
+        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onItemClick(View view, int position) {
+                if (mDataAdapter.getDataList().size() > position) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",mClues.get(position).getId());
+                    ARouterUtil.intentPar("/qb/JointDelActivity", view,bundle);
+                }
+            }
+
+        });
+
     }
 
-    private String mOrg = "";
-    private String mTime;
-    private String mEnd = "";
-    private String mStart = "";
-    private void getIntentData() {
-        mTime = NullUtil.getString(txt_date_three.getText().toString().trim());
-        LogUtils.e(mTime);
+    List<Joint> mClue = new ArrayList<>();;
+    List<Joint> mClues = new ArrayList<>();
+    private void connecting(int p) {
 
-        if (!mTime.equals("")&&mTime !=null){
-            mStart = NullUtil.getString(mTime.substring(0, mTime.indexOf("--->")));
-            mEnd = NullUtil.getString(mTime.substring(mTime.indexOf("--->")+4));
-        }
-    }
+        android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().joint_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
+        RestClient.builder()
+                .url(HttpUrlUtils.getHttpUrl().joint_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
+//                .params("","")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
 
+                        Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
+                        });
+                        android.util.Log.e("fule", response);
+                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                        });
+                        String num = mess.get("num").toString();
+                        String count = mess.get("count").toString();
+                        if (NullUtil.getString(map1.get("state")).equals("0")) {
+                            if (!count.equals("0")){
+                                mHandler.sendEmptyMessage(-1);
+                                list_r.setBackgroundColor(getResources().getColor(R.color.background));
+                                String table = map1.get("table").toString();
 
+                                List<Map> list1 = JSON.parseArray(table, Map.class);
+                                for (Map<String, Object> map : list1) {
+                                    Joint com = new Joint();
+                                    com.setId( NullUtil.getString(map.get("uccode")));//ID
+                                    com.setCom( NullUtil.getString(map.get("comname")));
+                                    com.setOrg( NullUtil.getString(map.get("ucorgname")));
+                                    com.setThing( NullUtil.getString(map.get("uccontent")));
+                                    com.setQuestion( NullUtil.getString(map.get("ucorgthing")));
+                                    com.setResult( NullUtil.getString(map.get("ucresult")));
+                                    mClue.add(com);
+                                    mClues.add(com);
+                            }
 
+                            }else {
+                                mHandler.sendEmptyMessage(-3);
+                            }
+                        }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.bt_query_three:
-                getIntentData();
-                Bundle bundle = new Bundle();
-                bundle.putString("org",oid);
-                bundle.putString("start",mStart);
-                bundle.putString("end",mEnd);
-                ARouterUtil.intentPar("/qb/DataDelActivity",view,bundle);
-                break;
-
-                case R.id.txt_org_three:
-
-//                    Intent intent = new Intent(this.getContext(), OrgActivityThree.class);
-//                    startActivityForResult(intent,0);
-
-                    if (SPUtils.get(instance,"so_level","").equals("3")){
-                        Intent intent1 = new Intent(this.getContext(), OrgActivityOne.class);
-                        startActivityForResult(intent1,0);
-//                        ARouterUtil.intentNoParRequest("/qb/OrgActivityOne",view,this.getActivity(),0);
-                    }else if (SPUtils.get(instance,"so_level","").equals("2")){
-                        Intent intent2 = new Intent(this.getContext(), OrgActivityTwo.class);
-                        startActivityForResult(intent2,0);
-//                        ARouterUtil.intentNoParRequest("/qb/OrgActivityTwo",view,this.getActivity(),0);
-                    }else if (SPUtils.get(instance,"so_level","").equals("1")){
-                        Intent intent3 = new Intent(this.getContext(), OrgActivityThree.class);
-                        startActivityForResult(intent3,0);
-                    }else if (SPUtils.get(instance,"so_level","").equals("0")){
-                        Intent intent4 = new Intent(this.getContext(), OrgActivityFour.class);
-                        startActivityForResult(intent4,0);
-//                        ARouterUtil.intentNoParRequest("/qb/OrgActivityFour",view,this.getActivity(),0);
+                        TOTAL_COUNTER = Integer.valueOf(count).intValue();
+                        REQUEST_COUNT = Integer.valueOf(num).intValue();
+//                        txt_size.setText("共查询到"+count+"条数据");
                     }
-                break;
-            case R.id.txt_date_three:
-                DoubleDateUtil.show(instance, txt_date_three);
-                break;
-        }
+                })
+                .failure(new IFailure() {
+                    @Override
+                    public void onFailure(String s) {
+                        mHandler.sendEmptyMessage(-3);
+
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        mHandler.sendEmptyMessage(-3);
+                    }
+                })
+                .build()
+                .get();
     }
 
+    private void notifyDataSetChanged() {
+        mLRecyclerViewAdapter.notifyDataSetChanged();
+    }
 
-    private String oid = "";
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK&&requestCode ==0){
-            if (data !=null){
-                String name = data.getStringExtra("orgName");
-                oid = data.getStringExtra("orgCode");
-                txt_org_three.setText(name);
+    private void addItems(ArrayList<Joint> list) {
+
+        mDataAdapter.addAll(list);
+        mCurrentCounter += list.size();
+
+    }
+
+    private int size;
+
+    private class PreviewHandler extends Handler {
+
+        private WeakReference<ThreeFragment> ref;
+
+        PreviewHandler(ThreeFragment activity) {
+            ref = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            final ThreeFragment activity = ref.get();
+            if (activity == null || activity.getActivity().isFinishing()) {
+                return;
+            }
+            switch (msg.what) {
+
+                case -1:
+
+                    int currentSize = activity.mDataAdapter.getItemCount();
+
+                    //模拟组装15个数据
+                    ArrayList<Joint> newList = new ArrayList<>();
+                    for (int i = 0; i < mClue.size(); i++) {
+                        if (newList.size() + currentSize >= TOTAL_COUNTER) {
+                            break;
+                        }
+
+                        Joint item = new Joint();
+                        item.setCom(mClue.get(i).getCom());
+                        item.setOrg(mClue.get(i).getOrg());
+                        item.setThing(mClue.get(i).getThing());
+                        item.setQuestion(mClue.get(i).getQuestion());
+                        item.setResult(mClue.get(i).getResult());
+                        newList.add(item);
+                    }
+
+                    activity.addItems(newList);
+
+                    activity.list_r.refreshComplete(REQUEST_COUNT);
+
+                    break;
+                case -3:
+                    activity.list_r.refreshComplete(REQUEST_COUNT);
+                    activity.notifyDataSetChanged();
+                    activity.list_r.setOnNetWorkErrorListener(new OnNetWorkErrorListener() {
+                        @Override
+                        public void reload() {
+//                            connecting(2);
+                        }
+                    });
+
+                    break;
+                default:
+                    break;
             }
         }
+
+
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        this.getActivity().getMenuInflater().inflate(R.menu.menu_main_refresh, menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.getActivity().finish();
+        } else if (item.getItemId() == R.id.menu_refresh) {
+            list_r.forceToRefresh();
+        }
+        return true;
     }
 
 
 
 
+
+//    private void setRecycleView() {
+//
+//        mDataAdapter = new LogBillAdapter(instance);
+//        mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
+//        list_r.setAdapter(mLRecyclerViewAdapter);
+//
+//        DividerDecoration divider = new DividerDecoration.Builder(this.getActivity())
+//                .setHeight(R.dimen.list_line)
+//                .setPadding(R.dimen.default_divider_padding)
+//                .setColorResource(R.color.wirte)
+//                .build();
+//
+//        //mRecyclerView.setHasFixedSize(true);
+//        list_r.addItemDecoration(divider);
+//
+//        list_r.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+//
+//        list_r.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
+//        list_r.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
+//        list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+//
+//        //add a HeaderView
+//        final View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.sample_header, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
+//        mLRecyclerViewAdapter.addHeaderView(header);
+//
+//        list_r.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                mDataAdapter.clear();
+//                mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
+//                mCurrentCounter = 0;
+//                connecting(1);
+//            }
+//        });
+//
+//        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
+//        list_r.setLoadMoreEnabled(true);
+//
+//        list_r.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore() {
+//
+//                if (mCurrentCounter < TOTAL_COUNTER) {
+//                    // loading more
+//                    mCurrentpage = mCurrentpage + 1;
+//                    connecting(mCurrentpage);
+//                } else {
+//                    //the end
+//                    list_r.setNoMore(true);
+//                }
+//            }
+//        });
+//
+//        list_r.setLScrollListener(new LRecyclerView.LScrollListener() {
+//
+//            @Override
+//            public void onScrollUp() {
+//            }
+//
+//            @Override
+//            public void onScrollDown() {
+//            }
+//
+//            @Override
+//            public void onScrolled(int distanceX, int distanceY) {
+//            }
+//
+//            @Override
+//            public void onScrollStateChanged(int state) {
+//
+//            }
+//
+//        });
+//
+//        //设置头部加载颜色
+//        list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
+//        //设置底部加载颜色
+//        list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
+//        //设置底部加载文字提示
+//        list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
+//
+//        list_r.refresh();
+//
+//        //子条目的点击事件
+//        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                if (mDataAdapter.getDataList().size() > position) {
+//
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("id", mClues.get(position).getId());
+//                    ARouterUtil.intentPar("/qb/LogDelActivity", view, bundle);
+//                }
+//            }
+//
+//        });
+//
+//    }
+//
+//
+//    List<LogBill> mClue = new ArrayList<>();
+//    ;
+//    List<LogBill> mClues = new ArrayList<>();
+//
+//    private void connecting(int p) {
+//
+//        LogUtils.e(HttpUrlUtils.getHttpUrl().log_list() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p);
+//        RestClient.builder()
+//                .url(HttpUrlUtils.getHttpUrl().log_list() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
+////                .params("","")
+//                .success(new ISuccess() {
+//                    @Override
+//                    public void onSuccess(String response) {
+//                        Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
+//                        });
+//                        LogUtils.e(response);
+//                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+//                        });
+//                        LogUtils.e(mess.get("num").toString());
+//                        LogUtils.e(mess.get("count").toString());
+//
+//                        String num = mess.get("num").toString();
+//                        String count = mess.get("count").toString();
+//                        if (NullUtil.getString(map1.get("state")).equals("0")) {
+//                            mHandler.sendEmptyMessage(-1);
+//                            list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
+//                            String table = map1.get("table").toString();
+//                            LogUtils.e(table);
+//
+//                            List<Map> list1 = JSON.parseArray(table, Map.class);
+//                            for (Map<String, Object> map : list1) {
+//                                LogBill item = new LogBill();
+//                                item.setId(NullUtil.getString(map.get("querylogid")));//ID
+//                                item.setOrg(NullUtil.getString(map.get("querysecurityorg")));//管辖机构
+//                                item.setAdd(NullUtil.getString(map.get("queryaddress")));//地址
+//                                item.setDate(NullUtil.getString(map.get("querydate")));//日期
+//                                item.setCom(NullUtil.getString(map.get("querycom")));//查询企业
+//                                item.setUser(NullUtil.getString(map.get("queryuser")));//查询人员
+//                                LogUtils.e(map.get("querysecurityorg")+"子条目的设置");
+//                                mClue.add(item);
+//                                mClues.add(item);
+//                            }
+//                        }
+//
+//                        TOTAL_COUNTER = Integer.valueOf(count).intValue();
+//                        REQUEST_COUNT = Integer.valueOf(num).intValue();
+//                        txt_size.setText("共查询到" + count + "条数据");
+//                    }
+//                })
+//                .failure(new IFailure() {
+//                    @Override
+//                    public void onFailure() {
+//                        mHandler.sendEmptyMessage(-3);
+//
+//                    }
+//                })
+//                .error(new IError() {
+//                    @Override
+//                    public void onError(int code, String msg) {
+//                        mHandler.sendEmptyMessage(-3);
+//                    }
+//                })
+//                .build()
+//                .get();
+//    }
+//
+//    private void notifyDataSetChanged() {
+//        mLRecyclerViewAdapter.notifyDataSetChanged();
+//    }
+//
+//    private void addItems(ArrayList<LogBill> list) {
+//
+//        mDataAdapter.addAll(list);
+//        mCurrentCounter += list.size();
+//
+//    }
+//
+//    private int size;
+//
+//    private class PreviewHandler extends Handler {
+//
+//        private WeakReference<TwoFragment> ref;
+//
+//        PreviewHandler(TwoFragment activity) {
+//            ref = new WeakReference<>(activity);
+//        }
+//
+//        @Override
+//        public void handleMessage(Message msg) {
+//            final TwoFragment activity = ref.get();
+//            if (activity == null || activity.getActivity().isFinishing()) {
+//                return;
+//            }
+//            switch (msg.what) {
+//
+//                case -1:
+//
+//                    int currentSize = activity.mDataAdapter.getItemCount();
+//
+//                    //模拟组装15个数据
+//                    ArrayList<LogBill> newList = new ArrayList<>();
+//                    for (int i = 0; i < mClue.size(); i++) {
+//                        if (newList.size() + currentSize >= TOTAL_COUNTER) {
+//                            break;
+//                        }
+//                        LogBill item = new LogBill();
+//                        item.setAdd(mClue.get(i).getAdd());
+//                        item.setOrg(mClue.get(i).getOrg());
+//                        item.setDate(mClue.get(i).getDate());
+//                        item.setUser(mClue.get(i).getUser());
+//                        item.setCom(mClue.get(i).getCom());
+//                        LogUtils.e(mClue.get(i).getOrg()+"子条目的设置传递");
+//
+//                    }
+//
+//                    activity.addItems(newList);
+//
+//                    activity.list_r.refreshComplete(REQUEST_COUNT);
+//
+//                    break;
+//                case -3:
+//                    activity.list_r.refreshComplete(REQUEST_COUNT);
+//                    activity.notifyDataSetChanged();
+//                    activity.list_r.setOnNetWorkErrorListener(new OnNetWorkErrorListener() {
+//                        @Override
+//                        public void reload() {
+////                            connecting(2);
+//                        }
+//                    });
+//
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//
+//    }
+//
+//
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        this.getActivity().getMenuInflater().inflate(R.menu.menu_main_refresh, menu);
+//    }
+//
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == android.R.id.home) {
+//            this.getActivity().finish();
+//        } else if (item.getItemId() == R.id.menu_refresh) {
+//            list_r.forceToRefresh();
+//        }
+//        return true;
+//    }
 
 }

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/wirte"
+        android:paddingLeft="@dimen/layout_padding_small"
+        android:paddingRight="@dimen/layout_padding_small"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/txt_com_joint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/line_large"
+            android:drawableLeft="@mipmap/bill"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:text="快递单号"
+            android:textColor="@color/main_gray" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/line_large"
+            android:src="@mipmap/fengefu" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_padding_small"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_three"
+                android:layout_weight="1"
+                android:text="联查机构"
+                android:textSize="@dimen/edit_text" />
+
+            <TextView
+                android:id="@+id/txt_org_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三丰/2天前"
+                android:textSize="@dimen/edit_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_padding_small"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_three"
+                android:layout_weight="1"
+                android:text="联查事项"
+                android:textSize="@dimen/edit_text" />
+
+            <TextView
+                android:id="@+id/txt_thing_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三丰/2天前"
+                android:textSize="@dimen/edit_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_padding_small"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_three"
+                android:layout_weight="1"
+                android:text="发现问题"
+                android:textSize="@dimen/edit_text" />
+
+            <TextView
+                android:id="@+id/txt_question_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三丰/2天前"
+                android:textSize="@dimen/edit_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_padding_small"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_three"
+                android:layout_weight="1"
+                android:text="处理结果"
+                android:textSize="@dimen/edit_text" />
+
+            <TextView
+                android:id="@+id/txt_result_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三丰/2天前"
+                android:textSize="@dimen/edit_text" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

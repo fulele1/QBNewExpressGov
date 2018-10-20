@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
 import com.xaqb.policescan.fragment.OneFragment;
+import com.xaqb.policescan.fragment.FourFragment;
 import com.xaqb.policescan.fragment.ThreeFragment;
 import com.xaqb.policescan.fragment.TwoFragment;
 import com.xaqb.policescan.utils.StatuBarUtil;
@@ -28,7 +29,7 @@ public class MainActivity extends BaseActivity {
     //    private BottomNavigationBar mBottomNavigationBar;
     private ArrayList<Fragment> mFragmentList = new ArrayList<>();
     private RadioGroup mRgp;
-    private RadioButton mRbOne, mRbTwo, mRbThree;
+    private RadioButton mRbOne, mRbTwo, mRbThree,mRbFour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity {
         mRbOne = findViewById(R.id.rb_one_main);
         mRbTwo = findViewById(R.id.rb_two_main);
         mRbThree = findViewById(R.id.rb_three_main);
+        mRbFour = findViewById(R.id.rb_four_main);
         mRgp.setOnCheckedChangeListener(new CheckedChange());
     }
 
@@ -68,6 +70,9 @@ public class MainActivity extends BaseActivity {
                 case R.id.rb_three_main:
                     mVpHome.setCurrentItem(2);
                     break;
+                case R.id.rb_four_main:
+                    mVpHome.setCurrentItem(3);
+                    break;
             }
         }
     }
@@ -78,6 +83,7 @@ public class MainActivity extends BaseActivity {
         mFragmentList.add(new OneFragment());
         mFragmentList.add(new TwoFragment());
         mFragmentList.add(new ThreeFragment());
+        mFragmentList.add(new FourFragment());
 
         mVpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -96,6 +102,7 @@ public class MainActivity extends BaseActivity {
                         mRbOne.setTextColor(instance.getResources().getColor(R.color.main));
                         mRbTwo.setTextColor(Color.BLACK);
                         mRbThree.setTextColor(Color.BLACK);
+                        mRbFour.setTextColor(Color.BLACK);
                         StatusBarUtil.setTransparentForImageViewInFragment(instance, null);
                         break;
                     case 1:
@@ -103,6 +110,7 @@ public class MainActivity extends BaseActivity {
                         mRbTwo.setTextColor(instance.getResources().getColor(R.color.main));
                         mRbOne.setTextColor(Color.BLACK);
                         mRbThree.setTextColor(Color.BLACK);
+                        mRbFour.setTextColor(Color.BLACK);
                         StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
                         break;
                     case 2:
@@ -110,6 +118,16 @@ public class MainActivity extends BaseActivity {
                         mRbThree.setTextColor(instance.getResources().getColor(R.color.main));
                         mRbOne.setTextColor(Color.BLACK);
                         mRbTwo.setTextColor(Color.BLACK);
+                        mRbFour.setTextColor(Color.BLACK);
+                        StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
+                        break;
+
+                        case 3:
+                        mRbFour.setChecked(true);
+                        mRbFour.setTextColor(instance.getResources().getColor(R.color.main));
+                        mRbOne.setTextColor(Color.BLACK);
+                        mRbTwo.setTextColor(Color.BLACK);
+                        mRbThree.setTextColor(Color.BLACK);
                         StatuBarUtil.setStatuBarLightMode(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
                         break;
                 }

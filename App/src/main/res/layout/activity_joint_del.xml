@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_com_detial"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/title_bar_child" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/wirte"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:background="@color/wirte"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="企业名称" />
+
+                <TextView
+                    android:id="@+id/txt_comname_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="张客气" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_comname_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="联查机构名称" />
+
+                <TextView
+                    android:id="@+id/txt_ucorgname_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="张客气" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucorgname_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="联查日期" />
+
+                <TextView
+                    android:id="@+id/txt_ucorgdate_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="132-3948--4321"
+                    android:textColor="@color/main" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucorgdate_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="联查人员" />
+
+                <TextView
+                    android:id="@+id/txt_ucorguser_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2333" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucorguser_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="联查事项" />
+
+                <TextView
+                    android:id="@+id/txt_ucorgthing_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucorgthing_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="发现问题" />
+
+                <TextView
+                    android:id="@+id/txt_uccontent_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_uccontent_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="处理结果" />
+
+                <TextView
+                    android:id="@+id/txt_ucresult_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucresult_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="录入人员" />
+
+                <TextView
+                    android:id="@+id/txt_ucuser_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucuser_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="录入日期" />
+
+                <TextView
+                    android:id="@+id/txt_ucdate_joint_del"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2343434" />
+
+
+                <LinearLayout
+                    style="@style/horizontal_black_line_small"
+                    android:layout_below="@+id/txt_ucdate_joint_del"
+                    android:layout_marginTop="@dimen/line_large" />
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

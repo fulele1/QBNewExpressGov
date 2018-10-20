@@ -149,6 +149,15 @@ public class HttpUrlUtils {
         return getBaseUrl() + "/v1/governor/querylog";
     }
 
+    /**
+     *  http://jdws.qbchoice.cn/v1/governor/unioncheck   联合检查
+     *
+     * @return
+     */
+    public String joint_list() {
+        return getBaseUrl() + "/v1/governor/unioncheck";
+    }
+
 
 
 
