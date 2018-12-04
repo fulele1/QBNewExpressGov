@@ -15,6 +15,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
@@ -28,7 +29,7 @@ public class ComDiaryCheckActivity extends BaseActivity {
     private ComDiaryCheckActivity instance;
     private TextView tv_title_child;
     private String id;
-    private TextView txt_comname_cdc,txt_soname_cdc,txt_dcorguser_cdc,txt_querydate_cdc,txt_queryaddress_cdc,txt_dccontent_cdc,txt_dcresult_cdc,txt_comaddress_cdc,txt_dcmark_cdc;
+    private TextView txt_comname_cdc,txt_soname_cdc,txt_dcorguser_cdc,txt_querydate_cdc,txt_dccontent_cdc,txt_dcresult_cdc,txt_comaddress_cdc,txt_dcmark_cdc;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -45,10 +46,10 @@ public class ComDiaryCheckActivity extends BaseActivity {
     }
 
     private void internet() {
-
-        Log.e("fule", HttpUrlUtils.getHttpUrl().com_list() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
+        Log.e("fule", HttpUrlUtils.getHttpUrl().com_list() +"/"+ id +
+                "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().com_list() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().com_list() +"/"+ id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -65,7 +66,6 @@ public class ComDiaryCheckActivity extends BaseActivity {
                             txt_dccontent_cdc.setText(NullUtil.getString(map2.get("dccontent")));
                             txt_dcresult_cdc.setText(NullUtil.getString(map2.get("dcresult")));
                             txt_comaddress_cdc.setText(NullUtil.getString(map2.get("comaddress")));
-                            txt_queryaddress_cdc.setText(NullUtil.getString(map2.get("queryaddress")));
                             txt_dcmark_cdc.setText(NullUtil.getString(map2.get("dcmark")));
                         }
                     }
@@ -102,7 +102,6 @@ public class ComDiaryCheckActivity extends BaseActivity {
         txt_dccontent_cdc = findViewById(R.id.txt_dccontent_cdc);
         txt_dcresult_cdc = findViewById(R.id.txt_dcresult_cdc);
         txt_comaddress_cdc = findViewById(R.id.txt_comaddress_cdc);
-        txt_queryaddress_cdc = findViewById(R.id.txt_queryaddress_cdc);
         txt_dcmark_cdc = findViewById(R.id.txt_dcmark_cdc);
     }
 

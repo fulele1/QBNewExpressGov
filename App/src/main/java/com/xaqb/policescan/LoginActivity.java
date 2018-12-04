@@ -1,11 +1,13 @@
 package com.xaqb.policescan;
 
+import android.content.pm.PackageInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
@@ -36,7 +39,8 @@ public class LoginActivity extends BaseActivity {
 //    @BindView(R.id.txt_finished_login)
     TextView txt_finished;
 //    @BindView(R.id.txt_register_login)
-    TextView txt_back_pwd,bt_login;
+    TextView txt_back_pwd,bt_login,version_login;
+    CheckBox cbRememberPsw;
     EditText et_phone_login,et_psw_login;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -62,7 +66,40 @@ public class LoginActivity extends BaseActivity {
         et_phone_login = findViewById(R.id.et_phone_login);
         et_psw_login = findViewById(R.id.et_psw_login);
         bt_login = findViewById(R.id.bt_login_login);
+        cbRememberPsw = (CheckBox) findViewById(R.id.cb_remember_psw);
+        version_login = findViewById(R.id.version_login);
+
+        String username = (String) SPUtils.get(instance, "userName", "");
+        String psw = (String) SPUtils.get(instance, "userPsw", "");
+        boolean rememberPsw = (boolean) SPUtils.get(instance, "rememberPsw", false);
+        if (rememberPsw) {
+            cbRememberPsw.setChecked(true);
+            if (username != null && !username.isEmpty()) {
+                et_phone_login.setText(username);
+            }
+            if (psw != null && !psw.isEmpty()) {
+                et_psw_login.setText(psw);
+            }
+        }
+
+        version_login.setText("v"+getVersionName());
+
     }
+
+    public String getVersionName() {
+        try {
+            PackageInfo info = instance.getPackageManager().getPackageInfo(instance.getPackageName(), 0);
+
+            // 当前应用的版本名称
+            return info.versionName;
+
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -79,16 +116,17 @@ public class LoginActivity extends BaseActivity {
                         .navigation();
                 break;
             case R.id.bt_login_login:
-               String et_phone = et_phone_login.getText().toString().trim();
-               String et_psw = et_psw_login.getText().toString().trim();
+               final String et_phone = et_phone_login.getText().toString().trim();
+               final String et_psw = et_psw_login.getText().toString().trim();
                if (et_phone.equals("")){
                    Toast.makeText(instance, "请输入账号", Toast.LENGTH_SHORT).show();
                    return;
                }else if (et_psw.equals("")){
-                   Toast.makeText(instance, "请密码", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(instance, "请输入密码", Toast.LENGTH_SHORT).show();
                    return;
                }else {
                    Log.e("fule",HttpUrlUtils.getHttpUrl().userLogin());
+                   DialogLoadingUtil.getInstance(instance).show();//显示加载框
                    RestClient.builder()
                            .url(HttpUrlUtils.getHttpUrl().userLogin())
                            .params("user",et_phone)
@@ -96,6 +134,7 @@ public class LoginActivity extends BaseActivity {
                            .success(new ISuccess() {
                                @Override
                                public void onSuccess(String response) {
+                                   DialogLoadingUtil.getInstance(instance).hide();//
                                    Log.e("fule",response);
                                    Map<String, Object> map1 = JSON.parseObject(response,new TypeReference<Map<String, Object>>(){});
 
@@ -105,6 +144,17 @@ public class LoginActivity extends BaseActivity {
                                        SPUtils.put(instance,"ou_securityorg", NullUtil.getString(map2.get("policeorg")));
                                        SPUtils.put(instance,"so_level", NullUtil.getString(map2.get("solevel")));
                                        SPUtils.put(instance,"org", NullUtil.getString(map2.get("soname")));
+                                       SPUtils.put(instance,"policeid", NullUtil.getString(map2.get("policeid")));
+                                       SPUtils.put(instance,"policeorg", NullUtil.getString(map2.get("policeorg")));
+                                       SPUtils.put(instance,"policename", NullUtil.getString(map2.get("policename")));
+                                       SPUtils.put(instance,"soname", NullUtil.getString(map2.get("soname")));
+                                       SPUtils.put(instance,"userName", et_phone);
+                                       SPUtils.put(instance,"userPsw", et_psw);
+                                       if (cbRememberPsw.isChecked()) {
+                                           SPUtils.put(instance, "rememberPsw", true);
+                                       } else {
+                                           SPUtils.put(instance, "rememberPsw", false);
+                                       }
 
                                        ARouter.getInstance()
                                                .build("/qb/MainActivity2")
@@ -115,8 +165,8 @@ public class LoginActivity extends BaseActivity {
                                    }
                                    if (map1.get("state").toString().equals("202")){
                                        Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
-
-
+                                   }else if (map1.get("state").toString().equals("204")){
+                                       Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                                    }
                                }
 
@@ -125,7 +175,7 @@ public class LoginActivity extends BaseActivity {
                            .failure(new IFailure() {
                                @Override
                                public void onFailure(String s) {
-                                   Toast.makeText(instance, s, Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(instance, "登录失败", Toast.LENGTH_SHORT).show();
 
                                }
                            })

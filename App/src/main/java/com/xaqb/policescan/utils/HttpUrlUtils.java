@@ -10,15 +10,11 @@ public class HttpUrlUtils {
         return httpUrl;
     }
 
-//    private String getBaseUrl() {
-//        return "http://demo.0-w.cc";
-//    }
 
 
     private String getBaseUrl() {
-        return "http://jdws.qbchoice.cn";
+        return "http://jdws.qbchoice.com";
     }
-
     /**
      * 登录
      * /v1/governor/login
@@ -26,6 +22,35 @@ public class HttpUrlUtils {
      */
     public String userLogin() {
         return getBaseUrl() + "/v1/governor/login";
+    }
+
+    /**
+     * 修改密码
+     * //http://jdws.qbchoice.cn/v1/governor/governor/update_pwd
+     * @return
+     */
+    public String modifypws() {
+        return getBaseUrl() + "/v1/governor/governor/update_pwd";
+    }
+
+
+    /**
+     * 找回密码
+     *  http://jdws.qbchoice.cnv1/governor/back_pwd
+     * @return
+     */
+    public String back_pwd() {
+        return getBaseUrl() + "/v1/governor/back_pwd";
+    }
+
+
+    /**
+     * 获取短信验证码
+     *  http://jdws.qbchoice.cn/v1/governor/send_sms
+     * @return
+     */
+    public String getSmsCode() {
+        return getBaseUrl() + "/v1/governor/send_sms";
     }
 
     /**
@@ -78,6 +103,15 @@ public class HttpUrlUtils {
     }
 
     /**
+     *  http://jdws.qbchoice.cn/v1/governor/company
+     *
+     * @return
+     */
+    public String companycode() {
+        return getBaseUrl() + "/v1/governor/company";
+    }
+
+    /**
      * www.newexpress.com/v1/governor/staff/search
      * 人员查询
      * /v1/governor/employee
@@ -116,10 +150,6 @@ public class HttpUrlUtils {
         return getBaseUrl() + "/v1/governor/dashboard/index";
     }
 
-
-
-
-
     /**
      * v1/governor/securityclue
      *
@@ -137,7 +167,6 @@ public class HttpUrlUtils {
     public String clue_del() {
         return getBaseUrl() + "/v1/governor/securityclue/";
     }
-
 
 
     /**
@@ -159,8 +188,6 @@ public class HttpUrlUtils {
     }
 
 
-
-
     /**
      *  http://jdws.qbchoice.cn/v1/governor/expresscode/search/:code   快递单
      *http://jdws.qbchoice.cn/v1/governor/expresscode/search/:code
@@ -171,14 +198,18 @@ public class HttpUrlUtils {
     }
 
 
+
+
     /**
      * /v1/governor/dailycheck     企业
      *
      * @return
      */
     public String com_list() {
-        return getBaseUrl() + "/v1/governor/dailycheck/";
+        return getBaseUrl() + "/v1/governor/dailycheck";
     }
+
+
 
     /**
      * v1/governor/securityclue/:id
@@ -190,8 +221,14 @@ public class HttpUrlUtils {
     }
 
 
-
-
+    /**
+     * /v1/governor/article/bbimg
+     * *轮播图
+     * @return
+     */
+    public String banner_pic() {
+        return getBaseUrl() + "/v1/governor/article/bbimg";
+    }
 
 
 }

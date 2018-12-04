@@ -4,8 +4,10 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.xaqb.policescan.R;
 import com.xaqb.policescan.utils.DateUtil;
+import com.xaqb.policescan.utils.GlideRoundTransform;
 
 
 /**
@@ -36,6 +38,13 @@ public class ClueAdapter extends ListBaseAdapter<Clue> {
         txt_message_lcl.setText(item.getMeg());
         txt_com_lcl.setText(item.getCom());
         txt_date_lcl.setText(DateUtil.getDate(item.getDate()));
+
+        if (!item.getPic().equals("")){
+            Glide.with(mContext)
+                    .load(item.getPic())
+                    .into(tv_pic);
+        }
+
 //        if(!item.getPic().equals("")&&item.getPic()!=null){
 //            Glide.with(mContext).load(item.getPic()).transform(new GlideRoundTransform(mContext,10))
 //                    .placeholder(R.mipmap.per).error(R.mipmap.ic_launcher).into(tv_pic);

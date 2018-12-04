@@ -16,6 +16,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
@@ -45,7 +46,6 @@ public class LogDelActivity extends BaseActivity {
     }
 
     private void internet() {
-
         Log.e("fule", HttpUrlUtils.getHttpUrl().log_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().log_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
@@ -94,14 +94,10 @@ public class LogDelActivity extends BaseActivity {
     private void initView() {
         tv_title_child = findViewById(R.id.tv_title_child_tilte);
         tv_title_child.setText("日志详情");
-        tv_right_child = findViewById(R.id.tv_right_child_title);
-        tv_right_child.setText("编辑");
-        tv_right_child.setVisibility(View.VISIBLE);
         txt_responsible_Per_cld = findViewById(R.id.txt_responsible_Per_cld);
         txt_responsible_tel_cld = findViewById(R.id.txt_responsible_tel_cld);
         txt_employee_count_cld = findViewById(R.id.txt_employee_count_cld);
         txt_get_count_cld = findViewById(R.id.txt_get_count_cld);
         txt_post_count_cld = findViewById(R.id.txt_post_count_cld);
     }
-
 }

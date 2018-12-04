@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
-            android:drawableTop="@drawable/button_two"
+            android:drawableTop="@drawable/button_four"
             android:layout_weight="1"
             android:text="联合检查"
             android:gravity="center"

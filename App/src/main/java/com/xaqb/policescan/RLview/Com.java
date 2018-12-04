@@ -1,5 +1,7 @@
 package com.xaqb.policescan.RLview;
 
+import com.amap.api.maps.model.LatLng;
+
 /**
  * Created by lenovo on 2018/8/28.
  */
@@ -10,6 +12,16 @@ public class Com {
     private String name;
     private String belongs;
     private String address;
+
+    public LatLng getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
+    }
+
+    private LatLng latLng;
 
     public String getId() {
         return id;

@@ -47,7 +47,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_gravity="center"
-                        android:src="@mipmap/man" />
+                        android:src="@mipmap/man"
+                        android:layout_marginLeft="@dimen/layout_padding_small"
+                        />
 
 
                     <TextView

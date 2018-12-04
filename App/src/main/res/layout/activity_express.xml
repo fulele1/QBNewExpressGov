@@ -202,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="联系电话" />
+                    android:text="寄件电话" />
 
                 <TextView
                     android:id="@+id/txt_manphone_exp"

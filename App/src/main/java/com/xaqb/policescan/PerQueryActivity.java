@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.xaqb.policescan.utils.ARouterUtil;
+import com.xaqb.policescan.utils.EditClearUtils;
 import com.xaqb.policescan.utils.SPUtils;
 import com.xaqb.policescan.utils.StatuBarUtil;
 
@@ -20,6 +22,7 @@ public class PerQueryActivity extends BaseActivity {
     private PerQueryActivity instance;
     private TextView tv_title_child;
     private Button btn_query_pq;
+    private ImageView img_clear_com_pq,img_clear_name_pq,img_clear_ide_pq,img_clear_tel_pq,img_clear_org_pq;
     private EditText et_org_pq,et_com_pq,et_name_pq,et_ide_pq,et_tel_pq;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -35,6 +38,15 @@ public class PerQueryActivity extends BaseActivity {
     private void addEvent() {
         btn_query_pq.setOnClickListener(instance);
         et_org_pq.setOnClickListener(instance);
+        et_com_pq.setOnClickListener(instance);
+        et_name_pq.setOnClickListener(instance);
+        et_ide_pq.setOnClickListener(instance);
+        et_tel_pq.setOnClickListener(instance);
+        img_clear_com_pq.setOnClickListener(instance);
+        img_clear_name_pq.setOnClickListener(instance);
+        img_clear_ide_pq.setOnClickListener(instance);
+        img_clear_tel_pq.setOnClickListener(instance);
+        img_clear_org_pq.setOnClickListener(instance);
     }
 
     private void initView() {
@@ -46,6 +58,16 @@ public class PerQueryActivity extends BaseActivity {
         et_name_pq = findViewById(R.id.et_name_pq);
         et_ide_pq = findViewById(R.id.et_ide_pq);
         et_tel_pq = findViewById(R.id.et_tel_pq);
+        img_clear_com_pq = findViewById(R.id.img_clear_com_pq);
+        img_clear_name_pq = findViewById(R.id.img_clear_name_pq);
+        img_clear_ide_pq = findViewById(R.id.img_clear_ide_pq);
+        img_clear_tel_pq = findViewById(R.id.img_clear_tel_pq);
+        img_clear_org_pq = findViewById(R.id.img_clear_org_pq);
+        EditClearUtils.clearText(et_com_pq,img_clear_com_pq);
+        EditClearUtils.clearText(et_name_pq,img_clear_name_pq);
+        EditClearUtils.clearText(et_ide_pq,img_clear_ide_pq);
+        EditClearUtils.clearText(et_tel_pq,img_clear_tel_pq);
+        EditClearUtils.clearText(et_org_pq,img_clear_org_pq);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -72,6 +94,27 @@ public class PerQueryActivity extends BaseActivity {
                     }else if (SPUtils.get(instance,"so_level","").equals("0")){
                         ARouterUtil.intentNoParRequest("/qb/OrgActivityFour",view,instance,2);
                     }
+                break;
+            case R.id.img_clear_com_pq:
+                et_com_pq.setText("");
+                img_clear_com_pq.setVisibility(View.GONE);
+                break;
+                case R.id.img_clear_name_pq:
+                    et_name_pq.setText("");
+                    img_clear_name_pq.setVisibility(View.GONE);
+                break;
+                case R.id.img_clear_ide_pq:
+                    et_ide_pq.setText("");
+                    img_clear_ide_pq.setVisibility(View.GONE);
+                break;
+                case R.id.img_clear_tel_pq:
+                    et_tel_pq.setText("");
+                    img_clear_tel_pq.setVisibility(View.GONE);
+                break;
+                case R.id.img_clear_org_pq:
+                    et_org_pq.setText("");
+                    oid = "";
+                    img_clear_org_pq.setVisibility(View.GONE);
                 break;
         }
     }

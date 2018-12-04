@@ -16,9 +16,6 @@
         android:background="@color/wirte"
         android:orientation="vertical">
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,18 +32,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="运单号" />
+                android:text="运单号:    " />
 
             <TextView
                 android:id="@+id/txt_responsible_Per_cld"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="张客气" />
+                android:text="" />
 
             <LinearLayout
                 style="@style/horizontal_black_line_small"
                 android:layout_below="@+id/txt_responsible_Per_cld"
+                android:layout_marginTop="@dimen/line_large" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="上报人:    " />
+
+            <TextView
+                android:id="@+id/txt__Per_cld"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="" />
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt__Per_cld"
                 android:layout_marginTop="@dimen/line_large" />
 
         </RelativeLayout>
@@ -60,14 +83,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="企业名称" />
+                android:text="企业名称:    " />
 
             <TextView
                 android:id="@+id/txt_responsible_tel_cld"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="132-3948--4321"
+                android:text=""
                 android:textColor="@color/main" />
 
             <LinearLayout
@@ -85,14 +108,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="时间" />
+                android:text="时间:    " />
 
             <TextView
                 android:id="@+id/txt_employee_count_cld"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="2333" />
+                android:text="" />
 
             <LinearLayout
                 style="@style/horizontal_black_line_small"
@@ -100,7 +123,7 @@
                 android:layout_marginTop="@dimen/line_large" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding">
@@ -109,24 +132,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="地址" />
+                android:text="地址:    " />
 
             <TextView
                 android:id="@+id/txt_get_count_cld"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="2343434" />
+                android:gravity="right"
+                android:text="" />
 
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_get_count_cld"
-                android:layout_marginTop="@dimen/line_large" />
+        </LinearLayout>
 
+        <LinearLayout
+            style="@style/horizontal_black_line_small"
+            android:layout_marginTop="@dimen/line_large" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding">
@@ -135,16 +156,39 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="线索信息" />
+                android:text="线索信息:    " />
 
             <TextView
                 android:id="@+id/txt_post_count_cld"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                 />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/horizontal_black_line_small"
+            android:layout_marginTop="@dimen/line_large" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="2343434" />
+                android:layout_alignParentLeft="true"
+                android:text="图片:    " />
 
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/img_pic_cdel"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
     </LinearLayout>

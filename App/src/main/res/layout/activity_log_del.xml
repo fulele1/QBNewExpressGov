@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="张客气" />
+                android:text="" />
 
             <LinearLayout
                 style="@style/horizontal_black_line_small"
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="132-3948--4321"
+                android:text=""
                 android:textColor="@color/main" />
 
             <LinearLayout
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="2333" />
+                android:text="" />
 
             <LinearLayout
                 style="@style/horizontal_black_line_small"
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="2343434" />
+                android:text="" />
 
             <LinearLayout
                 style="@style/horizontal_black_line_small"
@@ -142,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="2343434" />
+                android:text="" />
 
         </RelativeLayout>
 

@@ -32,6 +32,7 @@ import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
 import com.xaqb.policescan.utils.ARouterUtil;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
@@ -69,52 +70,19 @@ public class ClueListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lrecycleview_layout);
-
         instance = this;
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
-        setRecycleView();
+        initRecycle();
+        initList();
     }
 
-
-    private void initView() {
-        tv_title_child = findViewById(R.id.tv_title_child_tilte);
-        tv_title_child.setText("线索信息");
-
-        list_r = findViewById(R.id.list_recycleview);
-
-        txt_size = findViewById(R.id.txt_size);
-    }
-
-    private void setRecycleView() {
-
-        mDataAdapter = new ClueAdapter(instance);
-        mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
-        list_r.setAdapter(mLRecyclerViewAdapter);
-
-        DividerDecoration divider = new DividerDecoration.Builder(this)
-                .setHeight(R.dimen.list_line)
-                .setPadding(R.dimen.default_divider_padding)
-                .setColorResource(R.color.wirte)
-                .build();
-
-        //mRecyclerView.setHasFixedSize(true);
-        list_r.addItemDecoration(divider);
-
-        list_r.setLayoutManager(new LinearLayoutManager(this));
-
-        list_r.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
-        list_r.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
-        list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
-
-        //add a HeaderView
-        final View header = LayoutInflater.from(this).inflate(R.layout.sample_header, (ViewGroup) findViewById(android.R.id.content), false);
-        mLRecyclerViewAdapter.addHeaderView(header);
+    private void initList() {
 
         list_r.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                mClues = new ArrayList<>();
                 mDataAdapter.clear();
                 mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
                 mCurrentCounter = 0;
@@ -140,26 +108,44 @@ public class ClueListActivity extends BaseActivity {
             }
         });
 
-        list_r.setLScrollListener(new LRecyclerView.LScrollListener() {
+        list_r.refresh();
+    }
 
-            @Override
-            public void onScrollUp() {
-            }
 
-            @Override
-            public void onScrollDown() {
-            }
+    private void initView() {
+        tv_title_child = findViewById(R.id.tv_title_child_tilte);
+        tv_title_child.setText("线索信息");
 
-            @Override
-            public void onScrolled(int distanceX, int distanceY) {
-            }
+        list_r = findViewById(R.id.list_recycleview);
 
-            @Override
-            public void onScrollStateChanged(int state) {
+        txt_size = findViewById(R.id.txt_size);
+    }
 
-            }
+    private void initRecycle() {
 
-        });
+        mDataAdapter = new ClueAdapter(instance);
+        mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
+        list_r.setAdapter(mLRecyclerViewAdapter);
+
+        DividerDecoration divider = new DividerDecoration.Builder(this)
+                .setHeight(R.dimen.list_line)
+                .setPadding(R.dimen.default_divider_padding)
+                .setColorResource(R.color.wirte)
+                .build();
+
+        //mRecyclerView.setHasFixedSize(true);
+        list_r.addItemDecoration(divider);
+
+        list_r.setLayoutManager(new LinearLayoutManager(this));
+
+        list_r.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
+        list_r.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
+        list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+
+        //add a HeaderView
+        final View header = LayoutInflater.from(this).inflate(R.layout.sample_header, (ViewGroup) findViewById(android.R.id.content), false);
+        mLRecyclerViewAdapter.addHeaderView(header);
+
 
         //设置头部加载颜色
         list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
@@ -168,39 +154,19 @@ public class ClueListActivity extends BaseActivity {
         //设置底部加载文字提示
         list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
 
-        list_r.refresh();
-
-        //子条目的点击事件
-        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onItemClick(View view, int position) {
-                if (mDataAdapter.getDataList().size() > position) {
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString("id",mClues.get(position).getId());
-                    ARouterUtil.intentPar("/qb/ClueDelActivity", view,bundle);
-                }
-
-            }
-
-        });
-
     }
 
 
-    List<Clue> mClue = new ArrayList<>();;
-    List<Clue> mClues = new ArrayList<>();
+    List<Clue> mClue;
+    List<Clue> mClues;
     private void connecting(int p) {
-
-        Log.e("fule",HttpUrlUtils.getHttpUrl().brandcode()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
+        Log.e("fule",HttpUrlUtils.getHttpUrl().clue_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().clue_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
 //                .params("","")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-
 
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -214,7 +180,7 @@ public class ClueListActivity extends BaseActivity {
                                 mHandler.sendEmptyMessage(-1);
                                 list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
                                 String table = map1.get("table").toString();
-
+                                mClue = new ArrayList<>();
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
                                 for (Map<String, Object> map : list1) {
                                     Clue com = new Clue();
@@ -222,7 +188,7 @@ public class ClueListActivity extends BaseActivity {
                                     com.setMeg( NullUtil.getString(map.get("scsketch")));//
                                     com.setCom( NullUtil.getString(map.get("comname")));//
                                     com.setDate( NullUtil.getString(map.get("sccreatetime")));
-
+                                    com.setPic( NullUtil.getString(map.get("scimg")));
                                     mClue.add(com);
                                     mClues.add(com);
                                 }
@@ -237,6 +203,21 @@ public class ClueListActivity extends BaseActivity {
                         TOTAL_COUNTER = Integer.valueOf(count).intValue();
                         REQUEST_COUNT = Integer.valueOf(num).intValue();
                         txt_size.setText("共查询到"+count+"条数据");
+                        //子条目的点击事件
+                        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                if (mDataAdapter.getDataList().size() > position) {
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("id",mClues.get(position).getId());
+                                    ARouterUtil.intentPar("/qb/ClueDelActivity", view,bundle);
+                                }
+
+                            }
+
+                        });
                     }
                 })
                 .failure(new IFailure() {
@@ -301,6 +282,7 @@ public class ClueListActivity extends BaseActivity {
                         item.setMeg(mClue.get(i).getMeg());
                         item.setCom(mClue.get(i).getCom());
                         item.setDate(mClue.get(i).getDate());
+                        item.setPic(mClue.get(i).getPic());
                         newList.add(item);
                     }
 

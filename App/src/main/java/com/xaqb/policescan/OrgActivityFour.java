@@ -2,7 +2,9 @@ package com.xaqb.policescan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +27,7 @@ import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.LogUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
+import com.xaqb.policescan.utils.StatuBarUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,12 +46,13 @@ public class OrgActivityFour extends BaseActivity {
     private MenuData resultDate;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setTranslucent(this, 0);
         setContentView(R.layout.activity_org_four);
         mContext = this;
+        StatuBarUtil.setStatuBarLightModeClild(this, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initViews();
         TextView mTxtTitle = (TextView) findViewById(R.id.tv_title_child_tilte);
         mTxtTitle.setText("管辖机构");

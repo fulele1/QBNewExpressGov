@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,12 +10,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+    <include layout="@layout/title_bar"/>
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_marginx"
-        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:drawableTop="@mipmap/icon_login"
         android:gravity="center"
         android:text="新寄递·警员版"
@@ -29,7 +31,8 @@
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
 
 
         <LinearLayout
@@ -41,7 +44,7 @@
 
 
             <EditText
-                android:id="@+id/et_phone_login"
+                android:id="@+id/et_phone_backpwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -51,6 +54,52 @@
                 android:textColor="@color/wirte"
                 android:textColorHint="@color/wirte"
                 android:textSize="@dimen/edit_text" />
+
+            <LinearLayout style="@style/horizontal_black_line_small_login"></LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_padding">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edit_code_backpwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入验证码..."
+                    android:password="true"
+                    android:textColor="@color/wirte"
+                    android:textColorHint="@color/wirte"
+                    android:textSize="@dimen/edit_text" />
+
+                <TextView
+                    android:id="@+id/tv_find_bpwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="获取验证码"
+                    android:textColor="@color/wirte" />
+
+            </LinearLayout>
+
 
             <LinearLayout style="@style/horizontal_black_line_small_login"></LinearLayout>
 
@@ -71,6 +120,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/edit_pwd_backpwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
@@ -88,62 +138,19 @@
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            android:padding="@dimen/layout_padding">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/et_psw_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="请输入验证码..."
-                    android:password="true"
-                    android:textColor="@color/wirte"
-                    android:textColorHint="@color/wirte"
-                    android:textSize="@dimen/edit_text" />
-
-                <TextView
-                    android:id="@+id/tv_find_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="获取验证码"
-                    android:textColor="@color/wirte" />
-
-            </LinearLayout>
-
-
-            <LinearLayout style="@style/horizontal_black_line_small_login"></LinearLayout>
-
-
-        </LinearLayout>
     </LinearLayout>
 
 
-    <include layout="@layout/title_bar"/>
 
     <Button
-        android:id="@+id/bt_login_login"
+        android:id="@+id/bt_finish_bpwd"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
+        android:layout_marginTop="70dp"
         android:background="@drawable/bg_button_selector"
         android:text="完成"
+        android:layout_gravity="center"
         android:textColor="@color/wirte" />
 
-</RelativeLayout>
+</LinearLayout>

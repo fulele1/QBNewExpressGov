@@ -43,18 +43,44 @@
 
                 />
 
-            <EditText
-                android:id="@+id/txt_org_three"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/title_size"
+                android:orientation="horizontal"
                 android:layout_below="@+id/txt_name_three"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/activity_horizontal_margins"
-                android:background="@null"
-                android:hint="请选择管辖机构"
-                android:focusable="false"
-                />
+                >
+
+                <EditText
+                    android:id="@+id/txt_org_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/title_size"
+                    android:layout_below="@+id/txt_name_three"
+                    android:textColor="@color/black"
+                    android:background="@null"
+                    android:hint="请选择管辖机构..."
+                    android:focusable="false"
+                    android:layout_weight="1"
+                    android:gravity="right|center"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/img_clear_org_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+
+
+
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 
@@ -67,7 +93,7 @@
         android:background="@color/wirte"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         >
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding"
@@ -81,19 +107,32 @@
 
                 />
 
-            <TextView
+            <EditText
                 android:id="@+id/txt_date_three"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:drawableRight="@mipmap/go"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请选择时间..."
+                android:textSize="@dimen/activity_horizontal_margin"
                 />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_date_three"
-                android:layout_marginTop="@dimen/line_large"
+
+
+            <ImageView
+                android:id="@+id/img_clear_date_four"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:gravity="center"
+                android:src="@mipmap/delete_edit"
+                android:visibility="gone"
                 />
-        </RelativeLayout>
+
+
+        </LinearLayout>
 
 
 

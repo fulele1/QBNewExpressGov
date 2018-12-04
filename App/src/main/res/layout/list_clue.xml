@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/layout_padding"
         android:orientation="horizontal"
         >
 
@@ -26,8 +25,12 @@
                 android:id="@+id/txt_message_lcl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发现可疑人物，寄送物品既然不让打开，也不刘身份信息"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:textColor="@color/black"
+                android:maxLines="2"
+                android:ellipsize="end"
                 />
 
             <LinearLayout
@@ -40,7 +43,7 @@
                     android:id="@+id/txt_com_lcl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="陕西全峰快递有限公司"
+                    android:text=""
                     android:layout_below="@+id/txt_name_three"
                     android:layout_weight="1"
                     android:textSize="@dimen/edit_text"
@@ -50,7 +53,7 @@
                     android:id="@+id/txt_date_lcl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="张三丰/2天前"
+                    android:text=""
                     android:textSize="@dimen/edit_text"
                     />
 
@@ -64,8 +67,10 @@
             android:id="@+id/img_pic_lcl"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/place_pic"
             android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:layout_marginRight="@dimen/line_large"
             />
 
     </LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/wirte"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/wirte"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:orientation="horizontal"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding"
+                android:layout_weight="1"
+
+                >
+
+                <TextView
+                    android:id="@+id/txt_name_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="顺丰速运"
+                    android:textColor="@color/black"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_name_total_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="顺丰控股(集团)股份有限公司"
+                    android:layout_below="@+id/txt_name_three"
+                    android:layout_marginTop="@dimen/activity_horizontal_margins"
+                    /><TextView
+                    android:id="@+id/txt_name_add_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="顺丰控股(集团)股份有限公司"
+                    android:layout_below="@+id/txt_name_total_map"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img_pic_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/navagition"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

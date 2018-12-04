@@ -26,27 +26,43 @@
                 android:layout_height="wrap_content"
                 android:text="@string/brand"
                 android:layout_alignParentLeft="true"
-
                 />
 
-            <EditText
-                android:id="@+id/txt_brand_cq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:drawableRight="@mipmap/go"
-                android:hint="@string/please_choose_brand"
-                android:textSize="@dimen/edit_text"
-                android:background="@null"
-                android:focusable="false"
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_brand_cq"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
+                >
+                <EditText
+                    android:id="@+id/txt_brand_cq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/please_choose_brand"
+                    android:textSize="@dimen/edit_text"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:gravity="right"
+                    />
 
+
+                <ImageView
+                    android:id="@+id/img_clear_brand_cq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+        <LinearLayout
+            style="@style/horizontal_black_line_small"
+            android:layout_marginTop="@dimen/line_large"
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,20 +74,42 @@
                 android:layout_height="wrap_content"
                 android:text="@string/org"
                 android:layout_alignParentLeft="true"
-
                 />
 
-            <EditText
-                android:id="@+id/txt_org_cq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:drawableRight="@mipmap/go"
-                android:hint="@string/please_choose_org"
-                android:textSize="@dimen/edit_text"
-                android:background="@null"
-                android:focusable="false"
-                />
+
+                >
+
+                <EditText
+                    android:id="@+id/txt_org_cq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/please_choose_org"
+                    android:textSize="@dimen/edit_text"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_clear_org_cq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+
+                    />
+
+
+            </LinearLayout>
+
+
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -98,16 +136,36 @@
                 android:layout_alignParentLeft="true"
                 />
 
-            <EditText
-                android:id="@+id/et_com_cq"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/please_write_com_name"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/txt_name_three"
-                android:layout_marginTop="@dimen/activity_horizontal_margins"
-                android:textSize="@dimen/edit_text"
-                android:background="@null"
-                />
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+
+                >
+
+                <EditText
+                    android:id="@+id/et_com_cq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/please_write_com_name"
+                    android:layout_below="@+id/txt_name_three"
+                    android:textSize="@dimen/edit_text"
+                    android:background="@null"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:gravity="right"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_clear_com_cq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
 
         </RelativeLayout>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/App/App.iml" filepath="$PROJECT_DIR$/App/App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QB-annotations/QB-annotations.iml" filepath="$PROJECT_DIR$/QB-annotations/QB-annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QB-complier/QB-complier.iml" filepath="$PROJECT_DIR$/QB-complier/QB-complier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qb-core/QB-core.iml" filepath="$PROJECT_DIR$/qb-core/QB-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QB-ec/QB-ec.iml" filepath="$PROJECT_DIR$/QB-ec/QB-ec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QBNewExpressgov.iml" filepath="$PROJECT_DIR$/QBNewExpressgov.iml" />
+    </modules>
+  </component>
+</project>

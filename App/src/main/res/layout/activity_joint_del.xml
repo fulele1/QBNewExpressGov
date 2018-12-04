@@ -24,7 +24,7 @@
             android:background="@color/wirte"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -33,23 +33,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="企业名称" />
+                    android:text="企业名称:    " />
 
                 <TextView
                     android:id="@+id/txt_comname_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="张客气" />
+                    android:gravity="right"
+                    android:text="" />
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_comname_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -58,23 +58,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="联查机构名称" />
+                    android:text="联查机构名称:    " />
 
                 <TextView
                     android:id="@+id/txt_ucorgname_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="张客气" />
+                    android:gravity="right"
+                    android:text="" />
+            </LinearLayout>
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucorgname_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
 
-            </RelativeLayout>
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -83,23 +81,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="联查日期" />
+                    android:text="联查日期:    " />
 
                 <TextView
                     android:id="@+id/txt_ucorgdate_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="132-3948--4321"
-                    android:textColor="@color/main" />
+                    android:gravity="right"
+                    android:text="" />
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucorgdate_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
-            </RelativeLayout>
 
-            <RelativeLayout
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -108,22 +107,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="联查人员" />
+                    android:text="联查人员:    " />
 
                 <TextView
                     android:id="@+id/txt_ucorguser_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="2333" />
+                    android:gravity="right"
+                    android:text="" />
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucorguser_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
-            </RelativeLayout>
 
-            <RelativeLayout
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -132,24 +132,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="联查事项" />
+                    android:text="联查事项:    " />
 
                 <TextView
                     android:id="@+id/txt_ucorgthing_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="2343434" />
+                    android:gravity="right"
+                    android:text="" />
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucorgthing_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
+            </LinearLayout>
 
 
-            </RelativeLayout>
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt_ucorgthing_joint_del"
+                android:layout_marginTop="@dimen/line_large" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -158,23 +158,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="发现问题" />
+                    android:text="发现问题:    " />
 
                 <TextView
                     android:id="@+id/txt_uccontent_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="2343434" />
+                    android:gravity="right"
+                    android:text="" />
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_uccontent_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -183,27 +183,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="处理结果" />
+                    android:text="处理结果:    " />
 
                 <TextView
                     android:id="@+id/txt_ucresult_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="2343434" />
+                    android:gravity="right"
+                    android:text="" />
+
+            </LinearLayout>
 
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucresult_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
 
 
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -212,27 +209,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="录入人员" />
+                    android:text="录入人员:    " />
 
                 <TextView
                     android:id="@+id/txt_ucuser_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="2343434" />
+                    android:gravity="right"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
 
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucuser_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
-
-
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -241,24 +234,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="录入日期" />
+                    android:text="录入日期:    " />
 
                 <TextView
                     android:id="@+id/txt_ucdate_joint_del"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="2343434" />
+                    android:gravity="right"
+                    android:text="" />
+
+            </LinearLayout>
 
 
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_ucdate_joint_del"
-                    android:layout_marginTop="@dimen/line_large" />
-
-
-
-            </RelativeLayout>
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
 
         </LinearLayout>
     </LinearLayout>

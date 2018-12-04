@@ -50,9 +50,9 @@ public class OrgActivityTwo extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatuBarUtil.setStatuBarLightModeClild(this, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         setContentView(R.layout.activity_org_two);
         mContext = this;
+        StatuBarUtil.setStatuBarLightModeClild(this, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initViews();
         TextView mTxtTitle = (TextView) findViewById(R.id.tv_title_child_tilte);
         mTxtTitle.setText("管辖机构");

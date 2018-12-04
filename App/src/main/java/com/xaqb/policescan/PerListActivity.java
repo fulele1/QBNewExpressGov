@@ -78,7 +78,41 @@ public class PerListActivity extends BaseActivity {
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         addEvent();
-        setRecycleView();
+        initRecycle();
+        initList();
+    }
+
+    private void initList() {
+
+        list_r.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mClues = new ArrayList<>();
+                mDataAdapter.clear();
+                mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
+                mCurrentCounter = 0;
+                connecting(1);
+            }
+        });
+
+        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
+        list_r.setLoadMoreEnabled(true);
+
+        list_r.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+                if (mCurrentCounter < TOTAL_COUNTER) {
+                    // loading more
+                    mCurrentpage =mCurrentpage+1;
+                    connecting(mCurrentpage);
+                } else {
+                    //the end
+                    list_r.setNoMore(true);
+                }
+            }
+        });
+        list_r.refresh();
     }
 
     private void addEvent() {
@@ -111,7 +145,7 @@ public class PerListActivity extends BaseActivity {
         return "&condition="+ ConditionUtil.getConditionString(map);
     }
 
-    private void setRecycleView() {
+    private void initRecycle() {
 
         mDataAdapter = new PerAdapter(instance);
         mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
@@ -136,56 +170,6 @@ public class PerListActivity extends BaseActivity {
         final View header = LayoutInflater.from(this).inflate(R.layout.sample_header,(ViewGroup)findViewById(android.R.id.content), false);
         mLRecyclerViewAdapter.addHeaderView(header);
 
-        list_r.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                mDataAdapter.clear();
-                mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
-                mCurrentCounter = 0;
-                connecting(1);
-            }
-        });
-
-        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
-        list_r.setLoadMoreEnabled(true);
-
-        list_r.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                if (mCurrentCounter < TOTAL_COUNTER) {
-                    // loading more
-                    mCurrentpage =mCurrentpage+1;
-                    connecting(mCurrentpage);
-                } else {
-                    //the end
-                    list_r.setNoMore(true);
-                }
-            }
-        });
-
-        list_r.setLScrollListener(new LRecyclerView.LScrollListener() {
-
-            @Override
-            public void onScrollUp() {
-            }
-
-            @Override
-            public void onScrollDown() {
-            }
-
-            @Override
-            public void onScrolled(int distanceX, int distanceY) {
-            }
-
-            @Override
-            public void onScrollStateChanged(int state) {
-
-            }
-
-        });
-
         //设置头部加载颜色
         list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary ,android.R.color.white);
         //设置底部加载颜色
@@ -193,29 +177,11 @@ public class PerListActivity extends BaseActivity {
         //设置底部加载文字提示
         list_r.setFooterViewHint("拼命加载中","已经全部为你呈现了","网络不给力啊，点击再试一次吧");
 
-        list_r.refresh();
-
-        //子条目的点击事件
-        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onItemClick(View view, int position) {
-                if (mDataAdapter.getDataList().size() > position) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("id",mClues.get(position).getId());
-                    ARouterUtil.intentPar("/qb/PerDelActivity",view,bundle);
-                }
-            }
-
-        });
-
-
-
     }
 
 
-    List<Per> mClue = new ArrayList<>();;
-    List<Per> mClues = new ArrayList<>();
+    List<Per> mClue ;
+    List<Per> mClues;
     private void connecting(int p) {
         LogUtils.e(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p);
 
@@ -237,6 +203,7 @@ public class PerListActivity extends BaseActivity {
                                 list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
                                 String table = map1.get("table").toString();
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
+                                mClue = new ArrayList<>();
                                 for (Map<String, Object> map : list1) {
                                     Per com = new Per();
                                     com.setId(NullUtil.getString(map.get("empcode")));//ID
@@ -258,6 +225,21 @@ public class PerListActivity extends BaseActivity {
                                     TOTAL_COUNTER = Integer.valueOf(count).intValue();
                                     REQUEST_COUNT = Integer.valueOf(num).intValue();
                                     txt_size.setText("共查询到"+count+"条数据");
+                        //子条目的点击事件
+                        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                if (mDataAdapter.getDataList().size() > position) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("id",mClues.get(position).getId());
+                                    ARouterUtil.intentPar("/qb/PerDelActivity",view,bundle);
+                                }
+                            }
+
+                        });
+
+
 
                     }
                 })

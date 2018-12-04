@@ -68,6 +68,27 @@ public class DateUtil {
      * @return
      */
     public static String data(String time) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyy.MM.dd");
+        Date date;
+        String times = null;
+        try {
+            date = sdr.parse(time);
+            long l = date.getTime();
+            String stf = String.valueOf(l);
+            times = stf.substring(0, 10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return times;
+    }
+
+
+    /**
+     * 把时间转换为时间戳
+     * @param time
+     * @return
+     */
+    public static String data2(String time) {
         SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
         String times = null;

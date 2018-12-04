@@ -19,6 +19,7 @@ import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
 import com.xaqb.policescan.utils.DateUtil;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
@@ -48,7 +49,6 @@ public class JointDelActivity extends BaseActivity {
     }
 
     private void internet() {
-
         Log.e("fule", HttpUrlUtils.getHttpUrl().joint_list() +"/"+ id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().joint_list() +"/"+ id + "?access_token=" + SPUtils.get(instance, "access_token", ""))

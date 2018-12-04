@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.xaqb.policescan.R;
 
 
@@ -38,9 +39,10 @@ public class PerAdapter extends ListBaseAdapter<Per> {
         txt_com_lp.setText(item.getCom());
         txt_ide_lp.setText(item.getIde());
         txt_ide_lp.setText(item.getIde());
-        if(!item.getSix().equals("男")){
-//            Glide.with(mContext).load(item.getPic()).transform(new GlideRoundTransform(mContext,10))
-//                    .placeholder(R.mipmap.per).error(R.mipmap.ic_launcher).into(tv_pic);
+        if(item.getSix().equals("男")){
+            img_sex_lp.setImageResource(R.mipmap.man);
+        }else if (item.getSix().equals("女")){
+            img_sex_lp.setImageResource(R.mipmap.woman);
         }
 
 

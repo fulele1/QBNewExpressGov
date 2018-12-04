@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="企业名称" />
+                    android:text="企业名称:    " />
 
                 <TextView
                     android:id="@+id/txt_comname_bdc"
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="管辖机构" />
+                    android:text="管辖机构:    " />
 
                 <TextView
                     android:id="@+id/txt_soname_bdc"
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="检查人员" />
+                    android:text="检查人员:    " />
 
                 <TextView
                     android:id="@+id/txt_queryuser_bdc"
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="检查时间" />
+                    android:text="检查时间:    " />
 
                 <TextView
                     android:id="@+id/txt_querydate_bdc"
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="检查地址" />
+                    android:text="检查地址:    " />
 
                 <TextView
                     android:id="@+id/txt_queryaddress_bdc"

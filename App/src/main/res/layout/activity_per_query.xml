@@ -26,19 +26,42 @@
                 android:layout_height="wrap_content"
                 android:text="@string/com_name"
                 android:layout_alignParentLeft="true"
-
                 />
 
-            <EditText
-                android:id="@+id/et_com_pq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/please_write_com_name"
+                android:layout_alignParentRight="true"
                 android:layout_below="@+id/txt_name_three"
-                android:layout_marginTop="@dimen/activity_horizontal_margins"
-                android:textSize="@dimen/edit_text"
-                android:background="@null"
-                />
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                >
+
+                <EditText
+                    android:id="@+id/et_com_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/please_write_com_name"
+                    android:layout_below="@+id/txt_name_three"
+                    android:textSize="@dimen/edit_text"
+                    android:background="@null"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:gravity="right"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_clear_com_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"/>
+
+
+
+
+            </LinearLayout>
+
+
 
         </RelativeLayout>
 
@@ -66,21 +89,41 @@
 
                 />
 
-            <EditText
-                android:id="@+id/et_name_pq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:textSize="@dimen/edit_text"
-                android:background="@null"
-                android:hint="张三"
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/et_name_pq"
-                android:layout_marginTop="@dimen/line_large"
-                />
+                >
+
+                <EditText
+                    android:id="@+id/et_name_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/edit_text"
+                    android:background="@null"
+                    android:hint="请输入姓名..."
+                    android:gravity="right"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_clear_name_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"/>
+
+
+            </LinearLayout>
+
+
         </RelativeLayout>
+        <LinearLayout
+            style="@style/horizontal_black_line_small"
+            android:layout_marginTop="@dimen/line_large"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -96,23 +139,42 @@
 
                 />
 
-            <EditText
-                android:id="@+id/et_ide_pq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:hint="154654154654346456"
-                android:textSize="@dimen/edit_text"
-                android:background="@null"
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/et_ide_pq"
-                android:layout_marginTop="@dimen/line_large"
-                />
+                >
+
+                <EditText
+                    android:id="@+id/et_ide_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:hint="请输入证件号码..."
+                    android:textSize="@dimen/edit_text"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_clear_ide_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+
+
         </RelativeLayout>
 
-
+        <LinearLayout
+            style="@style/horizontal_black_line_small"
+            android:layout_marginTop="@dimen/line_large"
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,24 +186,44 @@
                 android:layout_height="wrap_content"
                 android:text="@string/phone"
                 android:layout_alignParentLeft="true"
-
                 />
 
-            <EditText
-                android:id="@+id/et_tel_pq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@null"
-                android:textSize="@dimen/edit_text"
-                android:hint="21565656"
-                />
+                >
+                <EditText
+                    android:id="@+id/et_tel_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@null"
+                    android:textSize="@dimen/edit_text"
+                    android:inputType="number"
+                    android:hint="请输入电话号码..."
+                    android:gravity="right"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_clear_tel_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
             <LinearLayout
                 style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/et_tel_pq"
                 android:layout_marginTop="@dimen/line_large"
                 />
-        </RelativeLayout>
 
 
         <RelativeLayout
@@ -155,20 +237,40 @@
                 android:layout_height="wrap_content"
                 android:text="@string/org"
                 android:layout_alignParentLeft="true"
-
                 />
 
-            <EditText
-                android:id="@+id/et_org_pq"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableRight="@mipmap/go"
-                android:hint="@string/please_choose_org"
-                android:background="@null"
-                android:focusable="false"
-                android:textSize="@dimen/edit_text"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                >
+
+                <EditText
+                    android:id="@+id/et_org_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/please_choose_org"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:textSize="@dimen/edit_text"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:gravity="right"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/img_clear_org_pq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+
+
+
         </RelativeLayout>
 
     </LinearLayout>

@@ -41,19 +41,20 @@
 
             <TextView
                 android:id="@+id/txt_com_lcllog"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_name_three"
-                android:layout_weight="1"
                 android:text="管辖机构"
                 android:textSize="@dimen/edit_text" />
 
             <TextView
                 android:id="@+id/txt_org_lcllog"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="张三丰/2天前"
-                android:textSize="@dimen/edit_text" />
+                android:textSize="@dimen/edit_text"
+                android:gravity="right"
+                />
 
         </LinearLayout>
 
@@ -64,19 +65,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_name_three"
-                android:layout_weight="1"
                 android:text="检查日期"
                 android:textSize="@dimen/edit_text" />
 
             <TextView
                 android:id="@+id/txt_date_listlog"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="张三丰/2天前"
-                android:textSize="@dimen/edit_text" />
+                android:textSize="@dimen/edit_text"
+                android:gravity="right"
+                />
 
         </LinearLayout>
 
@@ -87,19 +89,20 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txt_name_three"
-                android:layout_weight="1"
                 android:text="检查地址"
                 android:textSize="@dimen/edit_text" />
 
             <TextView
                 android:id="@+id/txt_add_listlog"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="张三丰/2天前"
-                android:textSize="@dimen/edit_text" />
+                android:textSize="@dimen/edit_text"
+                android:gravity="right"
+                />
 
         </LinearLayout>
 

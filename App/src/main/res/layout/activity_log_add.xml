@@ -1,232 +1,455 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <include layout="@layout/title_bar_child" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:orientation="vertical"
-        android:background="@color/wirte"
-        >
-        <RelativeLayout
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/com"
-                android:layout_alignParentLeft="true"
-
-                />
-
-            <TextView
-                android:id="@+id/txt_com_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="陕西全峰速运有限公司"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_com_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/address"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_address_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="陕西省西安市南大街13号"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_address_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/device"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_device_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_device_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/is_check"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_check_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_check_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/is_100"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_100_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:drawableRight="@mipmap/go"
-                android:text="是"
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_100_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-
-
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/other"
-                android:layout_alignParentLeft="true"
-                />
-
-            <TextView
-                android:id="@+id/txt_other_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-
-                />
-            <LinearLayout
-                style="@style/horizontal_black_line_small"
-                android:layout_below="@+id/txt_other_two"
-                android:layout_marginTop="@dimen/line_large"
-                />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
-            >
-
-            <TextView
-                android:id="@+id/txt_add_pic_two"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/check_pic"
-                android:layout_alignParentLeft="true"
-                />
-
-            <ImageView
-                android:id="@+id/img_one"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/add_pic"
-                android:layout_below="@+id/txt_add_pic_two"
-                android:layout_marginTop="@dimen/activity_horizontal_margins"
-                />
-
-
-
-        </RelativeLayout>
-
-
-        <Button
-            android:id="@+id/bt_finish_addLog"
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="36dp"
-            android:background="@drawable/bg_button_selector"
-            android:text="完成"
-            android:textColor="@color/wirte"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
-            />
+            android:background="@color/wirte"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="@string/com" />
+
+                <EditText
+                    android:id="@+id/txt_com_logadd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:hint="请选择企业..."
+                    android:textSize="@dimen/edit_text" />
 
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/img_clear_com_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="管辖机构" />
+
+                <EditText
+                    android:id="@+id/txt_org_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                    android:hint="请选择管辖机构..."
+                    android:textSize="@dimen/edit_text" />
+
+                <ImageView
+                    android:id="@+id/img_clear_org_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt_org_logadd"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="检查人员" />
+
+                <EditText
+                    android:id="@+id/txt_per_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入姓名..."
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                    android:textSize="@dimen/edit_text" />
+
+                <ImageView
+                    android:id="@+id/img_clear_per_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="负责人" />
+
+                <EditText
+                    android:id="@+id/txt_head_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入负责人..."
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                    android:textSize="@dimen/edit_text" />
+
+                <ImageView
+                    android:id="@+id/img_clear_head_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt_head_logadd"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="职务" />
+
+                <EditText
+                    android:id="@+id/edit_duty_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入职务..."
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                    android:textSize="@dimen/edit_text" />
+
+                <ImageView
+                    android:id="@+id/img_clear_duty_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="@dimen/line_large" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="检查日期" />
+
+                <EditText
+                    android:id="@+id/edit_date_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:hint="请选择日期..."
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                    android:textSize="@dimen/edit_text" />
+
+                <ImageView
+                    android:id="@+id/img_clear_date_logadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/edit_date_logadd"
+                android:layout_marginTop="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding">
+
+                <TextView
+                    android:id="@+id/txt_add_pic_tw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="发现问题" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_add_pic_tw"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_question_logadd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:hint="请输入处理的结果..."
+                        android:maxEms="50"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                        android:textSize="@dimen/edit_text" />
+
+
+                    <ImageView
+                        android:id="@+id/img_clear_questtion_logadd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:src="@mipmap/delete_edit" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/edit_question_logadd"
+                android:layout_marginTop="@dimen/line_large" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding">
+
+                <TextView
+                    android:id="@+id/txt_add_pic_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="处理结果" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_add_pic_two"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_result_logadd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:hint="请输入存在的问题..."
+                        android:maxEms="50"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+
+                        android:textSize="@dimen/edit_text" />
+
+
+                    <ImageView
+                        android:id="@+id/img_clear_result_logadd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:src="@mipmap/delete_edit" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/edit_question_logadd"
+                android:layout_marginTop="@dimen/line_large" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding">
+
+                <TextView
+                    android:id="@+id/txt_add_pic_t"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="备注" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_add_pic_t"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edit_remark_logadd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:hint="请输入..."
+                        android:maxEms="50"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:textSize="@dimen/edit_text" />
+
+                    <ImageView
+                        android:id="@+id/img_clear_remark_logadd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:src="@mipmap/delete_edit" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bt_finish_addLog"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="36dp"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:background="@drawable/bg_button_selector"
+                android:text="完成"
+                android:textColor="@color/wirte" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
 
 </LinearLayout>

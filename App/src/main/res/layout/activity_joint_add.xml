@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title_bar_child" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:background="@color/wirte"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/must_write"
+                    android:gravity="center"
+                    android:text="企业名称" />
+
+                <EditText
+                    android:id="@+id/txt_com_add_joint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:hint="请选择企业名称..."
+                    android:textSize="@dimen/edit_text" />
+
+
+                <ImageView
+                    android:id="@+id/img_clear_com_joint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" /><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/must_write"
+                android:gravity="center"
+                android:text="联查机构" />
+
+            <EditText
+                android:id="@+id/txt_org_add_joint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="请输入联查机构..."
+                android:textSize="@dimen/edit_text" />
+
+
+            <ImageView
+                android:id="@+id/img_clear_org_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/delete_edit"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" /><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/must_write"
+                android:gravity="center"
+                android:text="联查日期" />
+
+            <EditText
+                android:id="@+id/txt_date_add_joint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:background="@null"
+                android:focusable="false"
+                android:gravity="right"
+                android:hint="请选择日期..."
+                android:textSize="@dimen/edit_text" />
+
+
+            <ImageView
+                android:id="@+id/img_clear_date_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/delete_edit"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" /><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/must_write"
+                android:gravity="center"
+                android:text="联查人员" />
+
+            <EditText
+                android:id="@+id/txt_per_add_joint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="right"
+                android:hint="请输入联查人员..."
+                android:textSize="@dimen/edit_text" />
+
+
+            <ImageView
+                android:id="@+id/img_clear_per_joint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/delete_edit"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" /><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/must_write"
+                android:gravity="center"
+                android:text="联查事项" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <EditText
+                    android:id="@+id/txt_content_add_joint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入联查事项..."
+                    android:textSize="@dimen/edit_text" />
+
+
+                <ImageView
+                    android:id="@+id/img_clear_content_joint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" /><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/must_write"
+                android:gravity="center"
+                android:text="发现问题" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <EditText
+                    android:id="@+id/txt_question_add_joint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入问题..."
+                    android:textSize="@dimen/edit_text" />
+
+
+                <ImageView
+                    android:id="@+id/img_clear_questtion_joint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" /><LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_padding"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/must_write"
+                android:gravity="center"
+                android:text="处理结果" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/txt_result_add_joint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="请输入结果..."
+                    android:textSize="@dimen/edit_text" />
+
+
+                <ImageView
+                    android:id="@+id/img_clear_result_joint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/delete_edit"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/bt_finish_add_joint"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="36dp"
+                android:background="@drawable/bg_button_selector"
+                android:text="完成"
+                android:textColor="@color/wirte"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                />
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

@@ -88,7 +88,42 @@ public class TwoBillFragment extends BaseFragment {
         list_r = view.findViewById(R.id.list_recycleview);
         txt_size = view.findViewById(R.id.txt_size);
         setRecycleView();
+        initList();
         return view;
+    }
+
+    private void initList() {
+
+        list_r.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mClues = new ArrayList<>();
+                mDataAdapter.clear();
+                mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
+                mCurrentCounter = 0;
+                connecting(1);
+            }
+        });
+
+        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
+        list_r.setLoadMoreEnabled(true);
+
+        list_r.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+
+                if (mCurrentCounter < TOTAL_COUNTER) {
+                    // loading more
+                    mCurrentpage = mCurrentpage + 1;
+                    connecting(mCurrentpage);
+                } else {
+                    //the end
+                    list_r.setNoMore(true);
+                }
+            }
+        });
+
+        list_r.refresh();//刷新数据
     }
 
     private void setRecycleView() {
@@ -117,65 +152,14 @@ public class TwoBillFragment extends BaseFragment {
         //add a HeaderView
         final View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.sample_header, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
         mLRecyclerViewAdapter.addHeaderView(header);
-
-        list_r.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                mDataAdapter.clear();
-                mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
-                mCurrentCounter = 0;
-                connecting(1);
-            }
-        });
-
-        //是否禁用自动加载更多功能,false为禁用, 默认开启自动加载更多功能
-        list_r.setLoadMoreEnabled(true);
-
-        list_r.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                if (mCurrentCounter < TOTAL_COUNTER) {
-                    // loading more
-                    mCurrentpage = mCurrentpage + 1;
-                    connecting(mCurrentpage);
-                } else {
-                    //the end
-                    list_r.setNoMore(true);
-                }
-            }
-        });
-
-        list_r.setLScrollListener(new LRecyclerView.LScrollListener() {
-
-            @Override
-            public void onScrollUp() {
-            }
-
-            @Override
-            public void onScrollDown() {
-            }
-
-            @Override
-            public void onScrolled(int distanceX, int distanceY) {
-            }
-
-            @Override
-            public void onScrollStateChanged(int state) {
-
-            }
-
-        });
-
+//
+//        list_r.setOnRefreshL
         //设置头部加载颜色
         list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载颜色
         list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载文字提示
         list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
-
-        list_r.refresh();
 
         //子条目的点击事件
         mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -194,8 +178,8 @@ public class TwoBillFragment extends BaseFragment {
 
     }
 
-    List<LogBill> mClue = new ArrayList<>();;
-    List<LogBill> mClues = new ArrayList<>();
+    List<LogBill> mClue;
+    List<LogBill> mClues;
     private void connecting(int p) {
 
         android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().bill_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
@@ -220,6 +204,7 @@ public class TwoBillFragment extends BaseFragment {
                                 String table = map1.get("table").toString();
 
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
+                                mClue = new ArrayList<>();
                                 for (Map<String, Object> map : list1) {
                                     LogBill com = new LogBill();
                                     com.setId( NullUtil.getString(map.get("querylogid")));//ID

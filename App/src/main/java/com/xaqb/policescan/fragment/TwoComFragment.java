@@ -95,40 +95,33 @@ public class TwoComFragment extends BaseFragment {
                 ARouterUtil.intentNoPar("/qb/LogAddActivity", view);
             }
         });
+        initList();
+        SPUtils.put(instance,"addSuccess", "no");
         return view;
     }
 
-    private void setRecycleView() {
 
-        mDataAdapter = new LogComAdapter(instance);
-        mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
-        list_r.setAdapter(mLRecyclerViewAdapter);
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (SPUtils.get(instance,"addlogSuccess","").toString().equals("yes")){
+            mClues = new ArrayList<>();
+            mCurrentpage = 1;
+            initList();
+            SPUtils.put(instance,"addlogSuccess", "no");
+        }
+    }
 
 
-
-        //设置距离
-//        DividerDecoration divider = new DividerDecoration.Builder(this.getActivity())
-//                .setHeight(R.dimen.list_line)
-//                .setPadding(R.dimen.default_divider_padding)
-//                .setColorResource(R.color.wirte)
-//                .build();
-
-//        list_r.addItemDecoration(divider);
-
-        list_r.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-
-        list_r.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
-        list_r.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
-        list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
-
-        //add a HeaderView
-        final View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.sample_header, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
-        mLRecyclerViewAdapter.addHeaderView(header);
+    /**
+     * 初始化recycleview数据
+     */
+    private void initList() {
 
         list_r.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                mClues = new ArrayList<>();
                 mDataAdapter.clear();
                 mLRecyclerViewAdapter.notifyDataSetChanged();//fix bug:crapped or attached views may not be recycled. isScrap:false isAttached:true
                 mCurrentCounter = 0;
@@ -154,55 +147,50 @@ public class TwoComFragment extends BaseFragment {
             }
         });
 
-        list_r.setLScrollListener(new LRecyclerView.LScrollListener() {
+        list_r.refresh();//刷新数据
 
-            @Override
-            public void onScrollUp() {
-            }
 
-            @Override
-            public void onScrollDown() {
-            }
+    }
 
-            @Override
-            public void onScrolled(int distanceX, int distanceY) {
-            }
 
-            @Override
-            public void onScrollStateChanged(int state) {
 
-            }
+    private void setRecycleView() {
 
-        });
+        mDataAdapter = new LogComAdapter(instance);
+        mLRecyclerViewAdapter = new LRecyclerViewAdapter(mDataAdapter);
+        list_r.setAdapter(mLRecyclerViewAdapter);
 
+
+        //设置距离
+//        DividerDecoration divider = new DividerDecoration.Builder(this.getActivity())
+//                .setHeight(R.dimen.list_line)
+//                .setPadding(R.dimen.default_divider_padding)
+//                .setColorResource(R.color.wirte)
+//                .build();
+
+//        list_r.addItemDecoration(divider);
+
+        list_r.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        list_r.setRefreshProgressStyle(ProgressStyle.LineSpinFadeLoader);
+        list_r.setArrowImageView(R.drawable.ic_pulltorefresh_arrow);
+        list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
+
+        //add a HeaderView
+        final View header = LayoutInflater.from(this.getActivity()).inflate(R.layout.sample_header, (ViewGroup) this.getActivity().findViewById(android.R.id.content), false);
+        mLRecyclerViewAdapter.addHeaderView(header);
         //设置头部加载颜色
         list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载颜色
         list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载文字提示
         list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
-
-        list_r.refresh();
-
-        //子条目的点击事件
-        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onItemClick(View view, int position) {
-                if (mDataAdapter.getDataList().size() > position) {
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString("id",mClues.get(position).getId());
-                    ARouterUtil.intentPar("/qb/ComDiaryCheckActivity", view,bundle);
-                }
-            }
-
-        });
     }
 
 
-    List<LogCom> mClue = new ArrayList<>();;
-    List<LogCom> mClues = new ArrayList<>();    private void connecting(int p) {
+    List<LogCom> mClue ;
+    List<LogCom> mClues;
+    private void connecting(int p) {
 
         android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().com_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
         RestClient.builder()
@@ -226,13 +214,14 @@ public class TwoComFragment extends BaseFragment {
                                 String table = map1.get("table").toString();
 
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
+                                mClue = new ArrayList<>();
                                 for (Map<String, Object> map : list1) {
                                     LogCom com = new LogCom();
                                     com.setId( NullUtil.getString(map.get("dccode")));//ID
                                     com.setUser( NullUtil.getString(map.get("dcorguser")));//
                                     com.setOrg( NullUtil.getString(map.get("soname")));
-                                    com.setAdd( NullUtil.getString(map.get("queryaddress")));
-                                    com.setDate( NullUtil.getString(map.get("querydate")));
+                                    com.setAdd( NullUtil.getString(map.get("comaddress")));//企业地址
+                                    com.setDate( NullUtil.getString(map.get("dcorgdate")));//检查日期
                                     com.setCom( NullUtil.getString(map.get("comname")));
                                     mClue.add(com);
                                     mClues.add(com);
@@ -246,6 +235,24 @@ public class TwoComFragment extends BaseFragment {
                         TOTAL_COUNTER = Integer.valueOf(count).intValue();
                         REQUEST_COUNT = Integer.valueOf(num).intValue();
                         txt_size.setText("共查询到"+count+"条数据");
+
+                        //子条目的点击事件
+                        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                if (mDataAdapter.getDataList().size() > position) {
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("id",mClues.get(position).getId());
+                                    ARouterUtil.intentPar("/qb/ComDiaryCheckActivity", view,bundle);
+                                }
+                            }
+
+                        });
+
+
+
                     }
                 })
                 .failure(new IFailure() {

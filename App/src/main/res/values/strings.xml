@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">新寄递警用</string>
+    <string name="app_name">寄递卫士监管</string>
     <string name="edit">搜索内容...</string>
     <string name="shalou">代取件</string>
     <string name="cars">运送中</string>
@@ -10,6 +10,7 @@
     <string name="map">地图导航</string>
     <string name="clue_msg">线索信息</string>
     <string name="exit">退出系统</string>
+    <string name="update">检查更新</string>
     <string name="mdf_psw">修改密码</string>
     <string name="comurl">www.qbdongdong.com</string>
     <string name="pro">咚咚快递</string>
@@ -103,8 +104,8 @@
     <string name="start_time">时间查询</string>
     <string name="end_time">辖区截止时间</string>
     <string name="please_choose">请选择</string>
-    <string name="please_choose_brand">请选择品牌名称</string>
-    <string name="please_choose_org">请选择管辖机构</string>
+    <string name="please_choose_brand">请选择品牌名称...</string>
+    <string name="please_choose_org">请选择管辖机构...</string>
     <string name="please_write_com_name">请输入企业名称...</string>
     <string name="six">性别</string>
     <string name="title_activity_brand">BrandActivity</string>

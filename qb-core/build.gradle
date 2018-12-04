@@ -2,12 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'police'
-            keyPassword '123456'
-            storeFile file('G:/signing/police-0324.jks')
-            storePassword '123456'
-        }
     }
     compileSdkVersion 26
     defaultConfig {
@@ -23,6 +17,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.config
+        }
+        debug {
+//            signingConfig signingConfigs.config
         }
     }
 }
