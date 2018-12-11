@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/wirte"
-        android:paddingLeft="@dimen/layout_padding_small"
-        android:paddingRight="@dimen/layout_padding_small"
+        android:padding="@dimen/layout_padding_small"
         android:layout_marginTop="@dimen/activity_horizontal_margin">
 
         <TextView

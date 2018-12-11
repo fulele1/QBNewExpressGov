@@ -19,6 +19,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.ConditionUtil;
 import com.xaqb.policescan.utils.DateUtil;
 import com.xaqb.policescan.utils.DialogLoadingUtil;
@@ -50,6 +51,7 @@ public class ExpressActivity extends BaseActivity {
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         initData();
+        DialogLoadingUtil.getInstance(instance).show();
         initmap();
     }
     private String billcode;
@@ -157,8 +159,10 @@ public class ExpressActivity extends BaseActivity {
                         + SPUtils.get(instance, "access_token", "")
                         +getIntentData(latitude,longitude,address))
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -177,8 +181,12 @@ public class ExpressActivity extends BaseActivity {
                             txt_wdate_exp.setText(DateUtil.getDate(NullUtil.getString(map2.get("wdate"))));
                             txt_destphone_exp.setText(NullUtil.getString(map2.get("destphone")));
                             txt_manaddress_bdc.setText(NullUtil.getString(map2.get("manaddress")));
-                        }if (map1.get("state").toString().equals("217")) {
+                        }else if (map1.get("state").toString().equals("217")) {
                             txt_code_exp.setText("查无此单");
+                        }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child_tilte);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

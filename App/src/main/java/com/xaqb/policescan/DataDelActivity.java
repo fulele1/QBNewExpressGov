@@ -19,6 +19,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.ChartUtil;
 import com.xaqb.policescan.utils.ConditionUtil;
 import com.xaqb.policescan.utils.DateUtil;
@@ -48,6 +49,7 @@ public class DataDelActivity extends BaseActivity {
         StatuBarUtil.translucentStatusBar(this,true);
         initView();
         initData();
+        DialogLoadingUtil.getInstance(instance).show();
         internetUp();
         internetDown();
     }
@@ -95,8 +97,10 @@ public class DataDelActivity extends BaseActivity {
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().detail_org_up() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData())
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -114,6 +118,10 @@ public class DataDelActivity extends BaseActivity {
                             tv_per_org.setText(NullUtil.getString(map2.get("emp_count")));
                             tv_post_count_org.setText(NullUtil.getString(map2.get("delivery_count")));
                             tv_receive_count_org.setText(NullUtil.getString(map2.get("acceptence_count")));
+                        }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -141,6 +149,7 @@ public class DataDelActivity extends BaseActivity {
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().detail_org_down() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData())
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
                         Log.e("fule", "不知道" + response);
@@ -169,6 +178,11 @@ public class DataDelActivity extends BaseActivity {
                         LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x, "投递", Color.BLUE, "收寄", Color.RED);
                         ChartUtil.setChartStyle(chart_org_de, mLineData, Color.WHITE);
                     }
+                        else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
+                        }
 
 
                     }

@@ -299,15 +299,17 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
         RestClient.builder()
                 .url(url)
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
 
                         Map<String, Object> map1 = JSON.parseObject(response,
                                 new TypeReference<Map<String, Object>>() {});
                         Log.e("fule", response);
-                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(),
-                                new TypeReference<Map<String, Object>>() {});
+
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
+                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(),
+                                    new TypeReference<Map<String, Object>>() {});
                             List<Com> coms = new ArrayList<>();
                             List<LatLng> LatLngs = new ArrayList<>();
                             List<String> comnames = new ArrayList<>();
@@ -351,7 +353,10 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
                                 setMark(LatLngs, comnames);
                             }
 
-                        } else {
+                        } else if (NullUtil.getString(map1.get("state")).equals("10")){
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
+                        }else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

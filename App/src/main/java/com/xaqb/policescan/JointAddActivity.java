@@ -125,6 +125,7 @@ public class JointAddActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_finish_add_joint:
+                DialogLoadingUtil.getInstance(instance).show();
                 bt_finish_add_joint.setClickable(false);
                 connecting();
                 break;
@@ -201,30 +202,37 @@ public class JointAddActivity extends BaseActivity {
         if (com.equals("")) {
             Toast.makeText(instance, "选择企业名称", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (org.equals("")) {
             Toast.makeText(instance, "请输入联合机构", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (date.equals("")) {
             Toast.makeText(instance, "请选择日期", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (per.equals("")) {
             Toast.makeText(instance, "请输入检查人员", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (content.equals("")) {
             Toast.makeText(instance, "请输入联查事项", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (question.equals("")) {
             Toast.makeText(instance, "请输入发现的问题", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (result.equals("")) {
             Toast.makeText(instance, "请输入处理结果", Toast.LENGTH_SHORT).show();
             bt_finish_add_joint.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         }
 
@@ -269,10 +277,12 @@ public class JointAddActivity extends BaseActivity {
                     public void onError(Call call, Exception e, int i) {
 //                        loadingDialog.dismiss();
 //                        showToast(e.toString());
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                     }
 
                     @Override
                     public void onResponse(String s, int i) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         LogUtils.e(s);
                         Map<String, Object> map1 = JSON.parseObject(s, new TypeReference<Map<String, Object>>() {
                         });

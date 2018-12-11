@@ -21,7 +21,6 @@
             android:padding="@dimen/activity_horizontal_margin"
             android:textColor="@color/text_c"
             android:background="@color/background"
-            android:visibility="gone"
             />
 
         <com.github.jdsjlzx.recyclerview.LRecyclerView

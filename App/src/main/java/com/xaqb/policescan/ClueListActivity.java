@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSON;
@@ -165,17 +166,19 @@ public class ClueListActivity extends BaseActivity {
                 .url(HttpUrlUtils.getHttpUrl().clue_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
 //                .params("","")
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
 
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
                         Log.e("fule", response);
-                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
-                        });
-                        String num = mess.get("num").toString();
-                        String count = mess.get("count").toString();
+
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
+                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                            });
+                            String num = mess.get("num").toString();
+                            String count = mess.get("count").toString();
                             if (!NullUtil.getString(mess.get("count")).equals("0")){
                                 mHandler.sendEmptyMessage(-1);
                                 list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
@@ -193,31 +196,38 @@ public class ClueListActivity extends BaseActivity {
                                     mClues.add(com);
                                 }
 
+
+                                TOTAL_COUNTER = Integer.valueOf(count).intValue();
+                                REQUEST_COUNT = Integer.valueOf(num).intValue();
+                                txt_size.setText("共查询到"+count+"条数据");
+                                //子条目的点击事件
+                                mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        if (mDataAdapter.getDataList().size() > position) {
+
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("id",mClues.get(position).getId());
+                                            ARouterUtil.intentPar("/qb/ClueDelActivity", view,bundle);
+                                        }
+
+                                    }
+
+                                });
+
                             }else{
                                 mHandler.sendEmptyMessage(-3);
                                 txt_size.setVisibility(View.GONE);
                             }
 
+                        }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
 
-                        TOTAL_COUNTER = Integer.valueOf(count).intValue();
-                        REQUEST_COUNT = Integer.valueOf(num).intValue();
-                        txt_size.setText("共查询到"+count+"条数据");
-                        //子条目的点击事件
-                        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                            @Override
-                            public void onItemClick(View view, int position) {
-                                if (mDataAdapter.getDataList().size() > position) {
 
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("id",mClues.get(position).getId());
-                                    ARouterUtil.intentPar("/qb/ClueDelActivity", view,bundle);
-                                }
-
-                            }
-
-                        });
                     }
                 })
                 .failure(new IFailure() {

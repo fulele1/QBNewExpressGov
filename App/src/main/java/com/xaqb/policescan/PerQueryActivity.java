@@ -85,13 +85,13 @@ public class PerQueryActivity extends BaseActivity {
                 break;
 
             case R.id.et_org_pq:
-                    if (SPUtils.get(instance,"so_level","").equals("3")){
+                    if (SPUtils.get(instance,"solevel","").equals("3")){
                         ARouterUtil.intentNoParRequest("/qb/OrgActivityOne",view,instance,2);
-                    }else if (SPUtils.get(instance,"so_level","").equals("2")){
+                    }else if (SPUtils.get(instance,"solevel","").equals("2")){
                         ARouterUtil.intentNoParRequest("/qb/OrgActivityTwo",view,instance,2);
-                    }else if (SPUtils.get(instance,"so_level","").equals("1")){
+                    }else if (SPUtils.get(instance,"solevel","").equals("1")){
                         ARouterUtil.intentNoParRequest("/qb/OrgActivityThree",view,instance,2);
-                    }else if (SPUtils.get(instance,"so_level","").equals("0")){
+                    }else if (SPUtils.get(instance,"solevel","").equals("0")){
                         ARouterUtil.intentNoParRequest("/qb/OrgActivityFour",view,instance,2);
                     }
                 break;

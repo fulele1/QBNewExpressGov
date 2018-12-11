@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
 import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
+import com.xaqb.policescan.utils.LastClickUtil;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
 import com.xaqb.policescan.utils.StatuBarUtil;
@@ -104,92 +106,106 @@ public class LoginActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onClick(final View view) {
-        switch (view.getId()){
-            case R.id.txt_finished_login:
-                showAdialog(instance,"提示","是否退出登录","确定",View.VISIBLE);
-                break;
-            case R.id.txt_back_pwd_login:
-                ARouter.getInstance()
-                        .build("/qb/BackPWDActivity")
-                        .withOptionsCompat(ActivityOptionsCompat.
-                                makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0))//动画效果
-                        .navigation();
-                break;
-            case R.id.bt_login_login:
-               final String et_phone = et_phone_login.getText().toString().trim();
-               final String et_psw = et_psw_login.getText().toString().trim();
-               if (et_phone.equals("")){
-                   Toast.makeText(instance, "请输入账号", Toast.LENGTH_SHORT).show();
-                   return;
-               }else if (et_psw.equals("")){
-                   Toast.makeText(instance, "请输入密码", Toast.LENGTH_SHORT).show();
-                   return;
-               }else {
-                   Log.e("fule",HttpUrlUtils.getHttpUrl().userLogin());
-                   DialogLoadingUtil.getInstance(instance).show();//显示加载框
-                   RestClient.builder()
-                           .url(HttpUrlUtils.getHttpUrl().userLogin())
-                           .params("user",et_phone)
-                           .params("pwd",et_psw)
-                           .success(new ISuccess() {
-                               @Override
-                               public void onSuccess(String response) {
-                                   DialogLoadingUtil.getInstance(instance).hide();//
-                                   Log.e("fule",response);
-                                   Map<String, Object> map1 = JSON.parseObject(response,new TypeReference<Map<String, Object>>(){});
 
-                                   if (map1.get("state").toString().equals("0")){
-                                       Map<String, Object> map2 = JSON.parseObject(map1.get("table").toString(),new TypeReference<Map<String, Object>>(){});
-                                       SPUtils.put(instance,"access_token", NullUtil.getString(map2.get("access_token")));
-                                       SPUtils.put(instance,"ou_securityorg", NullUtil.getString(map2.get("policeorg")));
-                                       SPUtils.put(instance,"so_level", NullUtil.getString(map2.get("solevel")));
-                                       SPUtils.put(instance,"org", NullUtil.getString(map2.get("soname")));
-                                       SPUtils.put(instance,"policeid", NullUtil.getString(map2.get("policeid")));
-                                       SPUtils.put(instance,"policeorg", NullUtil.getString(map2.get("policeorg")));
-                                       SPUtils.put(instance,"policename", NullUtil.getString(map2.get("policename")));
-                                       SPUtils.put(instance,"soname", NullUtil.getString(map2.get("soname")));
-                                       SPUtils.put(instance,"userName", et_phone);
-                                       SPUtils.put(instance,"userPsw", et_psw);
-                                       if (cbRememberPsw.isChecked()) {
-                                           SPUtils.put(instance, "rememberPsw", true);
-                                       } else {
-                                           SPUtils.put(instance, "rememberPsw", false);
-                                       }
+        if (LastClickUtil.isFastClick()) {
+            return ;
+        }else {
 
-                                       ARouter.getInstance()
-                                               .build("/qb/MainActivity2")
-                                               .withOptionsCompat(ActivityOptionsCompat.
-                                                       makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0))//动画效果
-                                               .navigation();
-                                       finish();
-                                   }
-                                   if (map1.get("state").toString().equals("202")){
-                                       Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
-                                   }else if (map1.get("state").toString().equals("204")){
-                                       Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
-                                   }
-                               }
+            switch (view.getId()){
+                case R.id.txt_finished_login:
+                    showAdialog(instance,"提示","是否退出登录","确定",View.VISIBLE);
+                    break;
+                case R.id.txt_back_pwd_login:
+                    ARouter.getInstance()
+                            .build("/qb/BackPWDActivity")
+                            .withOptionsCompat(ActivityOptionsCompat.
+                                    makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0))//动画效果
+                            .navigation();
+                    break;
+                case R.id.bt_login_login:
+                    DialogLoadingUtil.getInstance(instance).show();//显示加载框
+                    final String et_phone = et_phone_login.getText().toString().trim();
+                    final String et_psw = et_psw_login.getText().toString().trim();
+                    if (et_phone.equals("")){
+                        Toast.makeText(instance, "请输入账号", Toast.LENGTH_SHORT).show();
+                        DialogLoadingUtil.getInstance(instance).dismiss();//取消加载框
+
+                        return;
+                    }else if (et_psw.equals("")){
+                        Toast.makeText(instance, "请输入密码", Toast.LENGTH_SHORT).show();
+                        DialogLoadingUtil.getInstance(instance).dismiss();//取消加载框
+
+                        return;
+                    }else {
+                        Log.e("fule",HttpUrlUtils.getHttpUrl().userLogin());
+                        RestClient.builder()
+                                .url(HttpUrlUtils.getHttpUrl().userLogin())
+                                .params("user",et_phone)
+                                .params("pwd",et_psw)
+                                .success(new ISuccess() {
+                                    @Override
+                                    public void onSuccess(String response) {
+                                        DialogLoadingUtil.getInstance(instance).dismiss();//取消加载框
+                                        Log.e("fule",response);
+                                        Map<String, Object> map1 = JSON.parseObject(response,new TypeReference<Map<String, Object>>(){});
+
+                                        if (map1.get("state").toString().equals("0")){
+                                            Map<String, Object> map2 = JSON.parseObject(map1.get("table").toString(),new TypeReference<Map<String, Object>>(){});
+                                            SPUtils.put(instance,"access_token", NullUtil.getString(map2.get("access_token")));
+                                            SPUtils.put(instance,"ou_securityorg", NullUtil.getString(map2.get("policeorg")));
+                                            SPUtils.put(instance,"solevel", NullUtil.getString(map2.get("solevel")));
+                                            SPUtils.put(instance,"org", NullUtil.getString(map2.get("soname")));
+                                            SPUtils.put(instance,"policeid", NullUtil.getString(map2.get("policeid")));
+                                            SPUtils.put(instance,"policeorg", NullUtil.getString(map2.get("policeorg")));
+                                            SPUtils.put(instance,"policename", NullUtil.getString(map2.get("policename")));
+                                            SPUtils.put(instance,"soname", NullUtil.getString(map2.get("soname")));
+                                            SPUtils.put(instance,"userName", et_phone);
+                                            SPUtils.put(instance,"userPsw", et_psw);
+                                            if (cbRememberPsw.isChecked()) {
+                                                SPUtils.put(instance, "rememberPsw", true);
+                                            } else {
+                                                SPUtils.put(instance, "rememberPsw", false);
+                                            }
+                                            ARouter.getInstance()
+                                                    .build("/qb/MainActivity2")
+                                                    .withOptionsCompat(ActivityOptionsCompat.
+                                                            makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0))//动画效果
+                                                    .navigation();
+                                            finish();
+                                        }
+                                        if (map1.get("state").toString().equals("202")){
+                                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
+
+                                        }else if (map1.get("state").toString().equals("204")){
+                                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                })
+                                .failure(new IFailure() {
+                                    @Override
+                                    public void onFailure(String s) {
+                                        DialogLoadingUtil.getInstance(instance).dismiss();//取消加载框
+                                        Toast.makeText(instance, "登录失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .error(new IError() {
+                                    @Override
+                                    public void onError(int code, String msg) {
+                                        DialogLoadingUtil.getInstance(instance).dismiss();//取消加载框
+                                        Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .build()
+                                .post();
+
+                    }
+            }
 
 
-                           })
-                           .failure(new IFailure() {
-                               @Override
-                               public void onFailure(String s) {
-                                   Toast.makeText(instance, "登录失败", Toast.LENGTH_SHORT).show();
 
-                               }
-                           })
-                           .error(new IError() {
-                               @Override
-                               public void onError(int code, String msg) {
-                                   Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
-                               }
-                           })
-                           .build()
-                           .post();
-               }
 
         }
+
     }
 
     @Override

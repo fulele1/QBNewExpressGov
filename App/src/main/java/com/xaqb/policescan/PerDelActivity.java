@@ -20,6 +20,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.ChartUtil;
 import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
@@ -49,6 +50,7 @@ public class PerDelActivity extends BaseActivity {
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         initData();
+        DialogLoadingUtil.getInstance(instance).show();
         internet();
     }
 
@@ -63,6 +65,7 @@ public class PerDelActivity extends BaseActivity {
         txt_get_count_pd = findViewById(R.id.txt_get_count_pd);
         txt_post_count_pd = findViewById(R.id.txt_post_count_pd);
         line_per_del = findViewById(R.id.line_per_del);
+        txt_tel_pd.setOnClickListener(instance);
     }
 
     private void internet() {
@@ -70,8 +73,10 @@ public class PerDelActivity extends BaseActivity {
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().detail_per() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -81,21 +86,21 @@ public class PerDelActivity extends BaseActivity {
                             });
                             txt_com_pd.setText(NullUtil.getString(map2.get("comname")));
                             txt_name_pd.setText(NullUtil.getString(map2.get("empname")));
-                            txt_tel_pd.setText(NullUtil.getString(map2.get("empphone_secret")));
-//                            txt_tel_pd.setText(NullUtil.getString(map2.get("empphone")));//非加密的
+//                            txt_tel_pd.setText(NullUtil.getString(map2.get("empphone_secret")));
+                            txt_tel_pd.setText(NullUtil.getString(map2.get("empphone")));//非加密的
                             txt_six_pd.setText(NullUtil.getString(map2.get("sexname")));
                             txt_ide_pd.setText(NullUtil.getString(map2.get("empcertcode")));
-                            txt_get_count_pd.setText(NullUtil.getString(map2.get("dv_count")));
-                            txt_post_count_pd.setText(NullUtil.getString(map2.get("at_count")));
+                            txt_get_count_pd.setText(NullUtil.getString(map2.get("at_count")));
+                            txt_post_count_pd.setText(NullUtil.getString(map2.get("dv_count")));
 
-                            txt_tel_pd.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent dialIntent =  new Intent(Intent.ACTION_DIAL,
-                                            Uri.parse("tel:" + NullUtil.getString(map2.get("empphone"))));//跳转到拨号界面，同时传递电话号码
-                                    instance.startActivity(dialIntent);
-                                }
-                            });
+//                            txt_tel_pd.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    Intent dialIntent =  new Intent(Intent.ACTION_DIAL,
+//                                            Uri.parse("tel:" + NullUtil.getString(map2.get("empphone"))));//跳转到拨号界面，同时传递电话号码
+//                                    instance.startActivity(dialIntent);
+//                                }
+//                            });
 
                             String list = NullUtil.getString(map2.get("list")).toString();
                             ArrayList<String> x = new ArrayList<String>();
@@ -116,12 +121,10 @@ public class PerDelActivity extends BaseActivity {
                             // 获取完数据之后 制作7个数据点（沿x坐标轴）
                             LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x, "投递", Color.BLUE, "收寄", Color.RED);
                             ChartUtil.setChartStyle(line_per_del, mLineData, Color.WHITE);
-
-
-
-
-
-
+                        }else if(NullUtil.getString(map1.get("state")).equals("10")){
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
+                        }else{
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -147,5 +150,20 @@ public class PerDelActivity extends BaseActivity {
         id = bundle.getString("id");
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.txt_tel_pd:
+                showAdialog(instance,"","是否要拨打电话?","确定",View.VISIBLE);
+        }
+    }
+
+
+    @Override
+    public void dialogOk() {
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + txt_tel_pd.getText().toString().trim()));//跳转到拨号界面，同时传递电话号码
+        startActivity(dialIntent);
+
+    }
 
 }

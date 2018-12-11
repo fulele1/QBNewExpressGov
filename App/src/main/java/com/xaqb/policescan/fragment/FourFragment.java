@@ -108,18 +108,18 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
 //                    Intent intent = new Intent(this.getContext(), OrgActivityThree.class);
 //                    startActivityForResult(intent,0);
 
-                if (SPUtils.get(instance, "so_level", "").equals("3")) {
+                if (SPUtils.get(instance, "solevel", "").equals("3")) {
                     Intent intent1 = new Intent(this.getContext(), OrgActivityOne.class);
                     startActivityForResult(intent1, 0);
 //                        ARouterUtil.intentNoParRequest("/qb/OrgActivityOne",view,this.getActivity(),0);
-                } else if (SPUtils.get(instance, "so_level", "").equals("2")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("2")) {
                     Intent intent2 = new Intent(this.getContext(), OrgActivityTwo.class);
                     startActivityForResult(intent2, 0);
 //                        ARouterUtil.intentNoParRequest("/qb/OrgActivityTwo",view,this.getActivity(),0);
-                } else if (SPUtils.get(instance, "so_level", "").equals("1")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("1")) {
                     Intent intent3 = new Intent(this.getContext(), OrgActivityThree.class);
                     startActivityForResult(intent3, 0);
-                } else if (SPUtils.get(instance, "so_level", "").equals("0")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("0")) {
                     Intent intent4 = new Intent(this.getContext(), OrgActivityFour.class);
                     startActivityForResult(intent4, 0);
 //                        ARouterUtil.intentNoParRequest("/qb/OrgActivityFour",view,this.getActivity(),0);

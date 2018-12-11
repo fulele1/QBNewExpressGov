@@ -160,6 +160,7 @@ public class LogAddActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_finish_addLog:
+                DialogLoadingUtil.getInstance(instance).show();
                 bt_finish_addLog.setClickable(false);
                 connecting();
                 break;
@@ -167,13 +168,13 @@ public class LogAddActivity extends BaseActivity {
                 ARouterUtil.intentNoParRequest("/qb/CompanyActivity", view, instance, 1);
                 break;
             case R.id.txt_org_logadd:
-                if (SPUtils.get(instance, "so_level", "").equals("3")) {
+                if (SPUtils.get(instance, "solevel", "").equals("3")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityOne", view, instance, 0);
-                } else if (SPUtils.get(instance, "so_level", "").equals("2")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("2")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityTwo", view, instance, 0);
-                } else if (SPUtils.get(instance, "so_level", "").equals("1")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("1")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityThree", view, instance, 0);
-                } else if (SPUtils.get(instance, "so_level", "").equals("0")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("0")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityFour", view, instance, 0);
                 }
                 break;
@@ -236,30 +237,33 @@ public class LogAddActivity extends BaseActivity {
         if (com.equals("")) {
             Toast.makeText(instance, "选择企业名称", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
-
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (org.equals("")) {
             Toast.makeText(instance, "请输入联合机构", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (per.equals("")) {
             Toast.makeText(instance, "请输入检查人员", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
 
             return;
         } else if (head.equals("")) {
             Toast.makeText(instance, "请输入负责人", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
-
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (date.equals("")) {
             Toast.makeText(instance, "请选择日期", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
-
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (question.equals("")) {
             Toast.makeText(instance, "请选输入问题", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
 
             return;
         } else if (result.equals("")) {
@@ -292,6 +296,7 @@ public class LogAddActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String s, int i) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Map<String, Object> map1 = JSON.parseObject(s, new TypeReference<Map<String, Object>>() {
                         });
 
@@ -306,8 +311,6 @@ public class LogAddActivity extends BaseActivity {
                         }
                     }
                 });
-
-
     }
 
 }

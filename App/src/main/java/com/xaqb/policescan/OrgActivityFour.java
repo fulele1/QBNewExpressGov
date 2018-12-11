@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.jaeger.library.StatusBarUtil;
@@ -23,6 +24,7 @@ import com.xaqb.policescan.threeLevel.MenuDialogAdapter;
 import com.xaqb.policescan.threeLevel.MyPagerAdapter;
 import com.xaqb.policescan.threeLevel.MyViewPager;
 import com.xaqb.policescan.utils.ConditionUtil;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.LogUtils;
 import com.xaqb.policescan.utils.NullUtil;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+@Route(path = "/qb/OrgActivityFour")
 
 public class OrgActivityFour extends BaseActivity {
 
@@ -107,6 +110,7 @@ public class OrgActivityFour extends BaseActivity {
         mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogLoadingUtil.getInstance(mContext).show();
                 if (mListView1Adapter != null)
                     mListView1Adapter.setSelectedPos(position);
                 if (mListView2Adapter != null)
@@ -129,6 +133,7 @@ public class OrgActivityFour extends BaseActivity {
                         .success(new ISuccess() {
                             @Override
                             public void onSuccess(String response) {
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                                 LogUtils.e(response);
                                 Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                                 });
@@ -163,12 +168,13 @@ public class OrgActivityFour extends BaseActivity {
                         .failure(new IFailure() {
                             @Override
                             public void onFailure(String s) {
-
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                             }
                         })
                         .error(new IError() {
                             @Override
                             public void onError(int code, String msg) {
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                             }
                         })
                         .build()
@@ -181,6 +187,7 @@ public class OrgActivityFour extends BaseActivity {
         mListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                DialogLoadingUtil.getInstance(mContext).show();
                 if (mListView2Adapter != null) {
                     mListView2Adapter.setSelectedPos(position);
                     mListView2Adapter.setSelectedBackgroundResource(R.drawable.select_gray);//选中时
@@ -188,6 +195,7 @@ public class OrgActivityFour extends BaseActivity {
 
                 if (views.contains(view3)) {
                     views.remove(view3);
+                    mViewPager.getAdapter().notifyDataSetChanged();
                 }
 
                 LogUtils.e("三级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
@@ -197,7 +205,8 @@ public class OrgActivityFour extends BaseActivity {
                 SPUtils.put(mContext,"codelist2",list2.get(position).id);
                 SPUtils.put(mContext,"namelist2",list2.get(position).name);
 
-                if (list2.get(position).id.equals("0")){
+                if (list2.get(position).id.equals("0")){//不限
+                    DialogLoadingUtil.getInstance(mContext).dismiss();
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putString("orgName", list1.get(position).name);
@@ -213,6 +222,7 @@ public class OrgActivityFour extends BaseActivity {
                             .success(new ISuccess() {
                                 @Override
                                 public void onSuccess(String response) {
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                     LogUtils.e(response);
                                     Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                                     });
@@ -257,12 +267,13 @@ public class OrgActivityFour extends BaseActivity {
                             .failure(new IFailure() {
                                 @Override
                                 public void onFailure(String s) {
-
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                 }
                             })
                             .error(new IError() {
                                 @Override
                                 public void onError(int code, String msg) {
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                 }
                             })
                             .build()
@@ -276,6 +287,7 @@ public class OrgActivityFour extends BaseActivity {
         mListView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                DialogLoadingUtil.getInstance(mContext).show();
                 if (mListView3Adapter != null) {
                     mListView3Adapter.setSelectedPos(position);
                     mListView3Adapter.setSelectedBackgroundResource(R.drawable.select_gray);//选中时
@@ -283,6 +295,7 @@ public class OrgActivityFour extends BaseActivity {
 
                 if (views.contains(view4)) {
                     views.remove(view4);
+                    mViewPager.getAdapter().notifyDataSetChanged();
                 }
 
                 LogUtils.e("四级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
@@ -294,7 +307,8 @@ public class OrgActivityFour extends BaseActivity {
                 SPUtils.put(mContext,"namelist3",list3.get(position).name);
                 SPUtils.put(mContext,"codelist3",list3.get(position).id);
 
-                if (list3.get(position).id.equals("0")){
+                if (list3.get(position).id.equals("0")){//不限
+                    DialogLoadingUtil.getInstance(mContext).dismiss();
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putString("orgName", SPUtils.get(mContext,"namelist2","").toString());
@@ -310,6 +324,7 @@ public class OrgActivityFour extends BaseActivity {
                             .success(new ISuccess() {
                                 @Override
                                 public void onSuccess(String response) {
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                     LogUtils.e(response);
                                     Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                                     });
@@ -352,12 +367,13 @@ public class OrgActivityFour extends BaseActivity {
                             .failure(new IFailure() {
                                 @Override
                                 public void onFailure(String s) {
-
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                 }
                             })
                             .error(new IError() {
                                 @Override
                                 public void onError(int code, String msg) {
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                 }
                             })
                             .build()

@@ -46,6 +46,7 @@ public class ClueDelActivity extends BaseActivity {
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         initData();
+        DialogLoadingUtil.getInstance(instance).show();
         internet();
     }
 
@@ -56,6 +57,7 @@ public class ClueDelActivity extends BaseActivity {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });

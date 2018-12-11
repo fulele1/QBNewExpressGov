@@ -22,6 +22,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.ChartUtil;
 import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
@@ -61,6 +62,7 @@ public class ComDelActivity extends BaseActivity {
         initView();
         initData();
         addEvent();
+        DialogLoadingUtil.getInstance(instance).show();//显示加载框
         internet();
     }
 
@@ -71,10 +73,14 @@ public class ComDelActivity extends BaseActivity {
     private void internet() {
         Log.e("fule", HttpUrlUtils.getHttpUrl().detail_com() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().detail_com() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().detail_com() + id + "?access_token=" +
+                        SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
+
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -86,19 +92,18 @@ public class ComDelActivity extends BaseActivity {
                             txt_com_cd.setText(NullUtil.getString(map2.get("comname")));
                             txt_address_cd.setText(NullUtil.getString(map2.get("comaddress")));
                             txt_responsible_Per_cd.setText(NullUtil.getString(map2.get("comman")));
-                            txt_responsible_tel_cd.setText(NullUtil.getString(map2.get("commanphone_secret")));
-//                            txt_responsible_tel_cd.setText(NullUtil.getString(map2.get("commanphone")));
+                            txt_responsible_tel_cd.setText(NullUtil.getString(map2.get("commanphone")));
                             txt_employee_count_cd.setText(NullUtil.getString(map2.get("comemployeenum")));
                             txt_get_count_cd.setText(NullUtil.getString(map2.get("at_count")));
                             txt_post_count_cd.setText(NullUtil.getString(map2.get("dv_count")));
-                            txt_responsible_tel_cd.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent dialIntent =  new Intent(Intent.ACTION_DIAL,
-                                            Uri.parse("tel:" + NullUtil.getString(map2.get("commanphone"))));//跳转到拨号界面，同时传递电话号码
-                                    instance.startActivity(dialIntent);
-                                }
-                            });
+//                            txt_responsible_tel_cd.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    Intent dialIntent =  new Intent(Intent.ACTION_DIAL,
+//                                            Uri.parse("tel:" + NullUtil.getString(map2.get("commanphone"))));//跳转到拨号界面，同时传递电话号码
+//                                    instance.startActivity(dialIntent);
+//                                }
+//                            });
 
                             String list = NullUtil.getString(map2.get("list")).toString();
                             ArrayList<String> x = new ArrayList<String>();
@@ -119,6 +124,10 @@ public class ComDelActivity extends BaseActivity {
                                 // 获取完数据之后 制作7个数据点（沿x坐标轴）
                                 LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x, "投递", Color.BLUE, "收寄", Color.RED);
                                 ChartUtil.setChartStyle(line_com_del, mLineData, Color.WHITE);
+                        }else if (map1.get("state").toString().equals("10")){
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
+                        }else{
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -172,6 +181,11 @@ public class ComDelActivity extends BaseActivity {
     public void dialogOk() {
         Intent dialIntent =  new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + txt_responsible_tel_cd.getText().toString().trim()));//跳转到拨号界面，同时传递电话号码
        startActivity(dialIntent);
+
+
+
+
+
     }
 }
 

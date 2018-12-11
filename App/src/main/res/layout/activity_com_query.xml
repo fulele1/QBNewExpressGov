@@ -43,6 +43,7 @@
                     android:focusable="false"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:gravity="right"
+                    android:longClickable="false"
                     />
 
 
@@ -93,6 +94,7 @@
                     android:focusable="false"
                     android:gravity="right"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:longClickable="false"
                     />
 
                 <ImageView

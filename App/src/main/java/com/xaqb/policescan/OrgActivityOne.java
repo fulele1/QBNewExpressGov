@@ -22,7 +22,7 @@ import com.xaqb.policescan.utils.StatuBarUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-@Route(path = "/qb/OrgActivityTwo")
+@Route(path = "/qb/OrgActivityOne")
 public class OrgActivityOne extends BaseActivity {
 
     List<MenuData> list1, list2;

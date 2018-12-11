@@ -83,18 +83,21 @@ public class BackPWDActivity extends BaseActivity {
 
 
     public void connection() {
-
+        DialogLoadingUtil.getInstance(instance).show();
         String tel = et_phone_backpwd.getText().toString().trim();
         String checkcode = edit_code_backpwd.getText().toString().trim();
         String newpwd = edit_pwd_backpwd.getText().toString().trim();
         if (tel.equals("")) {
             Toast.makeText(instance, "请输入电话号码...", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (checkcode.equals("")) {
             Toast.makeText(instance, "请输入手机验证码...", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (newpwd.equals("")) {
             Toast.makeText(instance, "请输入新密码...", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else {
             RestClient.builder()
@@ -106,6 +109,7 @@ public class BackPWDActivity extends BaseActivity {
                         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                         @Override
                         public void onSuccess(String response) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             LogUtils.e(response);
                             Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                             });
@@ -124,6 +128,7 @@ public class BackPWDActivity extends BaseActivity {
                     .failure(new IFailure() {
                         @Override
                         public void onFailure(String s) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Toast.makeText(instance, "修改密码失败", Toast.LENGTH_SHORT).show();
 
                         }
@@ -131,12 +136,15 @@ public class BackPWDActivity extends BaseActivity {
                     .error(new IError() {
                         @Override
                         public void onError(int code, String msg) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .build()
                     .post();
         }
+
+        DialogLoadingUtil.getInstance(instance).dismiss();
     }
 
     String phone;
@@ -145,9 +153,11 @@ public class BackPWDActivity extends BaseActivity {
      * 获取手机验证码
      */
     public void getVCode() {
+        DialogLoadingUtil.getInstance(instance).show();
         phone = et_phone_backpwd.getText().toString().trim();
         if (phone == null || phone.equals("")) {
             Toast.makeText(instance, "请输入手机号码", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
         } else {
 
             LogUtils.e(HttpUrlUtils.getHttpUrl().getSmsCode() +
@@ -159,6 +169,7 @@ public class BackPWDActivity extends BaseActivity {
                         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                         @Override
                         public void onSuccess(String response) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             LogUtils.e(response);
                             Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                             });
@@ -175,6 +186,7 @@ public class BackPWDActivity extends BaseActivity {
                     .failure(new IFailure() {
                         @Override
                         public void onFailure(String s) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Toast.makeText(instance, "获取验证码失败，请重新获取", Toast.LENGTH_SHORT).show();
 
                         }
@@ -182,11 +194,13 @@ public class BackPWDActivity extends BaseActivity {
                     .error(new IError() {
                         @Override
                         public void onError(int code, String msg) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .build()
                     .get();
+
         }
     }
 

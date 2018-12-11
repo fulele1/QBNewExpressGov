@@ -43,7 +43,7 @@
     <string name="kg">KG</string>
     <string name="finished">完成</string>
     <string name="search">查询</string>
-    <string name="cancel">取消订单</string>
+    <string name="cancel">取消</string>
     <string name="mp">手机：</string>
     <string name="code">验证码：</string>
     <string name="edit_phone">请输入手机号</string>

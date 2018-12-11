@@ -5,8 +5,8 @@
     android:background="@mipmap/log_bg"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/layout_padding_small"
-    android:paddingRight="@dimen/layout_padding_small">
+    android:padding="10dp"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -23,6 +23,7 @@ import com.xaqb.policescan.threeLevel.MenuDialogAdapter;
 import com.xaqb.policescan.threeLevel.MyPagerAdapter;
 import com.xaqb.policescan.threeLevel.MyViewPager;
 import com.xaqb.policescan.utils.ConditionUtil;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.LogUtils;
 import com.xaqb.policescan.utils.NullUtil;
@@ -71,8 +72,8 @@ public class OrgActivityThree extends BaseActivity {
 
     //操作控件
     public void initViews() {
-        //一级
         mViewPager = (MyViewPager) findViewById(R.id.viewpager);
+
         LayoutInflater inflater = LayoutInflater.from(this);
         view1 = inflater.inflate(R.layout.pager_number, null);
         view2 = inflater.inflate(R.layout.pager_number, null);
@@ -82,7 +83,7 @@ public class OrgActivityThree extends BaseActivity {
         mListView3 = (ListView) view3.findViewById(R.id.listview);
 
 
-        //一级
+        //一级列表
         list1 = new ArrayList<>();
         MenuData menuData = new MenuData(SPUtils.get(mContext, "ou_securityorg", "").toString(),
                 SPUtils.get(mContext, "org", "").toString(),
@@ -96,13 +97,15 @@ public class OrgActivityThree extends BaseActivity {
 
         views.add(view1);
         views.add(view2);//加载了一二级菜单
+        views.add(view3);//加载了一二三级菜单
         mViewPager.setAdapter(new MyPagerAdapter(views,0.33f));
 
 
-        //二级
+        //一级的点击事件 得到二级列表
         mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogLoadingUtil.getInstance(mContext).show();
                 if (mListView1Adapter != null)
                     mListView1Adapter.setSelectedPos(position);
                 if (mListView2Adapter != null)
@@ -110,7 +113,7 @@ public class OrgActivityThree extends BaseActivity {
 
                 if (views.contains(view3)) {
                     views.remove(view3);
-                    mViewPager.getAdapter().notifyDataSetChanged();
+                    mViewPager.getAdapter().notifyDataSetChanged();//刷新一级列表
                 }
                 LogUtils.e("二级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString() + "&code=" +
@@ -125,6 +128,7 @@ public class OrgActivityThree extends BaseActivity {
                         .success(new ISuccess() {
                             @Override
                             public void onSuccess(String response) {
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                                 LogUtils.e(response);
                                 Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                                 });
@@ -142,15 +146,6 @@ public class OrgActivityThree extends BaseActivity {
                                                 list2.add(menuData);
                                             }
                                         }
-//                                        LogUtils.e(table);
-//
-//                                        List<Map> list1 = JSON.parseArray(table, Map.class);
-//                                        for (Map<String, Object> map : list1) {
-//                                            MenuData menuData = new MenuData(NullUtil.getString(map.get("socode")),
-//                                                    NullUtil.getString(map.get("soname")),"");
-//                                            list2.add(menuData);
-//                                        }
-
                                         if (mListView2Adapter == null) {
                                             mListView2Adapter = new MenuDialogAdapter(mContext, list2);
                                             mListView2Adapter.setNormalBackgroundResource(R.color.wirte);
@@ -160,18 +155,20 @@ public class OrgActivityThree extends BaseActivity {
                                             mListView2Adapter.notifyDataSetChanged();
                                         }
                                     }
-                                }
-//                            }
+                            }
+
+
                         })
                         .failure(new IFailure() {
                             @Override
                             public void onFailure(String s) {
-
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                             }
                         })
                         .error(new IError() {
                             @Override
                             public void onError(int code, String msg) {
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                             }
                         })
                         .build()
@@ -180,10 +177,11 @@ public class OrgActivityThree extends BaseActivity {
         });
 
 
-        //三级
+        //二级的点击事件，得到三级列表
         mListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                DialogLoadingUtil.getInstance(mContext).show();
                 if (mListView2Adapter != null) {
                     mListView2Adapter.setSelectedPos(position);
                     mListView2Adapter.setSelectedBackgroundResource(R.drawable.select_gray);//选中时
@@ -191,6 +189,7 @@ public class OrgActivityThree extends BaseActivity {
 
                 if (views.contains(view3)) {
                     views.remove(view3);
+                    mViewPager.getAdapter().notifyDataSetChanged();//刷新二级列表
                 }
 
                 LogUtils.e("三级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
@@ -200,7 +199,8 @@ public class OrgActivityThree extends BaseActivity {
                 SPUtils.put(mContext,"codelist2",list2.get(position).id);
                 SPUtils.put(mContext,"namelist2",list2.get(position).name);
 
-                if (list2.get(position).id.equals("0")){
+                if (list2.get(position).id.equals("0")){//不限
+                    DialogLoadingUtil.getInstance(mContext).dismiss();
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putString("orgName", list1.get(position).name);
@@ -209,8 +209,6 @@ public class OrgActivityThree extends BaseActivity {
                     OrgActivityThree.this.setResult(RESULT_OK, intent);
                     OrgActivityThree.this.finish();
                 }else {
-
-
                     RestClient.builder()
                             .url(HttpUrlUtils.getHttpUrl().getOrg() +
                                     "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
@@ -218,6 +216,7 @@ public class OrgActivityThree extends BaseActivity {
                             .success(new ISuccess() {
                                 @Override
                                 public void onSuccess(String response) {
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                     LogUtils.e(response);
                                     Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                                     });
@@ -259,12 +258,13 @@ public class OrgActivityThree extends BaseActivity {
                             .failure(new IFailure() {
                                 @Override
                                 public void onFailure(String s) {
-
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                 }
                             })
                             .error(new IError() {
                                 @Override
                                 public void onError(int code, String msg) {
+                                    DialogLoadingUtil.getInstance(mContext).dismiss();
                                 }
                             })
                             .build()
@@ -273,7 +273,7 @@ public class OrgActivityThree extends BaseActivity {
             }
         });
 
-        //四级的自条目点击事件
+        //三级的自条目点击事件
         mListView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

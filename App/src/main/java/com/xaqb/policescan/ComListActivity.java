@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSON;
@@ -169,41 +170,44 @@ public class ComListActivity extends BaseActivity {
 
     }
 
-    public String  getIntentData(){
+    public String getIntentData() {
         Bundle bundle = getIntent().getBundleExtra("bundle");
         String brand = bundle.getString("brand");
         String org = bundle.getString("org");
         String comname = bundle.getString("comname");
 
         HashMap map = new HashMap();
-        map.put("\"comsecurityorg\"", "\""+org+"\"");//管辖机构
-        map.put("\"combrand\"", "\""+brand+"\"");//品牌
-        map.put("\"comname\"", "\""+comname+"\"");//企业名称
+        map.put("\"comsecurityorg\"", "\"" + org + "\"");//管辖机构
+        map.put("\"combrand\"", "\"" + brand + "\"");//品牌
+        map.put("\"comname\"", "\"" + comname + "\"");//企业名称
 
-        return "&condition="+ ConditionUtil.getConditionString(map);
+        return "&condition=" + ConditionUtil.getConditionString(map);
     }
 
-    List<Com> mClue ;
+    List<Com> mClue;
     List<Com> mClues = new ArrayList<>();
 
     private void connecting(int p) {
 
-        LogUtils.e(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData() + "&p=" + p);
+        LogUtils.e(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData() + "&p=" + p)
+                .url(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" +
+                        SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p)
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
 
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
                         Log.e("fule", response);
-                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
-                        });
-                        String num = mess.get("num").toString();
-                        String count = mess.get("count").toString();
+
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
-                            if (!NullUtil.getString(mess.get("count")).equals("0")){
+                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                            });
+                            String num = mess.get("num").toString();
+                            String count = mess.get("count").toString();
+                            if (!NullUtil.getString(mess.get("count")).equals("0")) {
                                 mHandler.sendEmptyMessage(-1);
                                 list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
                                 String table = map1.get("table").toString();
@@ -219,29 +223,34 @@ public class ComListActivity extends BaseActivity {
                                     mClue.add(com);
                                     mClues.add(com);
                                 }
-                            }else{
+
+                                TOTAL_COUNTER = Integer.valueOf(count).intValue();
+                                REQUEST_COUNT = Integer.valueOf(num).intValue();
+                                txt_size.setText("共查询到" + count + "条数据");
+
+                                //子条目的点击事件
+                                mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                                    @Override
+                                    public void onItemClick(View view, int position) {
+                                        if (mDataAdapter.getDataList().size() > position) {
+                                            Bundle mBundle = new Bundle();
+                                            mBundle.putString("id", mClues.get(position).getId());
+                                            ARouterUtil.intentPar("/qb/ComDelActivity", view, mBundle);
+                                        }
+                                    }
+                                });
+
+                            } else {
                                 mHandler.sendEmptyMessage(-3);
                                 txt_size.setVisibility(View.GONE);
                             }
+                        } else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
-                        TOTAL_COUNTER = Integer.valueOf(count).intValue();
-                        REQUEST_COUNT = Integer.valueOf(num).intValue();
-                        txt_size.setText("共查询到" + count + "条数据");
 
-                        //子条目的点击事件
-                        mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
-                            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                            @Override
-                            public void onItemClick(View view, int position) {
-                                if (mDataAdapter.getDataList().size() > position) {
-                                    Bundle mBundle = new Bundle();
-                                    mBundle.putString("id", mClues.get(position).getId());
-                                    ARouterUtil.intentPar("/qb/ComDelActivity", view, mBundle);
-                                }
-
-                            }
-
-                        });
                     }
                 })
                 .failure(new IFailure() {

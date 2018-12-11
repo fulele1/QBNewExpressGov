@@ -20,6 +20,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.DateUtil;
 import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
@@ -70,17 +71,21 @@ public class ModifyPSWActivity extends BaseActivity {
 
 
     public void connection(){
+        DialogLoadingUtil.getInstance(instance).show();//显示加载框
         String oldpwd = et_old_modify.getText().toString().trim();
         String newpwd = et_new_modify.getText().toString().trim();
         String repwd = et_con_modify.getText().toString().trim();
         if (oldpwd.equals("")){
             Toast.makeText(instance, "请输入旧密码...", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         }else if (newpwd.equals("")){
             Toast.makeText(instance, "请输入新密码...", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         }else if (repwd.equals("")){
             Toast.makeText(instance, "请确认密码...", Toast.LENGTH_SHORT).show();
+            DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         }else {
             RestClient.builder()
@@ -93,9 +98,11 @@ public class ModifyPSWActivity extends BaseActivity {
                         @Override
                         public void onSuccess(String response) {
                             LogUtils.e(response);
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Map<String, Object> map1 = JSON.parseObject(response,new TypeReference<Map<String, Object>>(){});
 //
                             if (map1.get("state").toString().equals("0")){
+                                        SPUtils.put(instance, "userPsw", "");//清除密码
                                 ARouter.getInstance()
                                         .build("/qb/loginActivity")
                                         .navigation();
@@ -104,12 +111,17 @@ public class ModifyPSWActivity extends BaseActivity {
                                 Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                             }else if (map1.get("state").toString().equals("221")){
                                 Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
-                            }
+                            }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", bt_finished_modify);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
+                        }
                         }
                     })
                     .failure(new IFailure() {
                         @Override
                         public void onFailure(String s) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Toast.makeText(instance, "修改密码失败", Toast.LENGTH_SHORT).show();
 
                         }
@@ -117,11 +129,14 @@ public class ModifyPSWActivity extends BaseActivity {
                     .error(new IError() {
                         @Override
                         public void onError(int code, String msg) {
+                            DialogLoadingUtil.getInstance(instance).dismiss();
                             Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
                         }
                     })
                     .build()
                     .post();
+
+
         }
 //{"state":"237","mess":"两次密码不一致"}
         //{"state":"221","mess":"旧密码输入错误"}

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.EditClearUtils;
+import com.xaqb.policescan.utils.LogUtils;
 import com.xaqb.policescan.utils.SPUtils;
 import com.xaqb.policescan.utils.StatuBarUtil;
 
@@ -77,13 +78,15 @@ public class ComQueryActivity extends BaseActivity {
                 ARouterUtil.intentNoParRequest("/qb/BrandActivity", view, instance, 1);
                 break;
             case R.id.txt_org_cq:
-                if (SPUtils.get(instance, "so_level", "").equals("3")) {
+
+                LogUtils.e("level----------"+SPUtils.get(instance, "solevel", ""));
+                if (SPUtils.get(instance, "solevel", "").equals("3")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityOne", view, instance, 2);
-                } else if (SPUtils.get(instance, "so_level", "").equals("2")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("2")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityTwo", view, instance, 2);
-                } else if (SPUtils.get(instance, "so_level", "").equals("1")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("1")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityThree", view, instance, 2);
-                } else if (SPUtils.get(instance, "so_level", "").equals("0")) {
+                } else if (SPUtils.get(instance, "solevel", "").equals("0")) {
                     ARouterUtil.intentNoParRequest("/qb/OrgActivityFour", view, instance, 2);
                 }
                 break;

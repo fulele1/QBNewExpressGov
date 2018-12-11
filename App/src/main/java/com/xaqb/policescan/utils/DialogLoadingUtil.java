@@ -3,6 +3,7 @@ package com.xaqb.policescan.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.PopupWindow;
 
 import com.wang.avi.AVLoadingIndicatorView;
 import com.xaqb.policescan.R;
@@ -13,14 +14,16 @@ import com.xaqb.policescan.R;
 
 public class DialogLoadingUtil extends AlertDialog {
 
-    private static DialogLoadingUtil loadingDialog;
+    private static DialogLoadingUtil loadingDialog = null;
     private AVLoadingIndicatorView avi;
 
 
     public static DialogLoadingUtil getInstance(Context context){
+        if (loadingDialog == null){
         loadingDialog = new DialogLoadingUtil(context,R.style.TransparentDialog);
-        loadingDialog.setCancelable(false);
-        loadingDialog.setCanceledOnTouchOutside(false);
+        loadingDialog.setCancelable(true);
+        loadingDialog.setCanceledOnTouchOutside(true);
+        }
         return loadingDialog;
     }
     Context mContext;
@@ -45,6 +48,8 @@ public class DialogLoadingUtil extends AlertDialog {
     @Override
     public void dismiss() {
         super.dismiss();
+        if (avi != null)
         avi.hide();
+        loadingDialog = null;//把窗体置为空，防止窗体移除
     }
 }

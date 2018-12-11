@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text=""
-                    android:textColor="@color/main" />
+                    />
 
                 <LinearLayout
                     style="@style/horizontal_black_line_small"
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-                    android:text="我问问" />
+                     />
 
 
 
@@ -129,7 +129,7 @@
                 android:layout_below="@+id/txt_dccontent_cdc"
                 android:layout_marginTop="@dimen/line_large" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -142,19 +142,19 @@
 
                 <TextView
                     android:id="@+id/txt_dcresult_cdc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="" />
-
-                <LinearLayout
-                    style="@style/horizontal_black_line_small"
-                    android:layout_below="@+id/txt_dcresult_cdc"
-                    android:layout_marginTop="@dimen/line_large" />
-
-            </RelativeLayout>
+                    android:gravity="right"
+                     />
 
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/horizontal_black_line_small"
+                android:layout_below="@+id/txt_dcresult_cdc"
+                android:layout_marginTop="@dimen/line_large" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                 style="@style/horizontal_black_line_small"
                 android:layout_marginTop="@dimen/line_large" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding">
@@ -193,12 +193,12 @@
 
                 <TextView
                     android:id="@+id/txt_dcmark_cdc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:gravity="right"
                     android:text="" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

@@ -100,6 +100,7 @@ public class CompanyActivity extends AppCompatActivity {
         map_IsHead = new HashMap<>();
         adapter = new BrandAdapter(this, list_show, map_IsHead);
         listView.setAdapter(adapter);
+        DialogLoadingUtil.getInstance(instance).show();
         okConnection();
         addListener();
     }
@@ -111,6 +112,7 @@ public class CompanyActivity extends AppCompatActivity {
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         LogUtils.e(response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });

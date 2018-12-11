@@ -23,6 +23,7 @@ import com.xaqb.policescan.threeLevel.MenuDialogAdapter;
 import com.xaqb.policescan.threeLevel.MyPagerAdapter;
 import com.xaqb.policescan.threeLevel.MyViewPager;
 import com.xaqb.policescan.utils.ConditionUtil;
+import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.LogUtils;
 import com.xaqb.policescan.utils.NullUtil;
@@ -71,7 +72,6 @@ public class OrgActivityTwo extends BaseActivity {
 
     //操作控件
     public void initViews() {
-        //一级
         mViewPager = (MyViewPager) findViewById(R.id.viewpager);
         LayoutInflater inflater = LayoutInflater.from(this);
         view1 = inflater.inflate(R.layout.pager_number, null);
@@ -101,10 +101,15 @@ public class OrgActivityTwo extends BaseActivity {
         mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DialogLoadingUtil.getInstance(mContext).show();
                 if (mListView1Adapter != null)
                     mListView1Adapter.setSelectedPos(position);
                 if (mListView2Adapter != null)
                     mListView2Adapter.setSelectedPos(-1);
+                if (views.contains(view2)) {
+                    views.remove(view2);
+                    mViewPager.getAdapter().notifyDataSetChanged();//刷新一级列表
+                }
 
                 LogUtils.e("二级" + HttpUrlUtils.getHttpUrl().getOrg() +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
@@ -119,6 +124,7 @@ public class OrgActivityTwo extends BaseActivity {
                         .success(new ISuccess() {
                             @Override
                             public void onSuccess(String response) {
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                                 LogUtils.e(response);
                                 Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                                 });
@@ -151,12 +157,13 @@ public class OrgActivityTwo extends BaseActivity {
                         .failure(new IFailure() {
                             @Override
                             public void onFailure(String s) {
-
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                             }
                         })
                         .error(new IError() {
                             @Override
                             public void onError(int code, String msg) {
+                                DialogLoadingUtil.getInstance(mContext).dismiss();
                             }
                         })
                         .build()

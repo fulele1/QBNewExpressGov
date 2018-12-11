@@ -255,6 +255,7 @@
                     android:textSize="@dimen/edit_text"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:gravity="right"
+                    android:longClickable="false"
                     />
 
 

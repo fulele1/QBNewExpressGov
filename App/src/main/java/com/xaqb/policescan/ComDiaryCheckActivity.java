@@ -15,6 +15,7 @@ import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
 import com.xaqb.policescan.net.callback.IFailure;
 import com.xaqb.policescan.net.callback.ISuccess;
+import com.xaqb.policescan.utils.ARouterUtil;
 import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.NullUtil;
@@ -42,6 +43,7 @@ public class ComDiaryCheckActivity extends BaseActivity {
         StatuBarUtil.setStatuBarLightModeClild(instance, getResources().getColor(R.color.wirte));//修改状态栏字体颜色为黑色
         initView();
         initData();
+        DialogLoadingUtil.getInstance(instance).show();
         internet();
     }
 
@@ -51,8 +53,10 @@ public class ComDiaryCheckActivity extends BaseActivity {
         RestClient.builder()
                 .url(HttpUrlUtils.getHttpUrl().com_list() +"/"+ id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
+                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -67,6 +71,10 @@ public class ComDiaryCheckActivity extends BaseActivity {
                             txt_dcresult_cdc.setText(NullUtil.getString(map2.get("dcresult")));
                             txt_comaddress_cdc.setText(NullUtil.getString(map2.get("comaddress")));
                             txt_dcmark_cdc.setText(NullUtil.getString(map2.get("dcmark")));
+                        }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 })

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -55,6 +56,7 @@ public class ThreeFragment extends BaseFragment {
 
     private Context instance;
     private View view;
+    private TextView txt_size;
 
     private LRecyclerView list_r;
     private FloatingActionButton floatingActionButton;
@@ -88,6 +90,7 @@ public class ThreeFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_three, null);
         instance = ThreeFragment.this.getActivity();
         list_r = view.findViewById(R.id.list_recycleview);
+        txt_size = view.findViewById(R.id.txt_size);
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,17 +203,19 @@ public class ThreeFragment extends BaseFragment {
                 .url(HttpUrlUtils.getHttpUrl().joint_list()
                         + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
                 .success(new ISuccess() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
 
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
                         android.util.Log.e("fule", response);
-                        Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
-                        });
-                        String num = mess.get("num").toString();
-                        String count = mess.get("count").toString();
+
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
+                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                            });
+                            String num = mess.get("num").toString();
+                            String count = mess.get("count").toString();
                             if (!count.equals("0")) {
                                 mHandler.sendEmptyMessage(-1);
                                 list_r.setBackgroundColor(getResources().getColor(R.color.background));
@@ -230,6 +235,10 @@ public class ThreeFragment extends BaseFragment {
                                     mClues.add(com);
                                 }
 
+                                TOTAL_COUNTER = Integer.valueOf(count).intValue();
+                                REQUEST_COUNT = Integer.valueOf(num).intValue();
+                                txt_size.setText("共查询到"+count+"条数据");
+
                                 //子条目的点击事件
                                 mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
                                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -245,16 +254,15 @@ public class ThreeFragment extends BaseFragment {
 
                                 });
 
-
-
                             } else {
                                 mHandler.sendEmptyMessage(-3);
                             }
+                        }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                            ARouterUtil.intentNoPar("/qb/loginActivity", view);
+                        } else {
+                            Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
 
-                        TOTAL_COUNTER = Integer.valueOf(count).intValue();
-                        REQUEST_COUNT = Integer.valueOf(num).intValue();
-//                        txt_size.setText("共查询到"+count+"条数据");
                     }
                 })
                 .failure(new IFailure() {

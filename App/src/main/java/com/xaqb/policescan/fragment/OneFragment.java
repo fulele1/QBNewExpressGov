@@ -55,7 +55,8 @@ import pub.devrel.easypermissions.EasyPermissions;
  * Created by fl on 2017/9/5.
  */
 
-public class OneFragment extends BaseFragment implements View.OnClickListener,EasyPermissions.PermissionCallbacks{
+public class OneFragment extends BaseFragment implements View.OnClickListener,
+        EasyPermissions.PermissionCallbacks{
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
     private Context instance;
     private View view;
@@ -170,6 +171,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,Ea
                 break;
             case R.id.iv_user_main://个人信息
                 ARouterUtil.intentNoPar("/qb/UserActivity",view);
+
                 break;
             case R.id.txt_update_one://检查更新
                 LogUtils.e("检查更新");
@@ -190,7 +192,8 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,Ea
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions,
+                grantResults, this);
     }
 
     @Override
@@ -208,7 +211,6 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,Ea
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和散光灯的权限", REQUEST_CODE_QRCODE_PERMISSIONS, perms);
         }
     }
-
 
     private String[] images;
     private String[] url;
@@ -291,6 +293,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,Ea
                 .build()
                 .get();
     }
+
 
     public class NetImageLoadHolder implements Holder<String> {
         private ImageView image_lv;
