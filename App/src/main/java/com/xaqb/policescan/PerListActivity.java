@@ -184,10 +184,10 @@ public class PerListActivity extends BaseActivity {
     List<Per> mClue ;
     List<Per> mClues;
     private void connecting(int p) {
-        LogUtils.e(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p);
+        LogUtils.e(HttpUrlUtils.getHttpUrl().query_per(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p);
 
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().query_per() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p)
+                .url(HttpUrlUtils.getHttpUrl().query_per(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p)
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override

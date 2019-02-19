@@ -55,9 +55,9 @@ public class BillQueryLogActivity extends BaseActivity {
     }
 
     private void internet() {
-        Log.e("fule", HttpUrlUtils.getHttpUrl().log_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
+        Log.e("fule", HttpUrlUtils.getHttpUrl().log_del(instance) + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().log_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().log_del(instance) + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override

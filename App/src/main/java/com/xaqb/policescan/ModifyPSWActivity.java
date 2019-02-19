@@ -89,7 +89,7 @@ public class ModifyPSWActivity extends BaseActivity {
             return;
         }else {
             RestClient.builder()
-                    .url(HttpUrlUtils.getHttpUrl().modifypws()+"?access_token=" + SPUtils.get(instance, "access_token", ""))
+                    .url(HttpUrlUtils.getHttpUrl().modifypws(instance)+"?access_token=" + SPUtils.get(instance, "access_token", ""))
                     .params("oldpwd",oldpwd)
                     .params("newpwd",newpwd)
                     .params("repwd",repwd)

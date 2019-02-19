@@ -102,9 +102,9 @@ public class BrandActivity extends AppCompatActivity {
     }
 
     public void okConnection() {
-        LogUtils.e(HttpUrlUtils.getHttpUrl().brandcode()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage");
+        LogUtils.e(HttpUrlUtils.getHttpUrl().brandcode(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage");
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().brandcode()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage")
+                .url(HttpUrlUtils.getHttpUrl().brandcode(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {

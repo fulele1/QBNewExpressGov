@@ -20,6 +20,7 @@ import com.xaqb.policescan.OrgActivityThree;
 import com.xaqb.policescan.OrgActivityTwo;
 import com.xaqb.policescan.R;
 import com.xaqb.policescan.utils.ARouterUtil;
+import com.xaqb.policescan.utils.DateUtil;
 import com.xaqb.policescan.utils.DoubleDateUtil;
 import com.xaqb.policescan.utils.EditClearUtils;
 import com.xaqb.policescan.utils.LogUtils;
@@ -69,6 +70,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
         img_clear_date_four.setOnClickListener(this);
         EditClearUtils.clearText(txt_org_three, img_clear_org_four);
         EditClearUtils.clearText(txt_date_three, img_clear_date_four);
+        txt_date_three.setText(DateUtil.get7Time()+"--->"+DateUtil.getNow7Time());
     }
 
 

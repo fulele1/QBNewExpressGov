@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSON;
@@ -30,11 +31,16 @@ import com.xaqb.policescan.utils.LogUtils;
 import com.xaqb.policescan.utils.NullUtil;
 import com.xaqb.policescan.utils.SPUtils;
 import com.xaqb.policescan.utils.StatuBarUtil;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Call;
+
 @Route(path = "/qb/OrgActivityFour")
 
 public class OrgActivityFour extends BaseActivity {
@@ -120,14 +126,14 @@ public class OrgActivityFour extends BaseActivity {
                     views.remove(view3);
                     mViewPager.getAdapter().notifyDataSetChanged();
                 }
-                LogUtils.e("二级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
-                        "?access_token=" + SPUtils.get(mContext, "access_token", "").toString() + "&code=" +
-                        SPUtils.get(mContext, "ou_securityorg", "").toString());
+                LogUtils.e(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
+                        "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
+                        + getIntentData(SPUtils.get(mContext, "ou_securityorg", "").toString())+"&nopage");
                 LogUtils.e("二级"+ SPUtils.get(mContext, "ou_securityorg", "").toString());
                 LogUtils.e("二级"+ list1.get(position).name+"-------------"+list1.get(position).id);
 
                 RestClient.builder()
-                        .url(HttpUrlUtils.getHttpUrl().getOrg() +
+                        .url(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                                 "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                                 + getIntentData(SPUtils.get(mContext, "ou_securityorg", "").toString())+"&nopage")
                         .success(new ISuccess() {
@@ -140,7 +146,7 @@ public class OrgActivityFour extends BaseActivity {
                                 if (NullUtil.getString(map1.get("state")).equals("0")) {
                                     if (!NullUtil.getString(map1.get("table")).equals("")){
                                         list2 = new ArrayList<>();
-                                        list2.add(new MenuData("0", "不限",""));
+                                        list2.add(new MenuData("0", "确定",""));
                                         String table = map1.get("table").toString();
                                         LogUtils.e(table);
 
@@ -198,13 +204,12 @@ public class OrgActivityFour extends BaseActivity {
                     mViewPager.getAdapter().notifyDataSetChanged();
                 }
 
-                LogUtils.e("三级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
+                LogUtils.e("三级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString() + "&code=" +
                         list2.get(position).id);
                 LogUtils.e("三级"+ list2.get(position).name+"------"+list2.get(position).id);
                 SPUtils.put(mContext,"codelist2",list2.get(position).id);
                 SPUtils.put(mContext,"namelist2",list2.get(position).name);
-
                 if (list2.get(position).id.equals("0")){//不限
                     DialogLoadingUtil.getInstance(mContext).dismiss();
                     Intent intent = new Intent();
@@ -216,7 +221,7 @@ public class OrgActivityFour extends BaseActivity {
                     OrgActivityFour.this.finish();
                 }else {
                     RestClient.builder()
-                            .url(HttpUrlUtils.getHttpUrl().getOrg() +
+                            .url(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                                     "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                                     + getIntentData(list2.get(position).id))
                             .success(new ISuccess() {
@@ -228,7 +233,7 @@ public class OrgActivityFour extends BaseActivity {
                                     });
                                     if (NullUtil.getString(map1.get("state")).equals("0")) {
                                         list3 = new ArrayList<>();
-                                        list3.add(new MenuData("0", "不限",""));
+                                        list3.add(new MenuData("0", "确定",""));
                                         if (!NullUtil.getString(map1.get("table")).equals("")){
                                             String table = map1.get("table").toString();
                                             LogUtils.e(table);
@@ -240,8 +245,6 @@ public class OrgActivityFour extends BaseActivity {
                                                 list3.add(menuData);
                                             }
                                         }
-
-
                                         if (mListView3Adapter == null) {
                                             mListView3Adapter = new MenuDialogAdapter(mContext, list3);
                                             mListView3Adapter.setNormalBackgroundResource(R.color.wirte);
@@ -250,7 +253,6 @@ public class OrgActivityFour extends BaseActivity {
                                             mListView3Adapter.setData(list3);
                                             mListView3Adapter.notifyDataSetChanged();
                                         }
-
                                         views.add(view3);
                                         mViewPager.getAdapter().notifyDataSetChanged();
                                         mViewPager.postDelayed(new Runnable() {
@@ -260,8 +262,6 @@ public class OrgActivityFour extends BaseActivity {
                                             }
                                         }, 300);
                                     }
-
-
                                 }
                             })
                             .failure(new IFailure() {
@@ -298,7 +298,7 @@ public class OrgActivityFour extends BaseActivity {
                     mViewPager.getAdapter().notifyDataSetChanged();
                 }
 
-                LogUtils.e("四级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
+                LogUtils.e("四级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString() + "&code=" +
                         list3.get(position).id);
 
@@ -318,7 +318,7 @@ public class OrgActivityFour extends BaseActivity {
                     OrgActivityFour.this.finish();
                 }else{
                     RestClient.builder()
-                            .url(HttpUrlUtils.getHttpUrl().getOrg() +
+                            .url(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                                     "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                                     + getIntentData(list3.get(position).id))
                             .success(new ISuccess() {
@@ -330,7 +330,7 @@ public class OrgActivityFour extends BaseActivity {
                                     });
                                     if (NullUtil.getString(map1.get("state")).equals("0")) {
                                         list4 = new ArrayList<>();
-                                        list4.add(new MenuData("0", "不限",""));
+                                        list4.add(new MenuData("0", "确定",""));
                                         if (!NullUtil.getString(map1.get("table")).equals("")){
                                             String table = map1.get("table").toString();
                                             LogUtils.e(table);
@@ -339,10 +339,9 @@ public class OrgActivityFour extends BaseActivity {
                                             for (Map<String, Object> map : list1) {
                                                 MenuData menuData = new MenuData(NullUtil.getString(map.get("socode")),
                                                         NullUtil.getString(map.get("soname")),"");
-                                                list3.add(menuData);
+                                                list4.add(menuData);
                                             }
                                         }
-
 
                                         if (mListView4Adapter == null) {
                                             mListView4Adapter = new MenuDialogAdapter(mContext, list4);
@@ -381,6 +380,11 @@ public class OrgActivityFour extends BaseActivity {
 
                 }}
         });
+
+
+
+
+
 
 
         //四级的自条目点击事件

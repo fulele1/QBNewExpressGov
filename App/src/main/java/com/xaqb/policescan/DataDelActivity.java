@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.LineData;
 import com.xaqb.policescan.net.RestClient;
 import com.xaqb.policescan.net.callback.IError;
@@ -52,6 +53,12 @@ public class DataDelActivity extends BaseActivity {
         DialogLoadingUtil.getInstance(instance).show();
         internetUp();
         internetDown();
+//        LogUtils.e(internetDown+"");
+//        LogUtils.e((internetUp)+"");
+//        LogUtils.e((internetDown&&internetUp)+"");
+//        if (internetDown&&internetUp){
+//            DialogLoadingUtil.getInstance(instance).dismiss();
+//        }
     }
 
 
@@ -89,18 +96,28 @@ public class DataDelActivity extends BaseActivity {
         if (!start.equals("")&&start !=null&&!end.equals("")&&end !=null) {
             map.put("\"createtime\"", "[[\">=\"," + DateUtil.data(start) + "],[\"<=\"," + DateUtil.data(end) + "]]");//时间
         }
+//        if (orgname.equals("")){
+//            tv_name_org.setText(SPUtils.get(instance,"soname","").toString());
+//        }else {
+//            tv_name_org.setText(orgname);
+//        }
         return "&condition="+ ConditionUtil.getConditionString(map);
     }
 
     private void internetUp() {
-        Log.e("fule", HttpUrlUtils.getHttpUrl().detail_org_up() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData());
+        Log.e("fule", HttpUrlUtils.getHttpUrl().detail_org_up(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData());
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().detail_org_up() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData())
+                .url(HttpUrlUtils.getHttpUrl().detail_org_up(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData())
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
-                        DialogLoadingUtil.getInstance(instance).dismiss();
+//                        DialogLoadingUtil.getInstance(instance).dismiss();
+                        internetUp = true;
+
+                        if (internetDown&&internetUp){
+                            DialogLoadingUtil.getInstance(instance).dismiss();
+                        }
                         Log.e("fule", response);
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
                         });
@@ -128,37 +145,51 @@ public class DataDelActivity extends BaseActivity {
                 .failure(new IFailure() {
                     @Override
                     public void onFailure(String s) {
-                        Toast.makeText(instance, "失败", Toast.LENGTH_SHORT).show();
+//                        DialogLoadingUtil.getInstance(instance).dismiss();
+                        internetUp();
+
+//                        Toast.makeText(instance, "失败", Toast.LENGTH_SHORT).show();
 
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
+//                        DialogLoadingUtil.getInstance(instance).dismiss();
+                        internetUp();
+//                        Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .build()
                 .get();
     }
-
+boolean internetUp  = false;
+boolean internetDown  = false;
 
     private void internetDown() {
+        DialogLoadingUtil.getInstance(instance).show();
 
-        Log.e("fule", HttpUrlUtils.getHttpUrl().detail_org_down() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData());
+        Log.e("fule", HttpUrlUtils.getHttpUrl().detail_org_down(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData());
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().detail_org_down() + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData())
+                .url(HttpUrlUtils.getHttpUrl().detail_org_down(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData())
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onSuccess(String response) {
+//                        DialogLoadingUtil.getInstance(instance).dismiss();
                         Log.e("fule", "不知道" + response);
+                        internetDown = true;
+
+                        if (internetDown&&internetUp){
+                            DialogLoadingUtil.getInstance(instance).dismiss();
+                        }
                         Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {}
                         );
 
                         if (map1.get("state").toString().equals("0")) {
 
                         String list = NullUtil.getString(map1.get("table")).toString();
+
                         ArrayList<String> x = new ArrayList<String>();
                         ArrayList<Double> y1 = new ArrayList<Double>();
                         ArrayList<Double> y2 = new ArrayList<Double>();
@@ -190,14 +221,18 @@ public class DataDelActivity extends BaseActivity {
                 .failure(new IFailure() {
                     @Override
                     public void onFailure(String s) {
-                        Toast.makeText(instance, "失败", Toast.LENGTH_SHORT).show();
+//                        DialogLoadingUtil.getInstance(instance).dismiss();
+                        internetDown();
+//                        Toast.makeText(instance, "失败", Toast.LENGTH_SHORT).show();
 
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
+//                        DialogLoadingUtil.getInstance(instance).dismiss();
+                        internetDown();
+//                        Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .build()

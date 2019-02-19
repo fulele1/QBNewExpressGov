@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/iv_user_main"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@mipmap/user" />
 
@@ -42,7 +42,7 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
                 android:alpha="0.7"
-                android:background="@color/edit"
+                android:background="@drawable/bg_solid"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/layout_padding_small"
                 android:paddingTop="@dimen/layout_padding_small">
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:src="@mipmap/message32"
-                android:visibility="invisible" />
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 

@@ -222,55 +222,54 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
 
 
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().banner_pic()+"?access_token="+SPUtils.get(instance,"access_token",""))
+                .url(HttpUrlUtils.getHttpUrl().banner_pic(instance)+"?access_token="+SPUtils.get(instance,"access_token",""))
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
                         Log.e("fule","轮播"+response);
                         Map<String, Object> map1 = JSON.parseObject(response,new TypeReference<Map<String, Object>>(){});
 
-                        if (map1.get("state").toString().equals("0")){
-
-                            String table = map1.get("table").toString();
-                            List<Map> list1 = JSON.parseArray(table, Map.class);
-                            images = new String [list1.size()] ;
-                            url = new String [list1.size()] ;
-                            for (int j = 0; j < list1.size(); j++) {
-                                LogUtils.e("图片");
-                                images[j] = NullUtil.getString(list1.get(j).get("artimg"));
-                                url[j] = NullUtil.getString(list1.get(j).get("url"));
-
-                            }
-
-
-                            bean = Arrays.asList(images);
-                            convenientBanner.setPointViewVisible(true)
-                                    //设置小点
-                                    .setPageIndicator(indicator);
-                            //允许手动轮播
-                            convenientBanner.setManualPageable(true);
-                            //设置自动轮播的时间
-                            convenientBanner.startTurning(2000);
-                            //设置点击事件
-                            //泛型为具体实现类ImageLoaderHolder
-                            convenientBanner.setPages(new CBViewHolderCreator<NetImageLoadHolder>() {
-                                @Override
-                                public NetImageLoadHolder createHolder() {
-                                    return new NetImageLoadHolder();
+                        if (map1.containsKey("table")){
+                            if (map1.get("state").toString().equals("0")){
+                                String table = map1.get("table").toString();
+                                List<Map> list1 = JSON.parseArray(table, Map.class);
+                                images = new String [list1.size()] ;
+                                url = new String [list1.size()] ;
+                                for (int j = 0; j < list1.size(); j++) {
+                                    LogUtils.e("图片");
+                                    images[j] = NullUtil.getString(list1.get(j).get("artimg"));
+                                    url[j] = NullUtil.getString(list1.get(j).get("url"));
                                 }
-                            }, bean);
+                                bean = Arrays.asList(images);
+                                convenientBanner.setPointViewVisible(true)
+                                        //设置小点
+                                        .setPageIndicator(indicator);
+                                //允许手动轮播
+                                convenientBanner.setManualPageable(true);
+                                //设置自动轮播的时间
+                                convenientBanner.startTurning(2000);
+                                //设置点击事件
+                                //泛型为具体实现类ImageLoaderHolder
+                                convenientBanner.setPages(new CBViewHolderCreator<NetImageLoadHolder>() {
+                                    @Override
+                                    public NetImageLoadHolder createHolder() {
+                                        return new NetImageLoadHolder();
+                                    }
+                                }, bean);
 
-                            //设置每个pager的点击事件
-                            convenientBanner.setOnItemClickListener(new OnItemClickListener() {
-                                @Override
-                                public void onItemClick(int position) {
+                                //设置每个pager的点击事件
+                                convenientBanner.setOnItemClickListener(new OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(int position) {
 //                                    if (url.length>0){
 //                                        Uri uri = Uri.parse(url[convenientBanner.getCurrentItem()]);
 //                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 //                                        instance.startActivity(intent);
 //                                    }
-                                }
-                            });
+                                    }
+                                });
+                        }
+
 
                         }
                         if (map1.get("state").toString().equals("202")){

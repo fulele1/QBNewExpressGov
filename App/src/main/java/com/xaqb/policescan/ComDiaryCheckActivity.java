@@ -48,10 +48,10 @@ public class ComDiaryCheckActivity extends BaseActivity {
     }
 
     private void internet() {
-        Log.e("fule", HttpUrlUtils.getHttpUrl().com_list() +"/"+ id +
+        Log.e("fule", HttpUrlUtils.getHttpUrl().com_list(instance) +"/"+ id +
                 "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().com_list() +"/"+ id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().com_list(instance) +"/"+ id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override

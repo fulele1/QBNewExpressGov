@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 设置圆弧 -->
+    <solid
+
+        android:color="#5c74f2" />
+    <corners android:radius="5dp" />
+
+    <!--设置渐变-->
+    <gradient android:startColor="#cdcdcd"
+        android:endColor="#cdcdcd"
+        android:angle="180"/>
+</shape>

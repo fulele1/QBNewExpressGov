@@ -237,7 +237,7 @@ public class JointAddActivity extends BaseActivity {
         }
 
 
-        LogUtils.e(HttpUrlUtils.getHttpUrl().joint_list() + "?access_token=" + SPUtils.get(instance, "access_token", ""));
+        LogUtils.e(HttpUrlUtils.getHttpUrl().joint_list(instance) + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         LogUtils.e("uccompanycode= " + comcode);
         LogUtils.e("ucorgname= " + org);
         LogUtils.e("ucorgdate= " + DateUtil.data2(date));
@@ -262,7 +262,7 @@ public class JointAddActivity extends BaseActivity {
 
         OkHttpUtils
                 .post()
-                .url(HttpUrlUtils.getHttpUrl().joint_list() + "?access_token=" +
+                .url(HttpUrlUtils.getHttpUrl().joint_list(instance) + "?access_token=" +
                         SPUtils.get(instance, "access_token", ""))
                 .addParams("uccompanycode", comcode)//企业名称编码
                 .addParams("ucorgname", org)//联查机构

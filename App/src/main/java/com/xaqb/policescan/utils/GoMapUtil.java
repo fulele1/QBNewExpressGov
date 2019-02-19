@@ -2,6 +2,7 @@ package com.xaqb.policescan.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.Toast;
 
 import java.io.File;
@@ -32,10 +33,13 @@ public class GoMapUtil {
 
 
     //百度地图
-    public  static void setUpBaiduAPPByMine(Context context,String comname) {
+    public  static void setUpBaiduAPPByMine(Context context,String address) {
         try {
-            Intent intent = Intent.getIntent("intent://map/direction?origin=我的位置&destination="+comname+"&mode=driving&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+            Intent intent = Intent.getIntent("intent://map/direction?origin=我的位置&" +
+                    "destination="+address+"&mode=driving&src=yourCompanyName|yourAppName#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
             if (isInstallByread("com.baidu.BaiduMap")) {
+
+
                 context.startActivity(intent);
 //                Toast.makeText(instance, "百度地图客户端已经安装", Toast.LENGTH_SHORT).show();
             } else {

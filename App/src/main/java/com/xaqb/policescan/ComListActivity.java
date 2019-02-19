@@ -189,9 +189,9 @@ public class ComListActivity extends BaseActivity {
 
     private void connecting(int p) {
 
-        LogUtils.e(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" + SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p);
+        LogUtils.e(HttpUrlUtils.getHttpUrl().query_com(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().query_com() + "?access_token=" +
+                .url(HttpUrlUtils.getHttpUrl().query_com(instance) + "?access_token=" +
                         SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p)
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

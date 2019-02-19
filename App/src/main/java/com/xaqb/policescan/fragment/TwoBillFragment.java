@@ -171,9 +171,9 @@ public class TwoBillFragment extends BaseFragment {
     List<LogBill> mClues;
     private void connecting(int p) {
 
-        android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().bill_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
+        android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().bill_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().bill_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
+                .url(HttpUrlUtils.getHttpUrl().bill_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
 //                .params("","")
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

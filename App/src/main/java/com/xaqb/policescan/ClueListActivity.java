@@ -161,9 +161,9 @@ public class ClueListActivity extends BaseActivity {
     List<Clue> mClue;
     List<Clue> mClues;
     private void connecting(int p) {
-        Log.e("fule",HttpUrlUtils.getHttpUrl().clue_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
+        Log.e("fule",HttpUrlUtils.getHttpUrl().clue_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().clue_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
+                .url(HttpUrlUtils.getHttpUrl().clue_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
 //                .params("","")
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -175,8 +175,7 @@ public class ClueListActivity extends BaseActivity {
                         Log.e("fule", response);
 
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
-                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
-                            });
+                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {});
                             String num = mess.get("num").toString();
                             String count = mess.get("count").toString();
                             if (!NullUtil.getString(mess.get("count")).equals("0")){

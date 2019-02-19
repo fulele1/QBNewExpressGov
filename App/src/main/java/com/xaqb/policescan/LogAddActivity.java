@@ -275,7 +275,7 @@ public class LogAddActivity extends BaseActivity {
 
         OkHttpUtils
                 .post()
-                .url(HttpUrlUtils.getHttpUrl().com_list() + "?access_token=" +
+                .url(HttpUrlUtils.getHttpUrl().com_list(instance) + "?access_token=" +
                         SPUtils.get(instance, "access_token", ""))
                 .addParams("dccompanycode", comcode)
                 .addParams("dcorgcode", orgcode)

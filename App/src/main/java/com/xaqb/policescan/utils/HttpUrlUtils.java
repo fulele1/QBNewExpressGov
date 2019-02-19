@@ -1,5 +1,7 @@
 package com.xaqb.policescan.utils;
 
+import android.content.Context;
+
 /**
  * 接口地址
  */
@@ -12,16 +14,16 @@ public class HttpUrlUtils {
 
 
 
-    private String getBaseUrl() {
-        return "http://jdws.qbchoice.com";
+    private String getBaseUrl(Context context) {
+        return SPUtils.get(context,"url","").toString();
     }
     /**
      * 登录
      * /v1/governor/login
      * @return
      */
-    public String userLogin() {
-        return getBaseUrl() + "/v1/governor/login";
+    public String userLogin(Context context) {
+        return getBaseUrl(context) + "/v1/governor/login";
     }
 
     /**
@@ -29,8 +31,8 @@ public class HttpUrlUtils {
      * //http://jdws.qbchoice.cn/v1/governor/governor/update_pwd
      * @return
      */
-    public String modifypws() {
-        return getBaseUrl() + "/v1/governor/governor/update_pwd";
+    public String modifypws(Context context) {
+        return getBaseUrl(context) + "/v1/governor/governor/update_pwd";
     }
 
 
@@ -39,8 +41,8 @@ public class HttpUrlUtils {
      *  http://jdws.qbchoice.cnv1/governor/back_pwd
      * @return
      */
-    public String back_pwd() {
-        return getBaseUrl() + "/v1/governor/back_pwd";
+    public String back_pwd(Context context) {
+        return getBaseUrl(context) + "/v1/governor/back_pwd";
     }
 
 
@@ -49,185 +51,68 @@ public class HttpUrlUtils {
      *  http://jdws.qbchoice.cn/v1/governor/send_sms
      * @return
      */
-    public String getSmsCode() {
-        return getBaseUrl() + "/v1/governor/send_sms";
+    public String getSmsCode(Context context) {
+        return getBaseUrl(context) + "/v1/governor/send_sms";
     }
 
-    /**
-     * 品牌
-     * www.newexpress.com/v1/common/data/getBranch
-     *
-     * @return
-     */
-    public String getBrand() {
-        return getBaseUrl() + "common/data/getBranch";
+    public String getOrg(Context context) {
+        return getBaseUrl(context) + "/v1/governor/securityorganization/search";
     }
 
-
-    /**
-     * 管辖机构
-     * /v1/governor/securityorganization/search
-     *
-     * @return
-     */
-    public String getOrg() {
-        return getBaseUrl() + "/v1/governor/securityorganization/search";
+    public String query_com(Context context) {
+        return getBaseUrl(context) + "/v1/governor/company";
     }
 
-    /**
-     * 企业查询
-     * www.newexpress.com/v1/governor/company/search
-     *
-     * @return
-     */
-    public String query_com() {
-        return getBaseUrl() + "/v1/governor/company";
+    public String detail_com(Context context) {
+        return getBaseUrl(context) + "/v1/governor/company/";
     }
 
-    /**
-     * /v1/governor/company/：id
-     *
-     * @return
-     */
-    public String detail_com() {
-        return getBaseUrl() + "/v1/governor/company/";
+    public String brandcode(Context context) {
+        return getBaseUrl(context) + "/v1/governor/brandcode";
     }
 
-    /**
-     * /v1/governor/brandcode
-     *
-     * @return
-     */
-    public String brandcode() {
-        return getBaseUrl() + "/v1/governor/brandcode";
+    public String companycode(Context context) {
+        return getBaseUrl(context) + "/v1/governor/company";
     }
 
-    /**
-     *  http://jdws.qbchoice.cn/v1/governor/company
-     *
-     * @return
-     */
-    public String companycode() {
-        return getBaseUrl() + "/v1/governor/company";
+    public String query_per(Context context) {
+        return getBaseUrl(context) + "/v1/governor/employee";
     }
 
-    /**
-     * www.newexpress.com/v1/governor/staff/search
-     * 人员查询
-     * /v1/governor/employee
-     * @return
-     */
-    public String query_per() {
-        return getBaseUrl() + "/v1/governor/employee";
+    public String detail_per(Context context) {
+        return getBaseUrl(context) + "/v1/governor/employee/";
+    }
+    public String detail_org_down(Context context) {
+        return getBaseUrl(context) + "/v1/governor/dashboard/statistical";
+    }
+    public String detail_org_up(Context context) {
+        return getBaseUrl(context) + "/v1/governor/dashboard/index";
+    }
+    public String clue_list(Context context) {
+        return getBaseUrl(context) + "/v1/governor/securityclue";
+    }
+    public String clue_del(Context context) {
+        return getBaseUrl(context) + "/v1/governor/securityclue/";
     }
 
-    /**
-     * /v1/governor/employee/:id
-     *
-     * @return
-     */
-    public String detail_per() {
-        return getBaseUrl() + "/v1/governor/employee/";
+    public String bill_list(Context context) {
+        return getBaseUrl(context) + "/v1/governor/querylog";
+    }
+    public String joint_list(Context context) {
+        return getBaseUrl(context) + "/v1/governor/unioncheck";
+    }
+    public String bill_del(Context context) {
+        return getBaseUrl(context) + "/v1/governor/expresscode/search/";
+    }
+    public String com_list(Context context) {
+        return getBaseUrl(context) + "/v1/governor/dailycheck";
     }
 
-
-
-    /**
-     * /v1/governor/dashboard/statistical
-     *
-     * @return
-     */
-    public String detail_org_down() {
-        return getBaseUrl() + "/v1/governor/dashboard/statistical";
+    public String log_del(Context context) {
+        return getBaseUrl(context) + "/v1/governor/querylog/";
     }
-
-    /**
-     * /v1/governor/dashboard/index
-     *
-     * @return
-     */
-    public String detail_org_up() {
-        return getBaseUrl() + "/v1/governor/dashboard/index";
-    }
-
-    /**
-     * v1/governor/securityclue
-     *
-     * @return
-     */
-    public String clue_list() {
-        return getBaseUrl() + "/v1/governor/securityclue";
-    }
-
-    /**
-     * v1/governor/securityclue/:id
-     *
-     * @return
-     */
-    public String clue_del() {
-        return getBaseUrl() + "/v1/governor/securityclue/";
-    }
-
-
-    /**
-     * v1/governor/querylog    快递单
-     *
-     * @return
-     */
-    public String bill_list() {
-        return getBaseUrl() + "/v1/governor/querylog";
-    }
-
-    /**
-     *  http://jdws.qbchoice.cn/v1/governor/unioncheck   联合检查
-     *
-     * @return
-     */
-    public String joint_list() {
-        return getBaseUrl() + "/v1/governor/unioncheck";
-    }
-
-
-    /**
-     *  http://jdws.qbchoice.cn/v1/governor/expresscode/search/:code   快递单
-     *http://jdws.qbchoice.cn/v1/governor/expresscode/search/:code
-     * @return
-     */
-    public String bill_del() {
-        return getBaseUrl() + "/v1/governor/expresscode/search/";
-    }
-
-
-
-
-    /**
-     * /v1/governor/dailycheck     企业
-     *
-     * @return
-     */
-    public String com_list() {
-        return getBaseUrl() + "/v1/governor/dailycheck";
-    }
-
-
-
-    /**
-     * v1/governor/securityclue/:id
-     *
-     * @return
-     */
-    public String log_del() {
-        return getBaseUrl() + "/v1/governor/querylog/";
-    }
-
-
-    /**
-     * /v1/governor/article/bbimg
-     * *轮播图
-     * @return
-     */
-    public String banner_pic() {
-        return getBaseUrl() + "/v1/governor/article/bbimg";
+    public String banner_pic(Context context) {
+        return getBaseUrl(context) + "/v1/governor/article/bbimg";
     }
 
 

@@ -69,9 +69,9 @@ public class PerDelActivity extends BaseActivity {
     }
 
     private void internet() {
-        Log.e("fule", HttpUrlUtils.getHttpUrl().detail_per() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
+        Log.e("fule", HttpUrlUtils.getHttpUrl().detail_per(instance) + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().detail_per() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().detail_per(instance) + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override

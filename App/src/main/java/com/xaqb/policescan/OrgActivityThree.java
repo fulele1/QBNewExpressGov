@@ -115,14 +115,14 @@ public class OrgActivityThree extends BaseActivity {
                     views.remove(view3);
                     mViewPager.getAdapter().notifyDataSetChanged();//刷新一级列表
                 }
-                LogUtils.e("二级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
+                LogUtils.e("二级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString() + "&code=" +
                         SPUtils.get(mContext, "ou_securityorg", "").toString());
                 LogUtils.e("二级"+ SPUtils.get(mContext, "ou_securityorg", "").toString());
                 LogUtils.e("二级"+ list1.get(position).name+"-------------"+list1.get(position).id);
 
                 RestClient.builder()
-                        .url(HttpUrlUtils.getHttpUrl().getOrg() +
+                        .url(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                                 "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                                 + getIntentData(SPUtils.get(mContext, "ou_securityorg", "").toString())+"&nopage")
                         .success(new ISuccess() {
@@ -134,7 +134,7 @@ public class OrgActivityThree extends BaseActivity {
                                 });
                                 if (NullUtil.getString(map1.get("state")).equals("0")) {
                                     list2 = new ArrayList<>();
-                                    list2.add(new MenuData("0", "不限",""));
+                                    list2.add(new MenuData("0", "确定",""));
                                         if (!NullUtil.getString(map1.get("table")).equals("")){
                                         String table = map1.get("table").toString();
                                             LogUtils.e(table);
@@ -192,7 +192,7 @@ public class OrgActivityThree extends BaseActivity {
                     mViewPager.getAdapter().notifyDataSetChanged();//刷新二级列表
                 }
 
-                LogUtils.e("三级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg() +
+                LogUtils.e("三级"+SPUtils.get(mContext, "url", "").toString() + HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString() + "&code=" +
                         list2.get(position).id);
                 LogUtils.e("三级"+ list2.get(position).name+"------"+list2.get(position).id);
@@ -210,7 +210,7 @@ public class OrgActivityThree extends BaseActivity {
                     OrgActivityThree.this.finish();
                 }else {
                     RestClient.builder()
-                            .url(HttpUrlUtils.getHttpUrl().getOrg() +
+                            .url(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                                     "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                                     + getIntentData(list2.get(position).id))
                             .success(new ISuccess() {
@@ -222,7 +222,7 @@ public class OrgActivityThree extends BaseActivity {
                                     });
                                     if (NullUtil.getString(map1.get("state")).equals("0")) {
                                         list3 = new ArrayList<>();
-                                        list3.add(new MenuData("0", "不限",""));
+                                        list3.add(new MenuData("0", "确定",""));
                                         if (!NullUtil.getString(map1.get("table")).equals("")){
                                             String table = map1.get("table").toString();
                                             LogUtils.e(table);

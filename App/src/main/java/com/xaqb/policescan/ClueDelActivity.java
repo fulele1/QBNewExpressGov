@@ -30,11 +30,12 @@ import java.util.Map;
 @Route(path = "/qb/ClueDelActivity")
 public class ClueDelActivity extends BaseActivity {
     private ClueDelActivity instance;
-    private TextView tv_title_child, tv_right_child,txt__Per_cld;
+    private TextView tv_title_child, tv_right_child, txt__Per_cld;
     private String id;
     private ImageView img_pic_cdel;
-    private TextView txt_responsible_Per_cld,txt_responsible_tel_cld,txt_employee_count_cld,txt_get_count_cld,txt_post_count_cld;
-
+    private TextView txt_responsible_Per_cld,
+            txt_responsible_tel_cld, txt_employee_count_cld,
+            txt_get_count_cld, txt_post_count_cld, txt_tel_cld;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -51,9 +52,9 @@ public class ClueDelActivity extends BaseActivity {
     }
 
     private void internet() {
-        Log.e("fule", HttpUrlUtils.getHttpUrl().clue_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
+        Log.e("fule", HttpUrlUtils.getHttpUrl().clue_del(instance) + id + "?access_token=" + SPUtils.get(instance, "access_token", ""));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().clue_del() + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
+                .url(HttpUrlUtils.getHttpUrl().clue_del(instance) + id + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -72,12 +73,17 @@ public class ClueDelActivity extends BaseActivity {
                             txt_post_count_cld.setText(NullUtil.getString(map2.get("scsketch")));//线索信息
 //                            txt_post_count_cld.setText(NullUtil.getString(map2.get("scimg")));//图片
                             txt__Per_cld.setText(NullUtil.getString(map2.get("empname")));//录入人
+                            String tel = NullUtil.getString(map2.get("scmp"));
+                            if (tel.equals("")) {
+                                txt_tel_cld.setText("无");//联系电话
+                            } else {
+                                txt_tel_cld.setText(tel);//联系电话
+                            }
 
                             String url = NullUtil.getString(map2.get("scimg").toString());
                             Glide.with(instance)
                                     .load(url)
                                     .into(img_pic_cdel);
-
                         }
                     }
                 })
@@ -114,6 +120,7 @@ public class ClueDelActivity extends BaseActivity {
         txt_post_count_cld = findViewById(R.id.txt_post_count_cld);
         txt__Per_cld = findViewById(R.id.txt__Per_cld);
         img_pic_cdel = findViewById(R.id.img_pic_cdel);
+        txt_tel_cld = findViewById(R.id.txt_tel_cld);
     }
 
 }

@@ -198,9 +198,9 @@ public class ThreeFragment extends BaseFragment {
 
     private void connecting(int p) {
 
-        android.util.Log.e("fule", HttpUrlUtils.getHttpUrl().joint_list() + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p);
+        android.util.Log.e("fule", HttpUrlUtils.getHttpUrl().joint_list(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().joint_list()
+                .url(HttpUrlUtils.getHttpUrl().joint_list(instance)
                         + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

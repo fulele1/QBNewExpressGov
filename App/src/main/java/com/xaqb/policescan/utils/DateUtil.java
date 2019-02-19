@@ -3,6 +3,7 @@ package com.xaqb.policescan.utils;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -102,5 +103,28 @@ public class DateUtil {
         }
         return times;
     }
+
+
+    public static String get7Time() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+//        Date date = new Date(System.currentTimeMillis());//获取当前日期
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, -6);//今天的时间加一7
+        date = calendar.getTime();
+
+
+        return simpleDateFormat.format(date);
+    }
+
+
+
+    public static String getNow7Time(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
+
 
 }

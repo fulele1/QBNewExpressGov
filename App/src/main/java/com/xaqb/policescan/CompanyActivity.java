@@ -106,9 +106,9 @@ public class CompanyActivity extends AppCompatActivity {
     }
 
     public void okConnection() {
-        LogUtils.e(HttpUrlUtils.getHttpUrl().companycode()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage");
+        LogUtils.e(HttpUrlUtils.getHttpUrl().companycode(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage");
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().companycode()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage")
+                .url(HttpUrlUtils.getHttpUrl().companycode(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -128,17 +128,33 @@ public class CompanyActivity extends AppCompatActivity {
 
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
                                 for (Map<String, Object> map : list1) {
-
                                     BrandBean cityBean = new BrandBean();
-                                    cityBean.setName(NullUtil.getString(map.get("comname")));
-                                    cityBean.setCode(NullUtil.getString(map.get("comcode")));
+                                    if (NullUtil.getString(map.get("comname")).equals("陕西希伊艾斯快递西安莲湖丰庆分公司")){
+                                        cityBean.setName("陕西希伊斯快递西安莲湖丰庆分公司");
+
+                                    }else {
+                                        cityBean.setName(NullUtil.getString(map.get("comname")));
+                                    }
+                                        cityBean.setCode(NullUtil.getString(map.get("comcode")));
                                     list_all.add(cityBean);
                                 }
+
+
+//                              for (int i = 0;i<list1.size();i++){
+////                                    if (i!=656){
+//                                        LogUtils.e("size------"+list1.size()+"i——————"+i);
+//                                        BrandBean cityBean = new BrandBean();
+//                                        cityBean.setCode(NullUtil.getString(list1.get(i).get("comcode")));
+//                                        cityBean.setName(NullUtil.getString(list1.get(i).get("comname")));
+//                                        cityBean.setName("陕西希伊艾斯快递西安莲湖丰庆分公司");
+//                                        list_all.add(cityBean);
+////                                    }
+//                                }
+
                                 getData();
                             }
                         }
                     }
-
 
                 })
                 .failure(new IFailure() {
@@ -154,8 +170,6 @@ public class CompanyActivity extends AppCompatActivity {
                 })
                 .build()
                 .get();
-
-
     }
 
     /**

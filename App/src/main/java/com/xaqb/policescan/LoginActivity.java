@@ -7,9 +7,11 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.xaqb.policescan.utils.DialogLoadingUtil;
 import com.xaqb.policescan.utils.HttpUrlUtils;
 import com.xaqb.policescan.utils.LastClickUtil;
 import com.xaqb.policescan.utils.NullUtil;
+import com.xaqb.policescan.utils.ProvinceUtil;
 import com.xaqb.policescan.utils.SPUtils;
 import com.xaqb.policescan.utils.StatuBarUtil;
 
@@ -43,6 +46,7 @@ public class LoginActivity extends BaseActivity {
 //    @BindView(R.id.txt_register_login)
     TextView txt_back_pwd,bt_login,version_login;
     CheckBox cbRememberPsw;
+    Spinner sp_city_login;
     EditText et_phone_login,et_psw_login;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -54,7 +58,43 @@ public class LoginActivity extends BaseActivity {
         unbinder= ButterKnife.bind(instance);
         StatuBarUtil.translucentStatusBar(this,true);
         initView();
+        initData();
+        addEvent();
     }
+    private void addEvent() {
+        sp_city_login.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                SPUtils.put(instance, "url", ProvinceUtil.geturl(i));
+                SPUtils.put(instance, "choice", ""+i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                SPUtils.put(instance, "url", ProvinceUtil.geturl(0));
+                SPUtils.put(instance, "choice", 0);
+
+            }
+        });
+    }
+    private void initData() {
+        String choice = (String) SPUtils.get(instance,"choice","");
+        if (choice.equals("0")){
+            sp_city_login.setSelection(0,true);
+            SPUtils.put(instance, "url", ProvinceUtil.geturl(0));
+        }else if (choice.equals("1")){
+            sp_city_login.setSelection(1,true);
+            SPUtils.put(instance, "url", ProvinceUtil.geturl(1));
+        }else if (choice.equals("2")){
+            sp_city_login.setSelection(2,true);
+            SPUtils.put(instance, "url", ProvinceUtil.geturl(2));
+        }else if (choice.equals("3")){
+            sp_city_login.setSelection(3,true);
+            SPUtils.put(instance, "url", ProvinceUtil.geturl(3));
+        }
+
+    }
+
 
     private void initView() {
         txt_finished = findViewById(R.id.txt_finished_login);
@@ -70,6 +110,7 @@ public class LoginActivity extends BaseActivity {
         bt_login = findViewById(R.id.bt_login_login);
         cbRememberPsw = (CheckBox) findViewById(R.id.cb_remember_psw);
         version_login = findViewById(R.id.version_login);
+        sp_city_login = findViewById(R.id.sp_city_login);
 
         String username = (String) SPUtils.get(instance, "userName", "");
         String psw = (String) SPUtils.get(instance, "userPsw", "");
@@ -137,9 +178,9 @@ public class LoginActivity extends BaseActivity {
 
                         return;
                     }else {
-                        Log.e("fule",HttpUrlUtils.getHttpUrl().userLogin());
+                        Log.e("fule",HttpUrlUtils.getHttpUrl().userLogin(instance));
                         RestClient.builder()
-                                .url(HttpUrlUtils.getHttpUrl().userLogin())
+                                .url(HttpUrlUtils.getHttpUrl().userLogin(instance))
                                 .params("user",et_phone)
                                 .params("pwd",et_psw)
                                 .success(new ISuccess() {

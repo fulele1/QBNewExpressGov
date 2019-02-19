@@ -151,11 +151,11 @@ public class ExpressActivity extends BaseActivity {
     }
 
     private void internet(double latitude,double longitude,String address) {
-        Log.e("fule", HttpUrlUtils.getHttpUrl().bill_del() + billcode + "?access_token="
+        Log.e("fule", HttpUrlUtils.getHttpUrl().bill_del(instance) + billcode + "?access_token="
                 + SPUtils.get(instance, "access_token", "")
                 +getIntentData(latitude,longitude,address));
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().bill_del() + billcode + "?access_token="
+                .url(HttpUrlUtils.getHttpUrl().bill_del(instance) + billcode + "?access_token="
                         + SPUtils.get(instance, "access_token", "")
                         +getIntentData(latitude,longitude,address))
                 .success(new ISuccess() {

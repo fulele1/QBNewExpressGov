@@ -101,7 +101,7 @@ public class BackPWDActivity extends BaseActivity {
             return;
         } else {
             RestClient.builder()
-                    .url(HttpUrlUtils.getHttpUrl().back_pwd())
+                    .url(HttpUrlUtils.getHttpUrl().back_pwd(instance))
                     .params("tel", tel)
                     .params("checkcode", checkcode)
                     .params("newpwd", newpwd)
@@ -160,10 +160,10 @@ public class BackPWDActivity extends BaseActivity {
             DialogLoadingUtil.getInstance(instance).dismiss();
         } else {
 
-            LogUtils.e(HttpUrlUtils.getHttpUrl().getSmsCode() +
+            LogUtils.e(HttpUrlUtils.getHttpUrl().getSmsCode(instance) +
                     "?tel=" + phone);
             RestClient.builder()
-                    .url(HttpUrlUtils.getHttpUrl().getSmsCode() +
+                    .url(HttpUrlUtils.getHttpUrl().getSmsCode(instance) +
                             "?tel=" + phone)
                     .success(new ISuccess() {
                         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

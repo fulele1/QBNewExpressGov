@@ -18,9 +18,10 @@
             android:id="@+id/txt_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:textColor="@color/text_c"
-            android:background="@color/background"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_horizontal_margin"
+            android:textColor="@color/main"
+            android:background="@color/wirte"
             />
 
         <com.github.jdsjlzx.recyclerview.LRecyclerView

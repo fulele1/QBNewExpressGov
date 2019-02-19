@@ -111,14 +111,14 @@ public class OrgActivityTwo extends BaseActivity {
                     mViewPager.getAdapter().notifyDataSetChanged();//刷新一级列表
                 }
 
-                LogUtils.e("二级" + HttpUrlUtils.getHttpUrl().getOrg() +
+                LogUtils.e("二级" + HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                         "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                         + getIntentData(SPUtils.get(mContext, "ou_securityorg", "").toString()));
                 LogUtils.e("二级" + SPUtils.get(mContext, "ou_securityorg", "").toString());
                 LogUtils.e("二级" + list1.get(position).name + "-------------" + list1.get(position).id);
 
                 RestClient.builder()
-                        .url(HttpUrlUtils.getHttpUrl().getOrg() +
+                        .url(HttpUrlUtils.getHttpUrl().getOrg(mContext) +
                                 "?access_token=" + SPUtils.get(mContext, "access_token", "").toString()
                                 + getIntentData(SPUtils.get(mContext, "ou_securityorg", "").toString()))
                         .success(new ISuccess() {
@@ -133,7 +133,7 @@ public class OrgActivityTwo extends BaseActivity {
                                         String table = map1.get("table").toString();
                                         LogUtils.e(table);
                                         list2 = new ArrayList<>();
-                                        list2.add(new MenuData("0", "不限",""));
+                                        list2.add(new MenuData("0", "确定",""));
                                         List<Map> list1 = JSON.parseArray(table, Map.class);
                                         for (Map<String, Object> map : list1) {
                                             MenuData menuData = new MenuData(NullUtil.getString(map.get("socode")),

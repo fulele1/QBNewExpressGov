@@ -77,7 +77,7 @@ public class MapCompanyAdapter extends BaseAdapter {
                 String latlug = mCom.get(i).getLatLng()+"";
                 String latmark = latlug.substring(10, latlug.indexOf(","));
                 String lugmark = latlug.substring(latlug.indexOf(",")+1,latlug.indexOf(")"));
-                showchoseAdialog(mContext,latmark,lugmark,mCom.get(i).getName());
+                showchoseAdialog(mContext,latmark,lugmark,mCom.get(i).getName(),mCom.get(i).getAddress());
 
             }
         });
@@ -92,7 +92,8 @@ AlertDialog alertDialog;
      */
     public AlertDialog showchoseAdialog(Context context, final String latmark,
                                         final String lugmark,
-                                        final String name){
+                                        final String name,
+                                        final String address){
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.show();
         Window window = alertDialog.getWindow();
@@ -110,7 +111,7 @@ AlertDialog alertDialog;
         baidu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GoMapUtil.setUpBaiduAPPByMine(mContext,name);
+                GoMapUtil.setUpBaiduAPPByMine(mContext,address);
             }
         });
         return alertDialog;

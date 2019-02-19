@@ -3,6 +3,8 @@ package com.xaqb.policescan.Listview;
 
 import android.text.TextUtils;
 
+import com.xaqb.policescan.utils.LogUtils;
+
 import java.util.ArrayList;
 
 public class BrandBean {
@@ -51,7 +53,9 @@ public class BrandBean {
 
     public void setName(String name) {
         this.name = name;
+        LogUtils.e(name);
         name_en = getPinYin(name);//获取字母名称
+        LogUtils.e(name+"---获取字母名称---"+name_en.charAt(0));
         name_en = name_en.toUpperCase();//把小写字母换成大写字母
         if (!TextUtils.isEmpty(name_en)) {
             char head = name_en.charAt(0);

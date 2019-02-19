@@ -277,7 +277,9 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
     @Override
     public void clickBaidu(MultiPointItem pointItem) {
         super.clickBaidu(pointItem);
-        GoMapUtil.setUpBaiduAPPByMine(instance, pointItem.getTitle());
+        GoMapUtil.setUpBaiduAPPByMine(instance,pointItem.getTitle());
+        LogUtils.e(pointItem.getTitle());
+        LogUtils.e(pointItem.getSnippet());
     }
 
     @Override
@@ -328,7 +330,7 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
                                     LatLng latLng = new LatLng(Double.parseDouble(NullUtil.getString(map.get("comlat"))),
                                             Double.parseDouble(NullUtil.getString(map.get("comlng"))));
                                     LatLngs.add(latLng);
-                                    comnames.add(NullUtil.getString(map.get("bcname")) + NullUtil.getString(map.get("comaddress")));
+                                    comnames.add(NullUtil.getString(map.get("comaddress")));
 //
                                     //列表中的
                                     Com com = new Com();

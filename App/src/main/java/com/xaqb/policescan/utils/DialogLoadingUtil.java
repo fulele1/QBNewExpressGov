@@ -22,7 +22,7 @@ public class DialogLoadingUtil extends AlertDialog {
         if (loadingDialog == null){
         loadingDialog = new DialogLoadingUtil(context,R.style.TransparentDialog);
         loadingDialog.setCancelable(true);
-        loadingDialog.setCanceledOnTouchOutside(true);
+        loadingDialog.setCanceledOnTouchOutside(true);//触屏取消功能
         }
         return loadingDialog;
     }

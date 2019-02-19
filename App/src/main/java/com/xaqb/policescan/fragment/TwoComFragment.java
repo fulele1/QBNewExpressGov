@@ -193,9 +193,9 @@ public class TwoComFragment extends BaseFragment {
     List<LogCom> mClues;
     private void connecting(int p) {
 
-        android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().com_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
+        android.util.Log.e("fule",HttpUrlUtils.getHttpUrl().com_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().com_list()+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
+                .url(HttpUrlUtils.getHttpUrl().com_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
 //                .params("","")
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
