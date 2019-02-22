@@ -14,6 +14,7 @@ import com.xaqb.policescan.utils.StatuBarUtil;
 public class UserActivity extends BaseActivity {
 
     private UserActivity instance;
+    private TextView tv_title_child_tilte;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +40,7 @@ public class UserActivity extends BaseActivity {
         txt_username_user = findViewById(R.id.txt_username_user);
         txt_org_user = findViewById(R.id.txt_org_user);
         txt_orgcode_user = findViewById(R.id.txt_orgcode_user);
+        tv_title_child_tilte = findViewById(R.id.tv_title_child_tilte);
+        tv_title_child_tilte.setText("个人信息");
     }
 }
