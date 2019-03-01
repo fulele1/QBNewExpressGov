@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,19 +50,26 @@ import java.util.Map;
 @Route(path = "/qb/PerListActivity")
 public class PerListActivity extends BaseActivity {
 
-   private PerListActivity instance;
+    private PerListActivity instance;
     private TextView tv_title_child;
     private TextView txt_size;
     private LRecyclerView list_r;
-    /**服务器端一共多少条数据*/
+    private RelativeLayout empty_view;
+    /**
+     * 服务器端一共多少条数据
+     */
     private int TOTAL_COUNTER;//如果服务器没有返回总数据或者总页数，这里设置为最大值比如10000，什么时候没有数据了根据接口返回判断
 
-    /**每一页展示多少条数据*/
+    /**
+     * 每一页展示多少条数据
+     */
     private int REQUEST_COUNT;
 
-    /**已经获取到多少条数据了*/
+    /**
+     * 已经获取到多少条数据了
+     */
     private static int mCurrentCounter = 0;
-    private  int mCurrentpage = 1;
+    private int mCurrentpage = 1;
 
 
     private PerAdapter mDataAdapter = null;
@@ -105,7 +113,7 @@ public class PerListActivity extends BaseActivity {
 
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     // loading more
-                    mCurrentpage =mCurrentpage+1;
+                    mCurrentpage = mCurrentpage + 1;
                     connecting(mCurrentpage);
                 } else {
                     //the end
@@ -126,9 +134,11 @@ public class PerListActivity extends BaseActivity {
         list_r = findViewById(R.id.list_recycleview);
 
         txt_size = findViewById(R.id.txt_size);
+        empty_view = findViewById(R.id.empty_view);
+
     }
 
-    public String  getIntentData(){
+    public String getIntentData() {
         Bundle bundle = getIntent().getBundleExtra("bundle");
         String comname = bundle.getString("comname");
         String empname = bundle.getString("empname");
@@ -137,13 +147,13 @@ public class PerListActivity extends BaseActivity {
         String comsecurityorg = bundle.getString("comsecurityorg");
 
         HashMap map = new HashMap();
-        map.put("\"comname\"", "\""+comname+"\"");
-        map.put("\"empname\"", "\""+empname+"\"");
-        map.put("\"empcertcode\"", "\""+empcertcode+"\"");
-        map.put("\"empphone\"", "\""+empphone+"\"");
-        map.put("\"comsecurityorg\"", "\""+comsecurityorg+"\"");
+        map.put("\"comname\"", "\"" + comname + "\"");
+        map.put("\"empname\"", "\"" + empname + "\"");
+        map.put("\"empcertcode\"", "\"" + empcertcode + "\"");
+        map.put("\"empphone\"", "\"" + empphone + "\"");
+        map.put("\"comsecurityorg\"", "\"" + comsecurityorg + "\"");
 
-        return "&condition="+ ConditionUtil.getConditionString(map);
+        return "&condition=" + ConditionUtil.getConditionString(map);
     }
 
     private void initRecycle() {
@@ -168,26 +178,27 @@ public class PerListActivity extends BaseActivity {
         list_r.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
 
         //add a HeaderView
-        final View header = LayoutInflater.from(this).inflate(R.layout.sample_header,(ViewGroup)findViewById(android.R.id.content), false);
+        final View header = LayoutInflater.from(this).inflate(R.layout.sample_header, (ViewGroup) findViewById(android.R.id.content), false);
         mLRecyclerViewAdapter.addHeaderView(header);
 
         //设置头部加载颜色
-        list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary ,android.R.color.white);
+        list_r.setHeaderViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载颜色
-        list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary ,android.R.color.white);
+        list_r.setFooterViewColor(R.color.colorAccent, R.color.colorPrimary, android.R.color.white);
         //设置底部加载文字提示
-        list_r.setFooterViewHint("拼命加载中","已经全部为你呈现了","网络不给力啊，点击再试一次吧");
+        list_r.setFooterViewHint("拼命加载中", "已经全部为你呈现了", "网络不给力啊，点击再试一次吧");
 
     }
 
 
-    List<Per> mClue ;
+    List<Per> mClue;
     List<Per> mClues;
+
     private void connecting(int p) {
-        LogUtils.e(HttpUrlUtils.getHttpUrl().query_per(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p);
+        LogUtils.e(HttpUrlUtils.getHttpUrl().query_per(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p);
 
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().query_per(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "")+getIntentData()+ "&p=" + p)
+                .url(HttpUrlUtils.getHttpUrl().query_per(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + getIntentData() + "&p=" + p)
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
@@ -222,7 +233,7 @@ public class PerListActivity extends BaseActivity {
 
                                 TOTAL_COUNTER = Integer.valueOf(count).intValue();
                                 REQUEST_COUNT = Integer.valueOf(num).intValue();
-                                txt_size.setText("共查询到"+count+"条数据");
+                                txt_size.setText("共查询到" + count + "条数据");
                                 //子条目的点击事件
                                 mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
                                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -230,27 +241,26 @@ public class PerListActivity extends BaseActivity {
                                     public void onItemClick(View view, int position) {
                                         if (mDataAdapter.getDataList().size() > position) {
                                             Bundle bundle = new Bundle();
-                                            bundle.putString("id",mClues.get(position).getId());
-                                            ARouterUtil.intentPar("/qb/PerDelActivity",view,bundle);
+                                            bundle.putString("id", mClues.get(position).getId());
+                                            ARouterUtil.intentPar("/qb/PerDelActivity", view, bundle);
                                         }
                                     }
 
                                 });
-
-                            }else {
-                                mHandler.sendEmptyMessage(-3);
+                                empty_view.setVisibility(View.GONE);
+                                list_r.setVisibility(View.VISIBLE);
+                            } else {
                                 txt_size.setVisibility(View.GONE);
+                                list_r.setEmptyView(empty_view);
+                                mHandler.sendEmptyMessage(-3);
                             }
-                        }  else if(NullUtil.getString(map1.get("state")).equals("10")){
+                        } else if (NullUtil.getString(map1.get("state")).equals("10")) {
                             ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
 
-                        }else{
+                        } else {
                             Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
 
                         }
-
-
-
 
 
                     }

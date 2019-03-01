@@ -42,7 +42,7 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
                 android:alpha="0.7"
-                android:background="@drawable/bg_solid"
+                android:background="@mipmap/search"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/layout_padding_small"
                 android:paddingTop="@dimen/layout_padding_small">
@@ -60,8 +60,8 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:background="@null"
                     android:hint="搜索订单号"
+                    android:background="@null"
                     android:textColor="@color/wirte"
                     android:textColorHint="@color/wirte"
                     android:textSize="@dimen/edit_text" />
@@ -191,6 +191,35 @@
             android:layout_height="wrap_content"
             android:background="@color/wirte">
 
+
+
+
+            <TextView
+                android:id="@+id/txt_about_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/line_large"
+                android:drawableTop="@mipmap/about"
+                android:gravity="center"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="关于我们" />
+
+            <TextView
+                android:id="@+id/txt_download_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/line_large"
+                android:drawableTop="@mipmap/download"
+                android:gravity="center"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="扫描下载" />
+
+
+
             <TextView
                 android:id="@+id/txt_exit_one"
                 android:layout_width="match_parent"
@@ -202,32 +231,6 @@
                 android:gravity="center"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="退出系统" />
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/layout_padding"
-                android:layout_weight="1"
-                android:drawablePadding="@dimen/line_large"
-                android:drawableTop="@mipmap/index_btn_password"
-                android:gravity="center"
-                android:visibility="invisible"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="@string/mdf_psw" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/layout_padding"
-                android:layout_weight="1"
-                android:drawablePadding="@dimen/line_large"
-                android:drawableTop="@mipmap/update"
-                android:gravity="center"
-                android:visibility="invisible"
-                android:padding="@dimen/activity_horizontal_margin"
-                android:text="@string/update" />
-
 
         </LinearLayout>
 

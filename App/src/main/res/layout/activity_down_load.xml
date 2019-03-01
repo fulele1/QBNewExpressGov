@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bgpolice"
+    android:orientation="vertical"
+    tools:context="com.xaqb.policescan.DownLoadActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_back_child_title"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="返回"
+            android:textColor="@color/wirte"
+            android:drawableLeft="@mipmap/back"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:layout_marginLeft="@dimen/layout_padding_small"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="扫码下载"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textSize="@dimen/title_size"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="返回"
+            android:textColor="@color/wirte"
+            android:drawableLeft="@mipmap/back"
+            android:gravity="center"
+            android:textSize="@dimen/edit_text"
+            android:layout_marginRight="@dimen/layout_padding_small"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+
+   <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@mipmap/card"
+       android:layout_gravity="center"
+       />
+
+</LinearLayout>

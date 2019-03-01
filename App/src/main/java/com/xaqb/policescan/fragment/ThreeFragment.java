@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,6 +61,7 @@ public class ThreeFragment extends BaseFragment {
 
     private LRecyclerView list_r;
     private FloatingActionButton floatingActionButton;
+    private RelativeLayout empty_view;
     /**
      * 服务器端一共多少条数据
      */
@@ -91,6 +93,7 @@ public class ThreeFragment extends BaseFragment {
         instance = ThreeFragment.this.getActivity();
         list_r = view.findViewById(R.id.list_recycleview);
         txt_size = view.findViewById(R.id.txt_size);
+        empty_view = view.findViewById(R.id.empty_view);
         floatingActionButton = view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,8 +256,11 @@ public class ThreeFragment extends BaseFragment {
                                     }
 
                                 });
-
+                                empty_view.setVisibility(View.GONE);
+                                list_r.setVisibility(View.VISIBLE);
                             } else {
+                                txt_size.setVisibility(View.GONE);
+                                list_r.setEmptyView(empty_view);
                                 mHandler.sendEmptyMessage(-3);
                             }
                         }else if (NullUtil.getString(map1.get("state")).equals("10")) {

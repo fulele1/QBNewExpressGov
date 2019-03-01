@@ -56,31 +56,31 @@ import pub.devrel.easypermissions.EasyPermissions;
  */
 
 public class OneFragment extends BaseFragment implements View.OnClickListener,
-        EasyPermissions.PermissionCallbacks{
+        EasyPermissions.PermissionCallbacks {
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
     private Context instance;
     private View view;
-    private ImageView iv_msg,img_scan_one,iv_user_main;
+    private ImageView iv_msg, img_scan_one, iv_user_main;
     private ConvenientBanner convenientBanner;
     private List<Integer> mImageList;
-    private TextView txt_com ;
-    private TextView txt_per ;
-    private TextView txt_map ;
-    private TextView txt_clue ;
-    private TextView txt_psw ;
-    private TextView txt_exit,txt_update_one ;
-    private EditText et_query_main ;
+    private TextView txt_com;
+    private TextView txt_per;
+    private TextView txt_map;
+    private TextView txt_clue;
+    private TextView txt_psw;
+    private TextView txt_exit, txt_update_one, txt_about_one, txt_download_one;
+    private EditText et_query_main;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_one,null);
+        view = inflater.inflate(R.layout.fragment_one, null);
         instance = this.getActivity();
         initView();
         initData();
         addEvent();
         getConnection();//轮播图
-        new UpdateUtil(getActivity(), "25").getVersion();
+        new UpdateUtil(getActivity(), "18").getVersion();
         return view;
     }
 
@@ -92,18 +92,20 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
     }
 
     public void initView() {
-        convenientBanner =  view.findViewById(R.id.cb_main);
-        txt_com =  view.findViewById(R.id.txt_com_one);
-        txt_per =  view.findViewById(R.id.txt_per_one);
-        txt_map =  view.findViewById(R.id.txt_map_one);
-        txt_clue =  view.findViewById(R.id.txt_clue_one);
-        txt_psw =  view.findViewById(R.id.txt_psw_one);
-        txt_exit =  view.findViewById(R.id.txt_exit_one);
-        txt_update_one =  view.findViewById(R.id.txt_update_one);
-        iv_msg =  view.findViewById(R.id.iv_msg_main);
-        img_scan_one =  view.findViewById(R.id.img_scan_one);
-        iv_user_main =  view.findViewById(R.id.iv_user_main);
-        et_query_main =  view.findViewById(R.id.et_query_main);
+        convenientBanner = view.findViewById(R.id.cb_main);
+        txt_com = view.findViewById(R.id.txt_com_one);
+        txt_per = view.findViewById(R.id.txt_per_one);
+        txt_map = view.findViewById(R.id.txt_map_one);
+        txt_clue = view.findViewById(R.id.txt_clue_one);
+        txt_psw = view.findViewById(R.id.txt_psw_one);
+        txt_exit = view.findViewById(R.id.txt_exit_one);
+        txt_about_one = view.findViewById(R.id.txt_about_one);
+        txt_download_one = view.findViewById(R.id.txt_download_one);
+        txt_update_one = view.findViewById(R.id.txt_update_one);
+        iv_msg = view.findViewById(R.id.iv_msg_main);
+        img_scan_one = view.findViewById(R.id.img_scan_one);
+        iv_user_main = view.findViewById(R.id.iv_user_main);
+        et_query_main = view.findViewById(R.id.et_query_main);
         requestCodeQRCodePermissions();
     }
 
@@ -127,6 +129,8 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
         img_scan_one.setOnClickListener(this);
         iv_user_main.setOnClickListener(this);
         txt_update_one.setOnClickListener(this);
+        txt_about_one.setOnClickListener(this);
+        txt_download_one.setOnClickListener(this);
 
     }
 
@@ -134,49 +138,54 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.txt_com_one://企业信息
-                ARouterUtil.intentNoPar("/qb/ComQueryActivity",view);
+                ARouterUtil.intentNoPar("/qb/ComQueryActivity", view);
                 break;
             case R.id.txt_per_one://从业人员
-                ARouterUtil.intentNoPar("/qb/PerQueryActivity",view);
+                ARouterUtil.intentNoPar("/qb/PerQueryActivity", view);
                 break;
             case R.id.txt_map_one://地图导航
-                ARouterUtil.intentNoPar("/qb/MapNavgActivity",view);
+                ARouterUtil.intentNoPar("/qb/MapNavgActivity", view);
 
                 break;
             case R.id.txt_clue_one://线索信息
-                ARouterUtil.intentNoPar("/qb/ClueListActivity",view);
+                ARouterUtil.intentNoPar("/qb/ClueListActivity", view);
 
                 break;
             case R.id.txt_psw_one://修改密码
-                ARouterUtil.intentNoPar("/qb/ModifyPSWActivity",view);
+                ARouterUtil.intentNoPar("/qb/ModifyPSWActivity", view);
 
                 break;
             case R.id.txt_exit_one://退出系统
-                showAdialog(instance,"确定要退出?","确定","取消");
+                showAdialog(instance, "确定要退出?", "确定", "取消");
                 break;
             case R.id.iv_msg_main://通知消息
-                ARouterUtil.intentNoPar("/qb/MsgListActivity",view);
+                ARouterUtil.intentNoPar("/qb/MsgListActivity", view);
                 break;
 
             case R.id.img_scan_one://二维码扫描
-                if (et_query_main.getText().toString().equals("")){
-                    ARouterUtil.intentNoPar("/qb/ScanActivity",view);
-                }else{
+                if (et_query_main.getText().toString().equals("")) {
+                    ARouterUtil.intentNoPar("/qb/ScanActivity", view);
+                } else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("billcode",et_query_main.getText().toString());
-                    ARouterUtil.intentPar("/qb/ExpressActivity",v,bundle);
+                    bundle.putString("billcode", et_query_main.getText().toString());
+                    ARouterUtil.intentPar("/qb/ExpressActivity", v, bundle);
                 }
                 break;
             case R.id.iv_user_main://个人信息
-                ARouterUtil.intentNoPar("/qb/UserActivity",view);
-
+                ARouterUtil.intentNoPar("/qb/UserActivity", view);
+                break;
+            case R.id.txt_about_one://关于我们
+                ARouterUtil.intentNoPar("/qb/AboutActivity", view);
+                break;
+            case R.id.txt_download_one://扫描下载
+                ARouterUtil.intentNoPar("/qb/DownLoadActivity", view);
                 break;
             case R.id.txt_update_one://检查更新
                 LogUtils.e("检查更新");
-                SPUtils.put(instance,"isclickFragment","true");
-                new UpdateUtil(getActivity(), "25").getVersion();
+                SPUtils.put(instance, "isclickFragment", "true");
+                new UpdateUtil(getActivity(), "18").getVersion();
                 break;
         }
 
@@ -186,7 +195,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void okDialog() {
 //        SPUtils.put(instance, "userPsw", "");//清除密码
-        ARouterUtil.intentNoPar("/qb/loginActivity",view);
+        ARouterUtil.intentNoPar("/qb/loginActivity", view);
         OneFragment.this.getActivity().finish();
     }
 
@@ -222,19 +231,20 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
 
 
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().banner_pic(instance)+"?access_token="+SPUtils.get(instance,"access_token",""))
+                .url(HttpUrlUtils.getHttpUrl().banner_pic(instance) + "?access_token=" + SPUtils.get(instance, "access_token", ""))
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Log.e("fule","轮播"+response);
-                        Map<String, Object> map1 = JSON.parseObject(response,new TypeReference<Map<String, Object>>(){});
+                        Log.e("fule", "轮播" + response);
+                        Map<String, Object> map1 = JSON.parseObject(response, new TypeReference<Map<String, Object>>() {
+                        });
 
-                        if (map1.containsKey("table")){
-                            if (map1.get("state").toString().equals("0")){
+                        if (map1.containsKey("table")) {
+                            if (map1.get("state").toString().equals("0")) {
                                 String table = map1.get("table").toString();
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
-                                images = new String [list1.size()] ;
-                                url = new String [list1.size()] ;
+                                images = new String[list1.size()];
+                                url = new String[list1.size()];
                                 for (int j = 0; j < list1.size(); j++) {
                                     LogUtils.e("图片");
                                     images[j] = NullUtil.getString(list1.get(j).get("artimg"));
@@ -268,11 +278,11 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
 //                                    }
                                     }
                                 });
-                        }
+                            }
 
 
                         }
-                        if (map1.get("state").toString().equals("202")){
+                        if (map1.get("state").toString().equals("202")) {
                             Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
                         }
                     }

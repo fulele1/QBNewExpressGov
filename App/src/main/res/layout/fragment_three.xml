@@ -42,8 +42,14 @@
             android:id="@+id/list_recycleview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@mipmap/nodata"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+        <include
+            android:id="@+id/empty_view"
+            layout="@layout/empty_layout"
+            android:visibility="gone"/>
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"

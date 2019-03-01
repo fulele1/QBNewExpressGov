@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xaqb.policescan.R;
+import com.xaqb.policescan.utils.GlideRoundTransform;
 
 
 /**
@@ -37,8 +38,9 @@ public class ComAdapter extends ListBaseAdapter<Com> {
         txt_name_total_lc.setText(item.getBelongs());
         txt_address_lc.setText(item.getAddress());
 //        if(!item.getPic().equals("")&&item.getPic()!=null){
-//            Glide.with(mContext).load(item.getPic()).transform(new GlideRoundTransform(mContext,10))
-//                    .placeholder(R.mipmap.per).error(R.mipmap.ic_launcher).into(tv_pic);
+//            Glide.with(mContext)
+//                    .load(item.getPic())
+//                    .into(tv_pic);
 //        }
 
 

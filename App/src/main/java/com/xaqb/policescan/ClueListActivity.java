@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,15 +51,22 @@ public class ClueListActivity extends BaseActivity {
     private TextView tv_title_child;
     private TextView txt_size;
     private LRecyclerView list_r;
-    /**服务器端一共多少条数据*/
+    private RelativeLayout empty_view;
+    /**
+     * 服务器端一共多少条数据
+     */
     private int TOTAL_COUNTER;//如果服务器没有返回总数据或者总页数，这里设置为最大值比如10000，什么时候没有数据了根据接口返回判断
 
-    /**每一页展示多少条数据*/
+    /**
+     * 每一页展示多少条数据
+     */
     private int REQUEST_COUNT;
 
-    /**已经获取到多少条数据了*/
+    /**
+     * 已经获取到多少条数据了
+     */
     private static int mCurrentCounter = 0;
-    private  int mCurrentpage = 1;
+    private int mCurrentpage = 1;
 
 
     private ClueAdapter mDataAdapter = null;
@@ -120,6 +128,8 @@ public class ClueListActivity extends BaseActivity {
         list_r = findViewById(R.id.list_recycleview);
 
         txt_size = findViewById(R.id.txt_size);
+        empty_view = findViewById(R.id.empty_view);
+
     }
 
     private void initRecycle() {
@@ -160,10 +170,11 @@ public class ClueListActivity extends BaseActivity {
 
     List<Clue> mClue;
     List<Clue> mClues;
+
     private void connecting(int p) {
-        Log.e("fule",HttpUrlUtils.getHttpUrl().clue_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p);
+        Log.e("fule", HttpUrlUtils.getHttpUrl().clue_list(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p);
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().clue_list(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&p="+p)
+                .url(HttpUrlUtils.getHttpUrl().clue_list(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&p=" + p)
 //                .params("","")
                 .success(new ISuccess() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -175,10 +186,11 @@ public class ClueListActivity extends BaseActivity {
                         Log.e("fule", response);
 
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
-                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {});
+                            Map<String, Object> mess = JSON.parseObject(map1.get("mess").toString(), new TypeReference<Map<String, Object>>() {
+                            });
                             String num = mess.get("num").toString();
                             String count = mess.get("count").toString();
-                            if (!NullUtil.getString(mess.get("count")).equals("0")){
+                            if (!NullUtil.getString(mess.get("count")).equals("0")) {
                                 mHandler.sendEmptyMessage(-1);
                                 list_r.setBackgroundColor(getResources().getColor(R.color.wirte));
                                 String table = map1.get("table").toString();
@@ -186,11 +198,11 @@ public class ClueListActivity extends BaseActivity {
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
                                 for (Map<String, Object> map : list1) {
                                     Clue com = new Clue();
-                                    com.setId( NullUtil.getString(map.get("scid")));//ID
-                                    com.setMeg( NullUtil.getString(map.get("scsketch")));//
-                                    com.setCom( NullUtil.getString(map.get("comname")));//
-                                    com.setDate( NullUtil.getString(map.get("sccreatetime")));
-                                    com.setPic( NullUtil.getString(map.get("scimg")));
+                                    com.setId(NullUtil.getString(map.get("scid")));//ID
+                                    com.setMeg(NullUtil.getString(map.get("scsketch")));//
+                                    com.setCom(NullUtil.getString(map.get("comname")));//
+                                    com.setDate(NullUtil.getString(map.get("sccreatetime")));
+                                    com.setPic(NullUtil.getString(map.get("scimg")));
                                     mClue.add(com);
                                     mClues.add(com);
                                 }
@@ -198,7 +210,7 @@ public class ClueListActivity extends BaseActivity {
 
                                 TOTAL_COUNTER = Integer.valueOf(count).intValue();
                                 REQUEST_COUNT = Integer.valueOf(num).intValue();
-                                txt_size.setText("共查询到"+count+"条数据");
+                                txt_size.setText("共查询到" + count + "条数据");
                                 //子条目的点击事件
                                 mLRecyclerViewAdapter.setOnItemClickListener(new OnItemClickListener() {
                                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -207,20 +219,22 @@ public class ClueListActivity extends BaseActivity {
                                         if (mDataAdapter.getDataList().size() > position) {
 
                                             Bundle bundle = new Bundle();
-                                            bundle.putString("id",mClues.get(position).getId());
-                                            ARouterUtil.intentPar("/qb/ClueDelActivity", view,bundle);
+                                            bundle.putString("id", mClues.get(position).getId());
+                                            ARouterUtil.intentPar("/qb/ClueDelActivity", view, bundle);
                                         }
 
                                     }
 
                                 });
-
-                            }else{
-                                mHandler.sendEmptyMessage(-3);
+                                empty_view.setVisibility(View.GONE);
+                                list_r.setVisibility(View.VISIBLE);
+                            } else {
                                 txt_size.setVisibility(View.GONE);
+                                list_r.setEmptyView(empty_view);
+                                mHandler.sendEmptyMessage(-3);
                             }
 
-                        }else if (NullUtil.getString(map1.get("state")).equals("10")) {
+                        } else if (NullUtil.getString(map1.get("state")).equals("10")) {
                             ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
                         } else {
                             Toast.makeText(instance, map1.get("mess").toString(), Toast.LENGTH_SHORT).show();
@@ -334,9 +348,6 @@ public class ClueListActivity extends BaseActivity {
         }
         return true;
     }
-
-
-
 
 
 }

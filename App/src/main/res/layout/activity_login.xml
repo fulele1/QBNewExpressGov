@@ -130,13 +130,7 @@
                     android:text=""
                     />
 
-                <TextView
-                    android:id="@+id/txt_back_pwd_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="忘记密码"
-                    android:textColor="@color/wirte" />
+
             </LinearLayout>
 
             <LinearLayout style="@style/horizontal_black_line_small_login"
@@ -147,7 +141,7 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:paddingLeft="@dimen/activity_horizontal_margin">
@@ -172,6 +166,22 @@
                 android:textSize="12sp"
                 android:textColor="@color/wirte"
                 />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"></LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt_back_pwd_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="忘记密码"
+                android:layout_gravity="center"
+                android:textColor="@color/wirte"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
 
         </LinearLayout>

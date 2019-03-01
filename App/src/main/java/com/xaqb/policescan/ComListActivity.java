@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class ComListActivity extends BaseActivity {
     private TextView tv_title_child;
     private TextView txt_size;
     private LRecyclerView list_r;
+    private RelativeLayout empty_view;
     /**
      * 服务器端一共多少条数据
      */
@@ -134,6 +136,8 @@ public class ComListActivity extends BaseActivity {
         list_r = findViewById(R.id.list_recycleview);
 
         txt_size = findViewById(R.id.txt_size);
+        empty_view = findViewById(R.id.empty_view);
+
     }
 
     private void initRecycle() {
@@ -240,10 +244,12 @@ public class ComListActivity extends BaseActivity {
                                         }
                                     }
                                 });
-
+                                empty_view.setVisibility(View.GONE);
+                                list_r.setVisibility(View.VISIBLE);
                             } else {
-                                mHandler.sendEmptyMessage(-3);
                                 txt_size.setVisibility(View.GONE);
+                                list_r.setEmptyView(empty_view);
+                                mHandler.sendEmptyMessage(-3);
                             }
                         } else if (NullUtil.getString(map1.get("state")).equals("10")) {
                             ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);

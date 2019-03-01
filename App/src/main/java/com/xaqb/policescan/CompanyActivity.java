@@ -55,12 +55,10 @@ public class CompanyActivity extends AppCompatActivity {
     private EditText edit_search;
     private PinnedSectionListView listView;
     private LetterIndexView letterIndexView;
-    private TextView txt_center,mTxtTitle;
+    private TextView txt_center, mTxtTitle;
     private ArrayList<BrandBean> list_all;
     private ArrayList<BrandBean> list_show;
     private BrandAdapter adapter;
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -79,7 +77,7 @@ public class CompanyActivity extends AppCompatActivity {
     private void addEvent() {
     }
 
-    public void onBack(View view){
+    public void onBack(View view) {
         finish();
     }
 
@@ -106,9 +104,9 @@ public class CompanyActivity extends AppCompatActivity {
     }
 
     public void okConnection() {
-        LogUtils.e(HttpUrlUtils.getHttpUrl().companycode(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage");
+        LogUtils.e(HttpUrlUtils.getHttpUrl().companycode(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&nopage");
         RestClient.builder()
-                .url(HttpUrlUtils.getHttpUrl().companycode(instance)+"?access_token="+ SPUtils.get(instance,"access_token","")+"&nopage")
+                .url(HttpUrlUtils.getHttpUrl().companycode(instance) + "?access_token=" + SPUtils.get(instance, "access_token", "") + "&nopage")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
@@ -122,20 +120,19 @@ public class CompanyActivity extends AppCompatActivity {
                         String count = mess.get("count").toString();
                         if (NullUtil.getString(map1.get("state")).equals("0")) {
 
-                            if (!count.equals("0")){
+                            if (!count.equals("0")) {
                                 String table = map1.get("table").toString();
                                 LogUtils.e(table);
 
                                 List<Map> list1 = JSON.parseArray(table, Map.class);
                                 for (Map<String, Object> map : list1) {
                                     BrandBean cityBean = new BrandBean();
-                                    if (NullUtil.getString(map.get("comname")).equals("陕西希伊艾斯快递西安莲湖丰庆分公司")){
+                                    if (NullUtil.getString(map.get("comname")).equals("陕西希伊艾斯快递西安莲湖丰庆分公司")) {
                                         cityBean.setName("陕西希伊斯快递西安莲湖丰庆分公司");
-
-                                    }else {
+                                    } else {
                                         cityBean.setName(NullUtil.getString(map.get("comname")));
                                     }
-                                        cityBean.setCode(NullUtil.getString(map.get("comcode")));
+                                    cityBean.setCode(NullUtil.getString(map.get("comcode")));
                                     list_all.add(cityBean);
                                 }
 
@@ -317,7 +314,6 @@ public class CompanyActivity extends AppCompatActivity {
     }
 
 
-
     public class MemberSortUtil implements Comparator<BrandBean> {
         /**
          * 按拼音排序
@@ -329,10 +325,6 @@ public class CompanyActivity extends AppCompatActivity {
             return cmp.compare(lhs.getName_en(), rhs.getName_en());
         }
     }
-
-
-
-
 
 
 }
