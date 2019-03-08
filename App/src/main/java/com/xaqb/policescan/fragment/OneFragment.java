@@ -60,7 +60,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
     private static final int REQUEST_CODE_QRCODE_PERMISSIONS = 1;
     private Context instance;
     private View view;
-    private ImageView iv_msg, img_scan_one, iv_user_main;
+    private ImageView iv_msg, img_scan_one, iv_user_main,search_kkk;
     private ConvenientBanner convenientBanner;
     private List<Integer> mImageList;
     private TextView txt_com;
@@ -106,6 +106,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
         img_scan_one = view.findViewById(R.id.img_scan_one);
         iv_user_main = view.findViewById(R.id.iv_user_main);
         et_query_main = view.findViewById(R.id.et_query_main);
+        search_kkk = view.findViewById(R.id.search_kkk);
         requestCodeQRCodePermissions();
     }
 
@@ -131,6 +132,7 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
         txt_update_one.setOnClickListener(this);
         txt_about_one.setOnClickListener(this);
         txt_download_one.setOnClickListener(this);
+        search_kkk.setOnClickListener(this);
 
     }
 
@@ -165,12 +167,23 @@ public class OneFragment extends BaseFragment implements View.OnClickListener,
                 break;
 
             case R.id.img_scan_one://二维码扫描
-                if (et_query_main.getText().toString().equals("")) {
+//                if (et_query_main.getText().toString().equals("")) {
                     ARouterUtil.intentNoPar("/qb/ScanActivity", view);
-                } else {
+//                } else {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("billcode", et_query_main.getText().toString());
+//                    ARouterUtil.intentPar("/qb/ExpressActivity", v, bundle);
+////                }
+                break;case R.id.search_kkk://搜索
+                if (!et_query_main.getText().toString().equals("")) {
+//                    ARouterUtil.intentNoPar("/qb/ScanActivity", view);
+//                } else {
                     Bundle bundle = new Bundle();
                     bundle.putString("billcode", et_query_main.getText().toString());
                     ARouterUtil.intentPar("/qb/ExpressActivity", v, bundle);
+                }else {
+                    Toast.makeText(instance, "请输入单号", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             case R.id.iv_user_main://个人信息

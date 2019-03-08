@@ -41,16 +41,17 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
-                android:alpha="0.7"
+                android:alpha="0.8"
                 android:background="@mipmap/search"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/layout_padding_small"
                 android:paddingTop="@dimen/layout_padding_small">
 
                 <ImageView
+                    android:id="@+id/search_kkk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/layout_padding_small"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:src="@mipmap/search_main" />
 
                 <EditText
@@ -60,11 +61,11 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_weight="1"
-                    android:hint="搜索订单号"
+                    android:hint="输入运单号..."
                     android:background="@null"
-                    android:textColor="@color/wirte"
-                    android:textColorHint="@color/wirte"
-                    android:textSize="@dimen/edit_text" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:textSize="@dimen/textww" />
 
                 <ImageView
                     android:id="@+id/img_scan_one"

@@ -35,6 +35,10 @@ public class HttpUrlUtils {
         return getBaseUrl(context) + "/v1/governor/governor/update_pwd";
     }
 
+    public String map(Context context) {
+        return getBaseUrl(context) + "/v1/governor/company/position";
+    }
+
 
     /**
      * 找回密码

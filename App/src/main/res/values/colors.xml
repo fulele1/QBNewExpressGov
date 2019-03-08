@@ -18,6 +18,7 @@
     <color name="menudialog_divider_color">#ededed</color>
     <color name="result_view">#b0000000</color>
     <color name="menudialog_bg_gray">#f5f5f5</color>
+    <color name="menudialo">#ffff2b</color>
 
 
 </resources>

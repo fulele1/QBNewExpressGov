@@ -14,6 +14,7 @@
     <dimen name="line_small">1dp</dimen>
     <dimen name="pro">24sp</dimen>
     <dimen name="text">16sp</dimen>
+    <dimen name="textww">14sp</dimen>
     <dimen name="edit_text">12sp</dimen>
     <dimen name="small_text">8sp</dimen>
     <dimen name="small">10sp</dimen>

@@ -261,7 +261,7 @@ public class LogAddActivity extends BaseActivity {
             DialogLoadingUtil.getInstance(instance).dismiss();
             return;
         } else if (question.equals("")) {
-            Toast.makeText(instance, "请选输入问题", Toast.LENGTH_SHORT).show();
+            Toast.makeText(instance, "请输入问题", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
             DialogLoadingUtil.getInstance(instance).dismiss();
 
@@ -269,6 +269,7 @@ public class LogAddActivity extends BaseActivity {
         } else if (result.equals("")) {
             Toast.makeText(instance, "请输入处理结果", Toast.LENGTH_SHORT).show();
             bt_finish_addLog.setClickable(true);
+            DialogLoadingUtil.getInstance(instance).dismiss();
 
             return;
         }

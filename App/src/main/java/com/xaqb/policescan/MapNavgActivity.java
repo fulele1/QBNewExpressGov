@@ -153,7 +153,8 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
                 LogUtils.e("lat---" + lat);
                 LogUtils.e("lon---" + lon);
                 if (fristClick) {
-                    connecting("http://jdws.qbchoice.com/v1/governor/company/position" +
+
+                    connecting(HttpUrlUtils.getHttpUrl().map(instance) +
                             "?access_token=" + SPUtils.get(instance, "access_token", "")
                             + "&lng=" + lon + "&lat=" + lat);
                     fristClick = false;
@@ -402,7 +403,7 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
                 }else {
                     multiPointOverlay.remove();//移除原始的标记
                     isClick = true;
-                    connecting("http://jdws.qbchoice.com/v1/governor/company" +
+                    connecting(HttpUrlUtils.getHttpUrl().map(instance)+
                             "?access_token=" + SPUtils.get(instance, "access_token", "")
                             + getIntentData()+"&nopage=0");
                 }
