@@ -201,6 +201,7 @@ public class UpdateUtil {
 
 
     protected void downVersion() {
+        LogUtils.e("http://update.qbchoice.com/api/version/"+mAid+"/"+ mNewVersion);
         RestClient.builder()
                 .url("http://update.qbchoice.com/api/version/"+mAid+"/"+ mNewVersion)
                 .success(new ISuccess() {

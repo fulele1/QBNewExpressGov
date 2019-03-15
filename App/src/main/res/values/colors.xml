@@ -19,6 +19,7 @@
     <color name="result_view">#b0000000</color>
     <color name="menudialog_bg_gray">#f5f5f5</color>
     <color name="menudialo">#ffff2b</color>
-
+    <color name="at_color">#f35d5d</color>
+    <color name="dv_color">#e84fe3</color>
 
 </resources>

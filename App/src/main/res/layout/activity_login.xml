@@ -92,6 +92,7 @@
                 android:hint="请输入账号..."
                 android:textColor="@color/wirte"
                 android:textColorHint="@color/wirte"
+                android:maxLines="1"
                 android:textSize="@dimen/edit_text" />
 
             <LinearLayout style="@style/horizontal_black_line_small_login"
@@ -128,6 +129,7 @@
                     android:textColorHint="@color/wirte"
                     android:textSize="@dimen/edit_text"
                     android:text=""
+                    android:maxLines="1"
                     />
 
 

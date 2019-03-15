@@ -36,6 +36,10 @@ public class HttpUrlUtils {
     }
 
     public String map(Context context) {
+        return getBaseUrl(context) + "/v1/governor/company";
+    }
+
+    public String mapposition(Context context) {
         return getBaseUrl(context) + "/v1/governor/company/position";
     }
 

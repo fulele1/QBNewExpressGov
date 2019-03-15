@@ -154,7 +154,7 @@ public class MapNavgActivity extends BaseActivity implements LocationSource, AMa
                 LogUtils.e("lon---" + lon);
                 if (fristClick) {
 
-                    connecting(HttpUrlUtils.getHttpUrl().map(instance) +
+                    connecting(HttpUrlUtils.getHttpUrl().mapposition(instance) +
                             "?access_token=" + SPUtils.get(instance, "access_token", "")
                             + "&lng=" + lon + "&lat=" + lat);
                     fristClick = false;

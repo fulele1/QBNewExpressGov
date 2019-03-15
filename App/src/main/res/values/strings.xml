@@ -89,9 +89,9 @@
     <string name="responsible_tel">负责人电话</string>
     <string name="employee">从业人数</string>
     <string name="get_count">收寄数量</string>
-    <string name="get_m_count">周内收寄数量</string>
+    <string name="get_m_count">收寄数量</string>
     <string name="post_count">投递数量</string>
-    <string name="post_m_count">周内投递数量</string>
+    <string name="post_m_count">投递数量</string>
     <string name="org">管理机构</string>
     <string name="address">地址</string>
     <string name="device">安全设备检查</string>

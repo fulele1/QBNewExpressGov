@@ -9,7 +9,9 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.FillFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.LineDataProvider;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class ChartUtil {
         // 用y轴的集合来设置参数
         mLineDataSet.setLineWidth(3.0f);// 线宽
 
-        mLineDataSet.setCircleSize(5.0f);// 显示的圆形大小
+        mLineDataSet.setCircleSize(0.0f);// 显示的圆形大小
 
         mLineDataSet.setColor(lineColor);// 折线的颜色
         //mLineDataSet2.setCircleColor(Color.GREEN);// 圆球的颜色
@@ -91,26 +93,17 @@ public class ChartUtil {
 
         mLineDataSet.setValueTextSize(10.0f);// 设置这项上显示的数据点的字体大小。
 
-        // mLineDataSet.setDrawCircleHole(true);//设置圆圈中心有小圈
+         mLineDataSet.setDrawCircleHole(false);//设置圆圈中心有小圈
 
         mLineDataSet.setDrawCubic(true);// 改变折线样式，用曲线。
         // 默认是直线
-        mLineDataSet.setCubicIntensity(0.2f);// 曲线的平滑度，值越大越平滑。
+        mLineDataSet.setCubicIntensity(0.7f);// 曲线的平滑度，值越大越平滑。
 
         // 填充曲线下方的区域，红色，半透明。
-//        mLineDataSet.setDrawFilled(true);
-//        mLineDataSet.setFillAlpha(128);
-//        mLineDataSet.setFillColor(Color.RED);
-
-        mLineDataSet.setCircleColorHole(Color.YELLOW);// 填充折线上数据点、圆球里面包裹的中心空白处的颜色。
-        mLineDataSet.setValueFormatter(new ValueFormatter() {// 设置折线上显示数据的格式。如果不设置，将默认显示float数据格式。
-
-            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                int n = (int) value;
-                String s = "" + n;
-                return s;
-            }
-        });
+        mLineDataSet.setDrawFilled(true);
+        mLineDataSet.setFillAlpha(128);
+        mLineDataSet.setFillColor(lineColor);
+        mLineDataSet.setCircleColorHole(lineColor);// 填充折线上数据点、圆球里面包裹的中心空白处的颜色。
         return mLineDataSet;
     }
 
@@ -135,20 +128,23 @@ public class ChartUtil {
         mLineChart.setDragEnabled(true);// 拖拽
         mLineChart.setScaleEnabled(true);// 缩放
         mLineChart.setPinchZoom(false);
-        mLineChart.getAxisRight().setEnabled(false);// 隐藏右边 的坐标轴
+//        mLineChart.getAxisRight().setEnabled(false);// 隐藏右边 的坐标轴
         mLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);// 让x轴在下面
         mLineChart.getXAxis().setLabelRotationAngle(-70);
-         // 隐藏左边坐标轴横网格线
+        // 隐藏左边坐标轴横网格线
 //         mLineChart.getAxisLeft().setDrawGridLines(false);
         // // 隐藏右边坐标轴横网格线
         // mLineChart.getAxisRight().setDrawGridLines(false);
-        // // 隐藏X轴竖网格线
-        // mLineChart.getXAxis().setDrawGridLines(false);
+         // 隐藏X轴竖网格线
+         mLineChart.getXAxis().setDrawGridLines(false);
+
+        mLineChart.getAxisRight().setEnabled(false);// 隐藏右边 的坐标轴
+        mLineChart.getAxisLeft().setEnabled(false);// 隐藏左边 的坐标轴
         mLineChart.setBackgroundColor(color);// 设置背景
         mLineChart.setData(lineData);// 设置x,y轴的数据
         Legend mLegend = mLineChart.getLegend(); // 设置比例图标示，就是那个一组y的value的
-        mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        mLegend.setForm(Legend.LegendForm.CIRCLE);// 样式
+        mLegend.setPosition(Legend.LegendPosition.BELOW_CHART_RIGHT);
+        mLegend.setForm(Legend.LegendForm.SQUARE);// 样式
         mLegend.setFormSize(13.0f);// 字体
         mLegend.setTextColor(Color.BLACK);// 颜色
         mLineChart.animateX(2000);// 沿x轴动画，时间2000毫秒。

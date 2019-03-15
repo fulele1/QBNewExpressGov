@@ -190,9 +190,9 @@ boolean internetDown  = false;
 
                         String list = NullUtil.getString(map1.get("table")).toString();
 
-                        ArrayList<String> x = new ArrayList<String>();
-                        ArrayList<Double> y1 = new ArrayList<Double>();
-                        ArrayList<Double> y2 = new ArrayList<Double>();
+                        ArrayList<String> x = new ArrayList<>();
+                        ArrayList<Double> y1 = new ArrayList<>();
+                        ArrayList<Double> y2 = new ArrayList<>();
                         LogUtils.e(list);
 
                         List<Map> list1 = JSON.parseArray(list, Map.class);
@@ -204,9 +204,9 @@ boolean internetDown  = false;
                             y2.add(Double.valueOf(map.get("at_num").toString()));
                             y1.add(Double.valueOf(map.get("dv_num").toString()));
                         }
-
                         // 获取完数据之后 制作7个数据点（沿x坐标轴）
-                        LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x, "投递", Color.BLUE, "收寄", Color.RED);
+                        LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x, "投递数量", getResources().getColor(R.color.dv_color),
+                                "收寄数量", getResources().getColor(R.color.at_color));
                         ChartUtil.setChartStyle(chart_org_de, mLineData, Color.WHITE);
                     }
                         else if (NullUtil.getString(map1.get("state")).equals("10")) {

@@ -119,7 +119,9 @@ public class PerDelActivity extends BaseActivity {
                             }
 
                             // 获取完数据之后 制作7个数据点（沿x坐标轴）
-                            LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x, "投递", Color.BLUE, "收寄", Color.RED);
+                            LineData mLineData = ChartUtil.makeLineData(list1.size(), y1, y2, x,
+                                    "投递数量", getResources().getColor(R.color.dv_color),
+                                    "收寄数量", getResources().getColor(R.color.at_color));
                             ChartUtil.setChartStyle(line_per_del, mLineData, Color.WHITE);
                         }else if(NullUtil.getString(map1.get("state")).equals("10")){
                             ARouterUtil.intentNoPar("/qb/loginActivity", tv_title_child);
