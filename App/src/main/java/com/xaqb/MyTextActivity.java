@@ -34,7 +34,7 @@ public class MyTextActivity extends AppCompatActivity implements LocationSource,
     AMapLocationClientOption mLocationOption;
     // 定位蓝点
     MyLocationStyle myLocationStyle;
-
+    //初始化地图
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
